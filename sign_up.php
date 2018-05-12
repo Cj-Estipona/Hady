@@ -476,7 +476,7 @@
                     callback: function () {
                         //console.log('This was logged in the callback: ');
                         resetForm($("#signUpForm"));
-                        window.location.replace("index.php");
+                        window.location.replace("sign_in.php");
                     }
                 });
               }
