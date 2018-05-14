@@ -148,7 +148,7 @@
     height:700px;
     padding: 20px;
     font-family: 'Ubuntu', sans-serif;
-    color: #DEDDE0;
+    color: #EFEEF1;
   }
   #header .row{
     padding-top: 30px;
@@ -188,7 +188,7 @@
     width:100%;
     margin-left: 0;
     margin-right: 0;
-    background-color: #DEDDE0;
+    background-color:#EFEEF1;
     font-family: 'Ubuntu', sans-serif;
 
   }
@@ -196,13 +196,13 @@
     padding-top: 30px;
   }
   #features .container .row .col-md-4 .list-group .list-group-item{
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     margin-top: 25px;
     margin-bottom: 25px;
     font-size: 18px;
   }
   #features .container .row .col-md-4 .list-group{
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     border-width:0px !important;
     box-shadow: none !important;
   }
@@ -253,7 +253,7 @@
     min-height: 100px;
     margin-left: 0;
     margin-right: 0;
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     font-family: 'Ubuntu', sans-serif;
   }
   #activities .container .row{
@@ -278,12 +278,12 @@
     font-size: 18px;
   }
   #activities .container .row .col-md-6 .list-group .list-group-item{
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     padding-top: 0;
     padding-bottom: 0;
   }
   #activities .container .row .col-md-6 .list-group{
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     border-width:0px !important;
     box-shadow: none !important;
   }
@@ -295,7 +295,7 @@
     min-height: 100px;
     margin-left: 0;
     margin-right: 0;
-    background-color: #DEDDE0;
+    background-color: #EFEEF1;
     font-family: 'Ubuntu', sans-serif;
   }
   #science .container{
@@ -369,7 +369,7 @@
     margin-right: 0;
     background: rgba(0,0,0,0)!important;
     font-family: 'Ubuntu', sans-serif;
-    color: #DEDDE0;
+    color: #EFEEF1;
   }
   #faq .container .row{
     padding-top: 80px;
@@ -396,7 +396,7 @@
   .panel-transparent .panel-heading{
       background: rgba(0,0,0,0)!important;
       border: 0 none !important;
-      color: #DEDDE0;
+      color: #EFEEF1;
   }
   .panel-transparent .panel-body{
       background: rgba(0,0,0,0)!important;
@@ -1079,8 +1079,6 @@
         </div>
       </div>
 
-
-
     </div> <!--content-->
 
 
@@ -1243,7 +1241,7 @@
           origin: 'top',
           distance: '300px'
         });
-        sr.reveal('#footer .fa-twitter',{
+        /*sr.reveal('#footer .fa-twitter',{
           duration: 2000,
           origin: 'right',
           distance: '300px'
@@ -1261,7 +1259,7 @@
 
         $("#signIn-btn").click(function(){
           window.location.assign("sign_in.php");
-        });
+        });*/
 
         function toggleIcon(e) {
             $(e.target)
