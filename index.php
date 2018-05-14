@@ -951,15 +951,15 @@
                 </div>
               </div><!--accordian1-->
             </div><!--col left content-->
-            <div class="col-md-6 right-content panel-transparent">
-              <div class="panel-group" id="accordion">
+            <div class="col-md-6 right-content">
+              <div class="panel-group" id="accordion2">
                 <div class="panel panel-default panel-transparent">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Is Hady free to use?</a>
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Is Hady free to use?</a>
                     </h4>
                   </div>
-                  <div id="collapse1" class="panel-collapse collapse">
+                  <div id="collapse6" class="panel-collapse collapse">
                     <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -968,10 +968,10 @@
                 <div class="panel panel-default panel-transparent">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Can I contact a real Psychologist/Counsellor using Hady?</a>
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse7"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Can I contact a real Psychologist/Counsellor using Hady?</a>
                     </h4>
                   </div>
-                  <div id="collapse2" class="panel-collapse collapse">
+                  <div id="collapse7" class="panel-collapse collapse">
                     <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -980,10 +980,10 @@
                 <div class="panel panel-default panel-transparent">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Can other people see that I'm using Hady or What I'm saying?</a>
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse8"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Can other people see that I'm using Hady or What I'm saying?</a>
                     </h4>
                   </div>
-                  <div id="collapse2" class="panel-collapse collapse">
+                  <div id="collapse8" class="panel-collapse collapse">
                     <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -992,10 +992,10 @@
                 <div class="panel panel-default panel-transparent">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Who can see my personal data?</a>
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse9"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Who can see my personal data?</a>
                     </h4>
                   </div>
-                  <div id="collapse2" class="panel-collapse collapse">
+                  <div id="collapse9" class="panel-collapse collapse">
                     <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
@@ -1004,17 +1004,17 @@
                 <div class="panel panel-default panel-transparent">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Does Hady speak another languages other than English?</a>
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse10"><i class='more-less fa fa-plus-circle fa-lg fa-pull-left'></i>Does Hady speak another languages other than English?</a>
                     </h4>
                   </div>
-                  <div id="collapse3" class="panel-collapse collapse">
+                  <div id="collapse10" class="panel-collapse collapse">
                     <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
                   </div>
                 </div>
               </div><!--accordion-->
-          </div><!--col right content-->
+            </div><!--col right content-->
           </div><!--row-->
         </div><!--container-->
       </div><!--mood chart-->
