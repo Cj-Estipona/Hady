@@ -11,6 +11,7 @@
   $contact = $_POST['MNumber'];
   $gender = $_POST['optradio'];
   $course = $_POST['course'];
+  $nickName = $_POST['FName'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   $avatarID = $_POST['disabledInput'];
@@ -18,8 +19,8 @@
   $userID = md5(time() . mt_rand(1,1000000));
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $query1 = "INSERT INTO tbl_user(`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`)
-      VALUES('".$userID."','".$email."','".$password."','".$fName."','".$mName."','".$lName."','".$birthdate."','".$contact."','".$gender."','".$course."')";
+    $query1 = "INSERT INTO tbl_user(`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`,`Nickname`)
+      VALUES('".$userID."','".$email."','".$password."','".$fName."','".$mName."','".$lName."','".$birthdate."','".$contact."','".$gender."','".$course."','".$nickName."')";
     $result = mysqli_query($connection1, $query1) or die("Failed to query the query1 ".mysqli_error($connection1));
     if($result) {
       $backResponse['query1'] = true;

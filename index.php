@@ -668,11 +668,11 @@
           duration: 2000,
           origin: 'left',
           distance: '300px'
-        });
+        });*/
 
         $("#signIn-btn").click(function(){
           window.location.assign("sign_in.php");
-        });*/
+        });
 
         function toggleIcon(e) {
             $(e.target)
