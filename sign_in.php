@@ -243,7 +243,7 @@
               if(d.success){
                 //$('#inForm').append('<div>'+d.message+'</div>');
                 $('#message').html(d.message);
-                window.location.replace("home.php");
+                window.location.replace("main/index.php");
               }
               else {
                 if(d.errors.email){

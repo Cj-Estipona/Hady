@@ -4,11 +4,11 @@
 
   $errors = array();
   $response = array();
-
+  $_SESSION['isLogin'] = false;
   $email = $_POST['email'];
   $password = $_POST['password'];
   $lastname = "";
-  $firstName = "";
+  $nickname = "";
   $id = "";
 
 
@@ -29,6 +29,7 @@
     $result = mysqli_query($connection1, $querySearch) or die("Failed to query database 1".mysqli_error($connection1));
     $row = mysqli_fetch_array($result);
     $id = $row['UserID'];
+    $nickname = $row['Nickname'];
 
     if(empty($row['Email']) || empty($row['Password'])){
       $errors['email'] = 'Invalid Email';
@@ -45,6 +46,9 @@
   else {
     $response['success'] = true;
     $response['message'] = 'SUCCESS!';
+    $_SESSION['isLogin'] = true;
+    $_SESSION['userId'] = $id;
+    $_SESSION['nickname'] = $nickname;
     $queryChange = "UPDATE tbl_preference SET isLogin = 1 WHERE  UserID = '$id'";
     $result1 = mysqli_query($connection1, $queryChange) or die("Failed to query database 2 ".mysqli_error($connection1));
 
