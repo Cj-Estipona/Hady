@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2018 at 04:45 PM
+-- Generation Time: Jun 07, 2018 at 10:39 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -120,7 +120,7 @@ CREATE TABLE `tbl_preference` (
 --
 
 INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, `DateCreated`, `Icon`) VALUES
-(8, '657536da27c78cfb26460d51aaf71e04', 0, 1, '2018-04-23 14:44:11', '2018002'),
+(8, '657536da27c78cfb26460d51aaf71e04', 1, 1, '2018-06-06 07:21:09', '2018002'),
 (9, '93274f95f6b7793c56d89f1e2cc543fa', 0, 1, '2018-04-22 16:07:20', '2018004'),
 (10, 'afad607105b900b08314a85c4519f437', 0, 1, '2018-04-22 10:09:57', '2018003'),
 (11, '29a66026a82a4c89c9a89a26fc561dbe', 0, 1, '2018-04-22 22:46:25', '2018008'),
@@ -146,23 +146,24 @@ CREATE TABLE `tbl_user` (
   `BDate` date NOT NULL,
   `MNumber` varchar(15) NOT NULL,
   `Gender` varchar(10) NOT NULL,
-  `Course` varchar(10) NOT NULL
+  `Course` varchar(10) NOT NULL,
+  `Nickname` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`) VALUES
-('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME'),
-('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE'),
-('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS'),
-('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE'),
-('93274f95f6b7793c56d89f1e2cc543fa', 'earljaison@gmail.com', 'earlesti', 'Earl Jaison', 'Dela Cruz', 'Estipona', '1998-09-29', '09365754321', 'Male', 'BSEE'),
-('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA'),
-('9c9c4de13c8bb8b64824133b0f7a63d9', 'narutokun@gmail.com', 'okmijnuhb', 'Naruto', 'Uzumaki', 'Uzumaki', '1997-07-14', '09296486426', 'Male', 'BEC'),
-('afad607105b900b08314a85c4519f437', 'dianamae@gmail.com', 'qwerty123', 'Diana Mae', 'Dela Cruz', 'Yabut', '1993-05-02', '09875738234', 'Female', 'BSA'),
-('c629b5b1e1a02104c752dc4da89b6443', 'jenny_pot@gmail.com', 'poiuyt', 'Jenny', 'Ester', 'Potrero', '1998-05-22', '09498938756', 'Female', 'BSHRM');
+INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`, `Nickname`) VALUES
+('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME', 'Chad'),
+('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE', 'Evelyn'),
+('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'Christian'),
+('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE', 'Vicky'),
+('93274f95f6b7793c56d89f1e2cc543fa', 'earljaison@gmail.com', 'earlesti', 'Earl Jaison', 'Dela Cruz', 'Estipona', '1998-09-29', '09365754321', 'Male', 'BSEE', 'Earl Jaison'),
+('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA', 'Mikee'),
+('9c9c4de13c8bb8b64824133b0f7a63d9', 'narutokun@gmail.com', 'okmijnuhb', 'Naruto', 'Uzumaki', 'Uzumaki', '1997-07-14', '09296486426', 'Male', 'BEC', 'Naruto'),
+('afad607105b900b08314a85c4519f437', 'dianamae@gmail.com', 'qwerty123', 'Diana Mae', 'Dela Cruz', 'Yabut', '1993-05-02', '09875738234', 'Female', 'BSA', 'Diana Mae'),
+('c629b5b1e1a02104c752dc4da89b6443', 'jenny_pot@gmail.com', 'poiuyt', 'Jenny', 'Ester', 'Potrero', '1998-05-22', '09498938756', 'Female', 'BSHRM', 'Jenny');
 
 --
 -- Indexes for dumped tables
