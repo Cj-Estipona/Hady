@@ -38,7 +38,7 @@
 
   <style>
     body{
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../resources/hope.jpg) no-repeat center center fixed;
+      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/mainbgBlur.jpg) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -60,7 +60,7 @@
             <div class="container-fluid navForeground">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" id="UserAvatar" href="#">
+                    <a class="navbar-brand" id="UserAvatar">
 
                     </a>
                     <div class="welcomeUser">
@@ -71,7 +71,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-main" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#/"><i class="fa fa-home"></i><span class="textLink">Today</span></a></li>
+                        <li><a href="#/" class="active"><i class="fa fa-home"></i><span class="textLink">Today</span></a></li>
                         <li><a href="#/moodTrack"><i class="fa fa-bar-chart"></i><span class="textLink">Mood Tracking</span></a></li>
                         <li><a href="#/chat"><i class="fa fa-comments-o"></i><span class="textLink">Chat</span></a></li>
                         <li><a href="#/activities"><i class="fa fa-lightbulb-o"></i><span class="textLink">Activities</span></a></li>
@@ -94,7 +94,8 @@
 
 
     <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-route.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+    <script src="lib/angular-sanitize.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="app_routes.js"></script>
     <script src="js/today.js"></script>
@@ -105,7 +106,8 @@
     <script>
       $(document).ready(function(){
         fetch_data();
-
+        addRemove_active();
+        //fetch data for user avatar
         function fetch_data() {
           var action = "fetchAvatar";
           $.ajax({
@@ -118,6 +120,31 @@
            }
           })
         }
+
+        //add active class for page refresh
+        function active_class_refresh(){
+          if (performance.navigation.type == 1) {
+            addRemove_active();
+          }
+        }
+        function addRemove_active(){
+          var pathname = window.location.href;
+          var extractLoc = pathname.substr(pathname.indexOf('#'));
+          $('.navbar-nav > li > a').closest('ul').find('.active').removeClass('active');
+          $('.navbar-nav > li > a[href="'+extractLoc+'"]').addClass('active');
+        }
+
+        //add active class when link is clicked
+        $('.navbar-nav li').on('click', 'a', function () {
+          // only do the following if the clicked link isn't already active
+          if(!$(this).closest('li').hasClass('active')) {
+              $(this).closest('ul').find('.active').removeClass('active');
+              $(this).closest('a').addClass('active');
+          }
+        });
+
+
+
       });
     </script>
   </body>

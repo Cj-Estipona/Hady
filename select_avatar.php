@@ -29,7 +29,7 @@
      while($row = mysqli_fetch_array($result))
      {
       $output = '
-          <img src="data:image/jpeg;base64,'.base64_encode($row['AvatarName'] ).'" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(this)" value='.$row['AvatarID'].'>';
+          <img src="data:image/jpeg;base64,'.base64_encode($row['AvatarName'] ).'" height="60px" width="60px" class="avatarImage" value='.$row['AvatarID'].'>';
      }
      echo $output;
    }

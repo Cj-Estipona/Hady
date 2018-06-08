@@ -1,3 +1,59 @@
-<div>
-  <h1>{{message}}</h1>
+<style>
+  [ng-click],
+  [data-ng-click],
+  [x-ng-click] {
+      cursor: pointer;
+  }
+  #account-div{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+  #account-div .right-content img {
+    display:block;
+    margin:auto;
+  }
+  #imageModal{
+    color: #2E2E2E;
+  }
+  #image_data{
+    width: inherit;
+  }
+  .avatarImage{
+    margin-bottom: 10px;
+  }
+  @media only screen and (max-width: 768px) {
+    #account-div{
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+</style>
+<!--modal for the avatars-->
+<div id="imageModal" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title"><b>Select your Avatar</b></h4>
+   </div>
+   <div class="modal-body">
+     <div id="image_data" class="container" ng-bind-html="modalData"></div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="row" id="account-div" ng-init="loadMethods()">
+  <h2>{{message}}</h2>
+  <div class="col-lg-4 col-md-3 right-content" style="background-color:blue;">
+    <img ng-src="{{imgSrc}}" height="140px" width="140px;" class="img-responsive" ng-click="viewModalAvatar()">
+  </div>
+
+  <div class="col-lg-8 col-md-9" style="background-color:green;">
+    heheh
+  </div>
 </div>
