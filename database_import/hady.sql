@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2018 at 10:39 AM
+-- Generation Time: Jun 11, 2018 at 01:11 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -111,7 +111,7 @@ CREATE TABLE `tbl_preference` (
   `UserID` varchar(60) NOT NULL,
   `IsLogin` tinyint(1) NOT NULL,
   `TextNotif` tinyint(1) NOT NULL DEFAULT '1',
-  `DateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Icon` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,10 +120,10 @@ CREATE TABLE `tbl_preference` (
 --
 
 INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, `DateCreated`, `Icon`) VALUES
-(8, '657536da27c78cfb26460d51aaf71e04', 1, 1, '2018-06-06 07:21:09', '2018002'),
-(9, '93274f95f6b7793c56d89f1e2cc543fa', 0, 1, '2018-04-22 16:07:20', '2018004'),
+(8, '657536da27c78cfb26460d51aaf71e04', 1, 0, '2018-04-04 05:31:10', '2018002'),
+(9, '93274f95f6b7793c56d89f1e2cc543fa', 1, 1, '2018-06-10 11:31:49', '2018004'),
 (10, 'afad607105b900b08314a85c4519f437', 0, 1, '2018-04-22 10:09:57', '2018003'),
-(11, '29a66026a82a4c89c9a89a26fc561dbe', 0, 1, '2018-04-22 22:46:25', '2018008'),
+(11, '29a66026a82a4c89c9a89a26fc561dbe', 1, 1, '2018-06-10 11:35:47', '2018008'),
 (12, '983f67a5e6408dd8c80fb3df2048f404', 0, 1, '2018-04-22 22:54:43', '2018005'),
 (13, '6e911b1d5d3149c60a50bf2e2cc87e06', 0, 1, '2018-04-23 14:44:05', '2018007'),
 (14, '64d5e552222ec2d3a47308934aed251f', 0, 1, '2018-04-22 23:17:12', '2018001'),
@@ -157,7 +157,7 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`, `Nickname`) VALUES
 ('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME', 'Chad'),
 ('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE', 'Evelyn'),
-('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'Christian'),
+('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian Jaizen', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'CJ'),
 ('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE', 'Vicky'),
 ('93274f95f6b7793c56d89f1e2cc543fa', 'earljaison@gmail.com', 'earlesti', 'Earl Jaison', 'Dela Cruz', 'Estipona', '1998-09-29', '09365754321', 'Male', 'BSEE', 'Earl Jaison'),
 ('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA', 'Mikee'),

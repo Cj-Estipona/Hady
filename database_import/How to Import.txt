@@ -1,0 +1,4 @@
+1. Create "hady" database in phpmyadmin
+2. Select the "hady" database
+3. Inside "hady" database click import.
+4. Import hady.sql from Hady/database_import
