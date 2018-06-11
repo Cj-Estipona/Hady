@@ -150,9 +150,22 @@
      }
    }
 
+   if ($action == "updateUserTheme") {
+     $varToUpdate = $request_body->varToUpdate;
+     $valToUpdate = $request_body->valToUpdate;
+
+     $queryUpdate = "UPDATE tbl_preference SET $varToUpdate='$valToUpdate' WHERE UserID = '$userID'";
+     $updateResult = mysqli_query($connection1, $queryUpdate) or die("Failed to query database ".mysqli_error());
+     if(mysqli_affected_rows($connection1) > 0){
+       echo "success";
+     } else {
+       echo "There was an error updating your data. Please try again.";
+     }
+   }
+
    //Function for Selecting User Prifle and Preference
    function selectFromUser($userID){
-     $selectQuery = "SELECT tbl_user.*, tbl_preference.isLogin,tbl_preference.TextNotif,tbl_preference.DateCreated FROM tbl_user INNER JOIN tbl_preference ON tbl_user.UserID = tbl_preference.UserID WHERE tbl_preference.UserID = '$userID'";
+     $selectQuery = "SELECT tbl_user.*, tbl_preference.isLogin,tbl_preference.TextNotif,tbl_preference.DateCreated,tbl_preference.Theme FROM tbl_user INNER JOIN tbl_preference ON tbl_user.UserID = tbl_preference.UserID WHERE tbl_preference.UserID = '$userID'";
      return $selectQuery;
    }
 

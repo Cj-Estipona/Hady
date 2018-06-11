@@ -1,4 +1,4 @@
-angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compile","$window", function($scope, $http, $compile, $window){
+angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compile","$window","$timeout","HadyService","$rootScope", function($scope, $http, $compile, $window, $timeout, HadyService,$rootScope){
   $scope.message = "ACCOUNT";
   var postId = "";
   var modal_img = angular.element('#imageModal');
@@ -7,7 +7,7 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
   $scope.userDetails ={};
   $scope.readonlyAttr = {};
   $scope.courseName = ["BSCS","BSIT","BSIS","BSEMC","ABB","ABJO","BSHRM","BSTM","BSA","BSAct","BSBA","MGE","BEC","FM","MKM","BSCE","BSCpE","BSEE","BSECE","BSME"];
-  //$scope.toggle.switch = true;
+  $scope.bgTheme = ["themeDefault","themeDarkSky","themeNightSky","themeHimalayas","themeMountainSky"];
 
   $scope.loadMethods = function(){
     $scope.getUserInfo();
@@ -101,6 +101,8 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
       $scope.BDate = bdate;
       $scope.MNumber = response.data.MNumber;
       $scope.Course = response.data.Course;
+      $scope.Theme = response.data.Theme;
+      $rootScope.appBodyBG = response.data.Theme;
       $scope.fullName = $scope.FName +" "+ $scope.MName +" "+ $scope.LName;
     });
   };
@@ -140,6 +142,16 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
         });
         $scope.getUserInfo();
       }
+    } else if (item=="Theme") {
+      $http.post("model/userProfile.php?action=updateUserTheme", {'varToUpdate':item,'valToUpdate':$scope[item]})
+      .then(function(response){
+        if(response.data=="success"){
+          $scope.showAlertBox(true,"alert alert-success","You have successfully changed your theme.");
+        } else {
+          $scope.showAlertBox(true,"alert alert-danger",response.data);
+        }
+      });
+      $scope.getUserInfo();
     } else {
       if($scope[item] == ""){
         $scope.showAlertBox(true,"alert alert-danger","Please enter a valid value.");
@@ -195,6 +207,9 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
     $scope.successful = alertBool;
     $scope.alertClass = alertClass;
     $scope.alertMessage = alertMessage;
+    $timeout(function () {
+          $scope.successful = false;
+      }, 7000);
   };
 
 }]);

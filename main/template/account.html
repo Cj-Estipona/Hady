@@ -323,13 +323,27 @@
           </div>
         </div>
       </li>
-      <div class="heading">CONTACT US</div>
+      <div class="heading">OTHER</div>
+      <li class="list-group-item">
+        <label>Background Theme</label>
+        <div class="input-group">
+          <select class="form-control right-input" focus-me="inputFocusTheme" ng-model="Theme" ng-disabled="!readonlyAttr.Theme" ng-options="x for x in bgTheme">
+          </select>
+          <input type="hidden" ng-model="Theme" ng-readonly="!readonlyAttr.Theme">
+          <div class="input-group-btn" ng-init="editButtonTheme=true">
+            <a class="btn" ng-click="readonlyAttr.Theme = true; inputFocusTheme=true; editButtonTheme=false" ng-show="editButtonTheme"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonTheme==false" ng-click = "editButtonTheme = !editButtonTheme; unsave('Theme')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonTheme==false" ng-click = "editButtonTheme = !editButtonTheme; updateUserInfo('Theme')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
       <a href="mailto:hadysupport@gmail.com" target="_blank">
-        <li class="list-group-item" style="padding-top:29px;padding-bottom:15px;"><i class="fa fa-envelope-o fa-lg" style="margin-right:7px;"></i>
-          Help
+        <li class="list-group-item" style="padding-top:15px;padding-bottom:15px;"><i class="fa fa-envelope-o fa-lg" style="margin-right:7px;"></i>
+          Contact Us
           <p style="font-size:12px;"><i>Give us your feedback or if you have any concern.</i></p>
         </li>
       </a>
     </ul>
   </div>
 </div>
+<br><br><br>

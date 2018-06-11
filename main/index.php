@@ -37,7 +37,43 @@
   </head>
 
   <style>
-    body{
+    .themeDarkSky{
+      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/darkSky.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin: 0;
+      position: relative;
+    }
+    .themeNightSky{
+      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/nightSky.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin: 0;
+      position: relative;
+    }
+    .themeHimalayas{
+      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/himalayasBG.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin: 0;
+      position: relative;
+    }
+    .themeMountainSky{
+      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/mountainSky.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin: 0;
+      position: relative;
+    }
+    .themeDefault{
       background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../resources/mainbgBlur.jpg) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
@@ -52,7 +88,7 @@
 
   </style>
 
-  <body ng-app="hadyWebApp">
+  <body ng-app="hadyWebApp" ng-controller="IndexCtrl" ng-class="$root.appBodyBG" ng-init="loadBG()">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-lg-2">
@@ -103,6 +139,8 @@
     <script src="js/chat.js"></script>
     <script src="js/activities.js"></script>
     <script src="js/account.js"></script>
+    <script src="js/app_service.js"></script>
+    <script src="js/body.js"></script>
     <script>
       $(document).ready(function(){
         fetch_data();
