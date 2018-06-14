@@ -1,4 +1,4 @@
-var app = angular.module('hadyWebApp', ['ngRoute','ngSanitize']);
+var app = angular.module('hadyWebApp', ['ngRoute','ngSanitize','rzModule']);
 
 
 app.config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider){

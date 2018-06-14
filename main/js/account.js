@@ -194,6 +194,8 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
               .then(function(response){
                 if(response.data == "success"){
                   $window.location.href = '../sign_in.php';
+                } else {
+                  $scope.showAlertBox(true,"alert alert-danger",response.data);
                 }
               });
             }else {

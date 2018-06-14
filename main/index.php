@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/navbar-fixed-side.css" />
+    <link rel="stylesheet" type="text/css" href="css/rzslider.min.css"/>
     <link rel="stylesheet" href="../font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <script src="../js/jquery.min.js"></script>
@@ -133,6 +134,7 @@
     <script src="lib/angular-route.min.js"></script>
     <script src="lib/angular-sanitize.min.js"></script>
     <script src="lib/underscore-min.js"></script>
+    <script src="lib/rzslider.min.js"></script>
     <script src="app_routes.js"></script>
     <script src="js/today.js"></script>
     <script src="js/moodTrack.js"></script>
@@ -142,6 +144,8 @@
     <script src="js/app_service.js"></script>
     <script src="js/body.js"></script>
     <script>
+      var idleTime = 0;
+
       $(document).ready(function(){
         fetch_data();
         addRemove_active();
@@ -181,9 +185,34 @@
           }
         });
 
+        //Increment the idle time counter every minute.
+        var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
+        //Zero the idle timer on mouse movement.
+        $(this).mousemove(function (e) {
+            idleTime = 0;
+        });
+        $(this).keypress(function (e) {
+            idleTime = 0;
+        });
 
       });
+
+      function timerIncrement() {
+          idleTime = idleTime + 1;
+          if (idleTime > 30) { // 30 minutes
+            $.ajax({
+             url:"model/destroy.php",
+             method:"POST",
+             data:{},
+             success:function(data)
+             {
+              window.location.href = '../sign_in.php?action=1';
+             }
+            })
+            //alert("You will be logout because of inactivity.");
+          }
+      }
     </script>
   </body>
 </html>

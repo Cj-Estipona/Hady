@@ -195,6 +195,11 @@
             </div>
             <div class="panel-body">
               <div id = "message"></div>
+              <!--alert-->
+              <div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>You have been logout.</strong> <br>You have been inactive for 30 mins.
+              </div>
 
               <form class="form-horizontal" method="POST" action="validator_signin.php" id="inForm">
                 <div class="input-group" id="error_for_email">
@@ -225,7 +230,26 @@
     </center>
 
     <script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+              return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+      }
+    };
       $(document).ready(function(){
+        $('.alert').hide();
+        var action = getUrlParameter('action');
+        if(action==1){
+          $('.alert').show();
+        }
         $('form').submit(function(e){
           e.preventDefault();
           $('.error').hide();

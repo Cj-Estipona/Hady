@@ -49,9 +49,15 @@
     $_SESSION['isLogin'] = true;
     $_SESSION['userId'] = $id;
     $_SESSION['nickname'] = $nickname;
+    $_SESSION['currentSessionID'] = substr(md5(uniqid()), 20);
+    $dateLogin = date('Y-m-d H:i:s');
+
     $queryChange = "UPDATE tbl_preference SET isLogin = 1 WHERE  UserID = '$id'";
     $result1 = mysqli_query($connection1, $queryChange) or die("Failed to query database 2 ".mysqli_error($connection1));
 
+    $queryLogTime = "INSERT INTO tbl_time(`UserID`, `SessionID`, `Login`)
+      VALUES('".$_SESSION['userId']."','".$_SESSION['currentSessionID']."','".$dateLogin."')";
+    $resultLogTime = mysqli_query($connection1, $queryLogTime) or die("Failed to query database 2 ".mysqli_error($connection1));
 
   }
 
