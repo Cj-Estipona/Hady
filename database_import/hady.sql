@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2018 at 01:11 PM
+-- Generation Time: Jun 14, 2018 at 05:26 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -112,23 +112,53 @@ CREATE TABLE `tbl_preference` (
   `IsLogin` tinyint(1) NOT NULL,
   `TextNotif` tinyint(1) NOT NULL DEFAULT '1',
   `DateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Icon` varchar(50) NOT NULL
+  `Icon` varchar(50) NOT NULL,
+  `Theme` varchar(30) NOT NULL DEFAULT 'themeDefault'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_preference`
 --
 
-INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, `DateCreated`, `Icon`) VALUES
-(8, '657536da27c78cfb26460d51aaf71e04', 1, 0, '2018-04-04 05:31:10', '2018002'),
-(9, '93274f95f6b7793c56d89f1e2cc543fa', 1, 1, '2018-06-10 11:31:49', '2018004'),
-(10, 'afad607105b900b08314a85c4519f437', 0, 1, '2018-04-22 10:09:57', '2018003'),
-(11, '29a66026a82a4c89c9a89a26fc561dbe', 1, 1, '2018-06-10 11:35:47', '2018008'),
-(12, '983f67a5e6408dd8c80fb3df2048f404', 0, 1, '2018-04-22 22:54:43', '2018005'),
-(13, '6e911b1d5d3149c60a50bf2e2cc87e06', 0, 1, '2018-04-23 14:44:05', '2018007'),
-(14, '64d5e552222ec2d3a47308934aed251f', 0, 1, '2018-04-22 23:17:12', '2018001'),
-(15, '9c9c4de13c8bb8b64824133b0f7a63d9', 0, 1, '2018-04-22 23:19:04', '2018006'),
-(16, 'c629b5b1e1a02104c752dc4da89b6443', 0, 1, '2018-04-22 23:22:05', '2018007');
+INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, `DateCreated`, `Icon`, `Theme`) VALUES
+(8, '657536da27c78cfb26460d51aaf71e04', 0, 0, '2018-04-04 05:31:10', '2018001', 'themeMountainSky'),
+(9, '93274f95f6b7793c56d89f1e2cc543fa', 0, 1, '2018-06-10 11:31:49', '2018004', 'themeDefault'),
+(10, 'afad607105b900b08314a85c4519f437', 0, 1, '2018-04-22 10:09:57', '2018003', 'themeDefault'),
+(11, '29a66026a82a4c89c9a89a26fc561dbe', 0, 1, '2018-06-10 11:35:47', '2018008', 'themeHimalayas'),
+(12, '983f67a5e6408dd8c80fb3df2048f404', 0, 1, '2018-04-22 22:54:43', '2018005', 'themeDefault'),
+(13, '6e911b1d5d3149c60a50bf2e2cc87e06', 0, 1, '2018-04-23 14:44:05', '2018007', 'themeDefault'),
+(14, '64d5e552222ec2d3a47308934aed251f', 0, 1, '2018-04-22 23:17:12', '2018001', 'themeDefault'),
+(15, '9c9c4de13c8bb8b64824133b0f7a63d9', 0, 1, '2018-04-22 23:19:04', '2018006', 'themeDefault'),
+(16, 'c629b5b1e1a02104c752dc4da89b6443', 0, 1, '2018-04-22 23:22:05', '2018007', 'themeDefault'),
+(17, '03103672f98952c8f16b443f143f31e4', 0, 1, '2018-06-14 00:16:47', '2018004', 'themeHimalayas'),
+(18, '61014b5f9e191862f081add449b636bb', 0, 1, '2018-06-14 06:24:18', '2018003', 'themeDarkSky'),
+(19, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 0, 1, '2018-06-14 06:36:11', '2018006', 'themeNightSky');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_time`
+--
+
+CREATE TABLE `tbl_time` (
+  `LogTimeID` int(11) NOT NULL,
+  `UserID` varchar(60) NOT NULL,
+  `SessionID` varchar(60) NOT NULL,
+  `Login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Logout` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `TotalTime` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_time`
+--
+
+INSERT INTO `tbl_time` (`LogTimeID`, `UserID`, `SessionID`, `Login`, `Logout`, `TotalTime`) VALUES
+(8, '03103672f98952c8f16b443f143f31e4', '24be4b13a6a8', '2018-06-14 08:30:16', '2018-06-14 08:30:26', 0),
+(9, '61014b5f9e191862f081add449b636bb', 'f907d6f5bf31', '2018-06-14 08:31:14', '2018-06-14 08:34:13', 2),
+(10, '03103672f98952c8f16b443f143f31e4', '3771ed814e62', '2018-06-14 08:35:16', '2018-06-14 08:47:35', 12),
+(11, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 'ec6bf9d2fea7', '2018-06-14 09:19:00', '2018-06-14 09:21:02', 2),
+(12, '61014b5f9e191862f081add449b636bb', '9a64cd396704', '2018-06-14 09:22:32', '2018-06-14 09:25:50', 3);
 
 -- --------------------------------------------------------
 
@@ -155,7 +185,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`, `Nickname`) VALUES
+('03103672f98952c8f16b443f143f31e4', 'sampleuser@gmail.com', 'sampleuser', 'Sample', 'Account', 'User', '1997-12-13', '09975683458', 'Male', 'BSA', 'Sample'),
 ('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME', 'Chad'),
+('61014b5f9e191862f081add449b636bb', 'sampleauser@gmail.com', 'sampleauser', 'SampleA', 'AccountA', 'UserA', '1998-05-23', '09846583768', 'Female', 'BSECE', 'SampleA'),
 ('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE', 'Evelyn'),
 ('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian Jaizen', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'CJ'),
 ('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE', 'Vicky'),
@@ -163,6 +195,7 @@ INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`
 ('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA', 'Mikee'),
 ('9c9c4de13c8bb8b64824133b0f7a63d9', 'narutokun@gmail.com', 'okmijnuhb', 'Naruto', 'Uzumaki', 'Uzumaki', '1997-07-14', '09296486426', 'Male', 'BEC', 'Naruto'),
 ('afad607105b900b08314a85c4519f437', 'dianamae@gmail.com', 'qwerty123', 'Diana Mae', 'Dela Cruz', 'Yabut', '1993-05-02', '09875738234', 'Female', 'BSA', 'Diana Mae'),
+('bbfb11ca03ed09d07c3e5dc0c91811e9', 'samplebuser@gmail.com', 'samplebuser', 'SampleB', 'AccountB', 'UserB', '2000-07-26', '09384593858', 'Male', 'BSCE', 'SampleB'),
 ('c629b5b1e1a02104c752dc4da89b6443', 'jenny_pot@gmail.com', 'poiuyt', 'Jenny', 'Ester', 'Potrero', '1998-05-22', '09498938756', 'Female', 'BSHRM', 'Jenny');
 
 --
@@ -208,6 +241,14 @@ ALTER TABLE `tbl_preference`
   ADD KEY `UserID` (`UserID`);
 
 --
+-- Indexes for table `tbl_time`
+--
+ALTER TABLE `tbl_time`
+  ADD PRIMARY KEY (`LogTimeID`),
+  ADD UNIQUE KEY `SessionID` (`SessionID`),
+  ADD KEY `UserID` (`UserID`);
+
+--
 -- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -237,7 +278,12 @@ ALTER TABLE `tbl_logs`
 -- AUTO_INCREMENT for table `tbl_preference`
 --
 ALTER TABLE `tbl_preference`
-  MODIFY `PreferenceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `PreferenceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `tbl_time`
+--
+ALTER TABLE `tbl_time`
+  MODIFY `LogTimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
@@ -265,6 +311,12 @@ ALTER TABLE `tbl_mood`
 --
 ALTER TABLE `tbl_preference`
   ADD CONSTRAINT `tbl_preference_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `tbl_user` (`UserID`);
+
+--
+-- Constraints for table `tbl_time`
+--
+ALTER TABLE `tbl_time`
+  ADD CONSTRAINT `tbl_time_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `tbl_user` (`UserID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
