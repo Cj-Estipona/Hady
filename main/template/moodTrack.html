@@ -1,3 +1,11 @@
-<div>
-  <h1>{{message}}</h1>
+
+<h1>{{message}}</h1>
+<div id="moodTrack-div" class="row">
+  <canvas id="bar" class="chart chart-bar"
+        chart-data="data"
+        chart-labels="labels"
+        chart-colors="colors"
+        chart-options="options"
+        chart-dataset-override="dataOverride">
+  </canvas>
 </div>

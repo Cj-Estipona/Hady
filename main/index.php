@@ -89,7 +89,7 @@
 
   </style>
 
-  <body ng-app="hadyWebApp" ng-controller="IndexCtrl" ng-class="$root.appBodyBG" ng-init="loadBG()">
+  <body ng-app="hadyWebApp" ng-controller="IndexCtrl" ng-class="$root.appBodyBG" ng-init="loadResource()">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-lg-2">
@@ -98,11 +98,11 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <a class="navbar-brand" id="UserAvatar">
-
+                      <img ng-src={{$root.avatarSrc}} height="60px" width="60px" class="avatarImage">
                     </a>
                     <div class="welcomeUser">
                       <h4>Welcome,</h4>
-                      <h3><?php echo $_SESSION['nickname']?></h3>
+                      <h3> {{$root.Nickname}}</h3>
                     </div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -135,6 +135,9 @@
     <script src="lib/angular-sanitize.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/rzslider.min.js"></script>
+    <script src="lib/angular-drag-and-drop-lists.min.js"></script>
+    <script src="lib/Chart.min.js"></script>
+    <script src="lib/angular-chart.min.js"></script>
     <script src="app_routes.js"></script>
     <script src="js/today.js"></script>
     <script src="js/moodTrack.js"></script>
@@ -147,10 +150,10 @@
       var idleTime = 0;
 
       $(document).ready(function(){
-        fetch_data();
+        //fetch_data();
         addRemove_active();
         //fetch data for user avatar
-        function fetch_data() {
+        /*function fetch_data() {
           var action = "fetchAvatar";
           $.ajax({
            url:"../select_avatar.php",
@@ -161,7 +164,7 @@
             $('#UserAvatar').html(data);
            }
           })
-        }
+        }*/
 
         //add active class for page refresh
         function active_class_refresh(){
@@ -200,7 +203,7 @@
 
       function timerIncrement() {
           idleTime = idleTime + 1;
-          if (idleTime > 30) { // 30 minutes
+          if (idleTime > 29) { // 30 minutes
             $.ajax({
              url:"model/destroy.php",
              method:"POST",

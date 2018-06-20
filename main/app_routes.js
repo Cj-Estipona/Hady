@@ -1,4 +1,4 @@
-var app = angular.module('hadyWebApp', ['ngRoute','ngSanitize','rzModule']);
+var app = angular.module('hadyWebApp', ['ngRoute','ngSanitize','rzModule', 'dndLists','chart.js']);
 
 
 app.config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider){
@@ -24,5 +24,5 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
   .when('/account', {
     templateUrl: 'template/account.html',
     controller: 'AccountCtrl'
-  })
+  });
 }]);

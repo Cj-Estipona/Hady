@@ -267,7 +267,12 @@
               if(d.success){
                 //$('#inForm').append('<div>'+d.message+'</div>');
                 $('#message').html(d.message);
-                window.location.replace("main/index.php");
+        				if(d.access == 1){
+        					window.location.replace("admin/index.php");
+        				}
+        				else{
+        					window.location.replace("main/index.php");
+        				}
               }
               else {
                 if(d.errors.email){

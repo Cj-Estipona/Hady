@@ -10,6 +10,7 @@
   $lastname = "";
   $nickname = "";
   $id = "";
+  $access = "";
 
 
   //$response['hello'] = $email;
@@ -30,6 +31,7 @@
     $row = mysqli_fetch_array($result);
     $id = $row['UserID'];
     $nickname = $row['Nickname'];
+	$access = $row['access_type'];
 
     if(empty($row['Email']) || empty($row['Password'])){
       $errors['email'] = 'Invalid Email';
@@ -45,6 +47,7 @@
   }
   else {
     $response['success'] = true;
+	$response['access'] = $access;
     $response['message'] = 'SUCCESS!';
     $_SESSION['isLogin'] = true;
     $_SESSION['userId'] = $id;
@@ -58,6 +61,7 @@
     $queryLogTime = "INSERT INTO tbl_time(`UserID`, `SessionID`, `Login`)
       VALUES('".$_SESSION['userId']."','".$_SESSION['currentSessionID']."','".$dateLogin."')";
     $resultLogTime = mysqli_query($connection1, $queryLogTime) or die("Failed to query database 2 ".mysqli_error($connection1));
+
 
   }
 

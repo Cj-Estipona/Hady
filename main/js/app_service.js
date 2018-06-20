@@ -10,4 +10,13 @@ angular.module("hadyWebApp").service('HadyService', function($http, $rootScope){
     this.bgName = data;
   };
 
+  this.setAvatarImg = function(data) {
+    $rootScope.avatarSrc = data;
+  };
+
+  this.setNickname = function(data) {
+    $rootScope.Nickname = data;
+  };
+
+
 });

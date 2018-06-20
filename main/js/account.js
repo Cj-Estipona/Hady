@@ -47,6 +47,7 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
     $http.post("model/userProfile.php?action=getAvatar")
     .then(function(response){
       $scope.imgSrc = response.data;
+      HadyService.setAvatarImg(response.data);
       //console.log(response.data);
     });
   };
@@ -94,6 +95,7 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
       $scope.userDetails.BDate = bdate;
       $scope.dateCreated = dateCreated.toDateString();
       $scope.Nickname = response.data.Nickname;
+      HadyService.setNickname(response.data.Nickname);
       $scope.Email = response.data.Email;
       $scope.FName = response.data.FName;
       $scope.MName = response.data.MName;

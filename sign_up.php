@@ -328,7 +328,7 @@
               </div>
 
               <div class="checkbox">
-                <label><input type="checkbox" value="Agreement" name="agreement" id="agreement">I accept the <a href="#" id="acceptAgreement">terms and conditions.</a> </label>
+                <label><input type="checkbox" value="Agreement" name="agreement" id="agreement" disabled>I accept the <a href="#" id="acceptAgreement">terms and conditions.</a> </label>
               </div>
               <center>
                 <input type="button" class="btnReg btn btn-warning btn-lg" id="btnregister" value="Register">
