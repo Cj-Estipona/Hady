@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2018 at 05:26 PM
+-- Generation Time: Jun 20, 2018 at 08:42 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -95,10 +95,30 @@ CREATE TABLE `tbl_logs` (
 --
 
 CREATE TABLE `tbl_mood` (
+  `MoodLogID` int(11) NOT NULL,
   `UserID` varchar(60) NOT NULL,
-  `Moods` varchar(10) NOT NULL,
-  `MoodDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `MoodLvl` varchar(10) NOT NULL,
+  `MoodFeel` varchar(250) DEFAULT NULL,
+  `MoodJournal` varchar(600) DEFAULT NULL,
+  `MoodDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_mood`
+--
+
+INSERT INTO `tbl_mood` (`MoodLogID`, `UserID`, `MoodLvl`, `MoodFeel`, `MoodJournal`, `MoodDate`) VALUES
+(1, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Sad,Lonely,Excited,Dreamy,Happy', 'I was very lonely and sad today but I am happy also', '2018-06-18 14:04:20'),
+(2, '03103672f98952c8f16b443f143f31e4', 'Low', 'Happy,Sad,Lonely,Weird', 'This was very Happy to use', '2018-06-18 16:00:00'),
+(3, '03103672f98952c8f16b443f143f31e4', 'High', 'fasdfasdf', 'fasdfwefcaw', '2018-06-18 01:15:25'),
+(4, '03103672f98952c8f16b443f143f31e4', 'Very High', 'fasdvrthwe', 'gasdfvwerg', '2018-06-17 15:59:59'),
+(5, '03103672f98952c8f16b443f143f31e4', 'High', 'asdfasdfasdf', 'gaerfvaerf', '2018-06-18 07:32:47'),
+(6, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'fasdfva', 'vasdfs', '2018-06-18 15:06:14'),
+(7, '03103672f98952c8f16b443f143f31e4', 'Low', 'fanlsjdoifanpsd', 'fnaojujlfuiewrp', '2018-06-18 15:06:14'),
+(18, '03103672f98952c8f16b443f143f31e4', 'Low', 'Blissful,Ecstatic,Flirty', 'akjsdnfajsndkfjbakdjsdbfalsdf', '2018-06-19 04:37:25'),
+(19, '03103672f98952c8f16b443f143f31e4', 'Low', 'Sad,Dreamy,Lonely,Stressed', 'fnalksndfnalsdknfalkneofbw', '2018-06-19 04:39:00'),
+(20, '03103672f98952c8f16b443f143f31e4', 'High', 'Happy,Cheerful,Amused', 'alndflanowiebfipainwepifnaoiwef', '2018-06-19 04:39:55'),
+(21, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'Flirty,Energetic,Excited,Calm', 'hgsdrgfbsdrgahert', '2018-06-19 04:41:55');
 
 -- --------------------------------------------------------
 
@@ -130,9 +150,10 @@ INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, 
 (14, '64d5e552222ec2d3a47308934aed251f', 0, 1, '2018-04-22 23:17:12', '2018001', 'themeDefault'),
 (15, '9c9c4de13c8bb8b64824133b0f7a63d9', 0, 1, '2018-04-22 23:19:04', '2018006', 'themeDefault'),
 (16, 'c629b5b1e1a02104c752dc4da89b6443', 0, 1, '2018-04-22 23:22:05', '2018007', 'themeDefault'),
-(17, '03103672f98952c8f16b443f143f31e4', 0, 1, '2018-06-14 00:16:47', '2018004', 'themeHimalayas'),
+(17, '03103672f98952c8f16b443f143f31e4', 0, 0, '2018-06-14 00:16:47', '2018004', 'themeNightSky'),
 (18, '61014b5f9e191862f081add449b636bb', 0, 1, '2018-06-14 06:24:18', '2018003', 'themeDarkSky'),
-(19, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 0, 1, '2018-06-14 06:36:11', '2018006', 'themeNightSky');
+(19, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 0, 1, '2018-06-14 06:36:11', '2018006', 'themeNightSky'),
+(20, 'e1d17aa01131632250a78398c4487eb1', 0, 1, '2018-06-19 09:13:29', '2018005', 'themeDefault');
 
 -- --------------------------------------------------------
 
@@ -158,7 +179,16 @@ INSERT INTO `tbl_time` (`LogTimeID`, `UserID`, `SessionID`, `Login`, `Logout`, `
 (9, '61014b5f9e191862f081add449b636bb', 'f907d6f5bf31', '2018-06-14 08:31:14', '2018-06-14 08:34:13', 2),
 (10, '03103672f98952c8f16b443f143f31e4', '3771ed814e62', '2018-06-14 08:35:16', '2018-06-14 08:47:35', 12),
 (11, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 'ec6bf9d2fea7', '2018-06-14 09:19:00', '2018-06-14 09:21:02', 2),
-(12, '61014b5f9e191862f081add449b636bb', '9a64cd396704', '2018-06-14 09:22:32', '2018-06-14 09:25:50', 3);
+(12, '61014b5f9e191862f081add449b636bb', '9a64cd396704', '2018-06-14 09:22:32', '2018-06-14 09:25:50', 3),
+(13, '03103672f98952c8f16b443f143f31e4', '747271cf1ce6', '2018-06-18 12:40:03', '2018-06-18 14:32:57', 112),
+(14, '03103672f98952c8f16b443f143f31e4', 'c0e57775708d', '2018-06-18 14:42:17', '2018-06-18 15:09:11', 26),
+(15, '03103672f98952c8f16b443f143f31e4', 'fcb434a81c86', '2018-06-18 15:09:20', '2018-06-19 02:58:51', 709),
+(16, '03103672f98952c8f16b443f143f31e4', '382fac89588d', '2018-06-19 03:29:45', '2018-06-19 05:25:06', 115),
+(17, '03103672f98952c8f16b443f143f31e4', 'a7a87041d1e2', '2018-06-19 13:44:28', '2018-06-20 01:18:28', 694),
+(18, '03103672f98952c8f16b443f143f31e4', '6ac2f7604d77', '2018-06-20 01:20:13', '2018-06-20 03:00:08', 99),
+(19, '03103672f98952c8f16b443f143f31e4', 'aa298860ab35', '2018-06-20 05:11:49', '2018-06-20 12:25:04', 433),
+(20, '03103672f98952c8f16b443f143f31e4', '517d16e5f453', '2018-06-20 12:36:38', '2018-06-20 12:36:48', 0),
+(21, '03103672f98952c8f16b443f143f31e4', 'a60a601b5e80', '2018-06-20 12:39:25', '2018-06-20 12:39:35', 0);
 
 -- --------------------------------------------------------
 
@@ -177,26 +207,29 @@ CREATE TABLE `tbl_user` (
   `MNumber` varchar(15) NOT NULL,
   `Gender` varchar(10) NOT NULL,
   `Course` varchar(10) NOT NULL,
-  `Nickname` varchar(50) NOT NULL
+  `Nickname` varchar(50) NOT NULL,
+  `access_type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`, `Nickname`) VALUES
-('03103672f98952c8f16b443f143f31e4', 'sampleuser@gmail.com', 'sampleuser', 'Sample', 'Account', 'User', '1997-12-13', '09975683458', 'Male', 'BSA', 'Sample'),
-('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME', 'Chad'),
-('61014b5f9e191862f081add449b636bb', 'sampleauser@gmail.com', 'sampleauser', 'SampleA', 'AccountA', 'UserA', '1998-05-23', '09846583768', 'Female', 'BSECE', 'SampleA'),
-('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE', 'Evelyn'),
-('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian Jaizen', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'CJ'),
-('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE', 'Vicky'),
-('93274f95f6b7793c56d89f1e2cc543fa', 'earljaison@gmail.com', 'earlesti', 'Earl Jaison', 'Dela Cruz', 'Estipona', '1998-09-29', '09365754321', 'Male', 'BSEE', 'Earl Jaison'),
-('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA', 'Mikee'),
-('9c9c4de13c8bb8b64824133b0f7a63d9', 'narutokun@gmail.com', 'okmijnuhb', 'Naruto', 'Uzumaki', 'Uzumaki', '1997-07-14', '09296486426', 'Male', 'BEC', 'Naruto'),
-('afad607105b900b08314a85c4519f437', 'dianamae@gmail.com', 'qwerty123', 'Diana Mae', 'Dela Cruz', 'Yabut', '1993-05-02', '09875738234', 'Female', 'BSA', 'Diana Mae'),
-('bbfb11ca03ed09d07c3e5dc0c91811e9', 'samplebuser@gmail.com', 'samplebuser', 'SampleB', 'AccountB', 'UserB', '2000-07-26', '09384593858', 'Male', 'BSCE', 'SampleB'),
-('c629b5b1e1a02104c752dc4da89b6443', 'jenny_pot@gmail.com', 'poiuyt', 'Jenny', 'Ester', 'Potrero', '1998-05-22', '09498938756', 'Female', 'BSHRM', 'Jenny');
+INSERT INTO `tbl_user` (`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`, `Nickname`, `access_type`) VALUES
+('!Qaz2wsx', 'admin@gmail.com', '12345', 'Hady Admin', '', '', '0000-00-00', '', '', '', 'Admin', 1),
+('03103672f98952c8f16b443f143f31e4', 'sampleuser@gmail.com', 'sampleuser', 'Sample', 'Account', 'User', '1997-12-13', '09975683458', 'Male', 'BSA', 'Sample', NULL),
+('29a66026a82a4c89c9a89a26fc561dbe', 'chadyabut@gmail.com', 'qazwsxedc', 'Chad', 'Gabriel', 'Yabut', '1996-12-14', '09496732678', 'Male', 'BSME', 'Chad', NULL),
+('61014b5f9e191862f081add449b636bb', 'sampleauser@gmail.com', 'sampleauser', 'SampleA', 'AccountA', 'UserA', '1998-05-23', '09846583768', 'Female', 'BSECE', 'SampleA', NULL),
+('64d5e552222ec2d3a47308934aed251f', 'evelynSL@gmail.com', '12345qazwsxedc', 'Evelyn', 'Sonza', 'Letran', '1998-08-10', '09973486538', 'Female', 'BSECE', 'Evelyn', NULL),
+('657536da27c78cfb26460d51aaf71e04', 'cjestipona@gmail.com', 'asakanaman', 'Christian Jaizen', 'Dela Cruz', 'Estipona', '1998-09-29', '09975683458', 'Male', 'BSCS', 'CJ', NULL),
+('6e911b1d5d3149c60a50bf2e2cc87e06', 'vicky23@gmail.com', 'asdfgh', 'Vicky', 'Delfin', 'Estrero', '1995-05-25', '09397851274', 'Female', 'BSCE', 'Vicky', NULL),
+('93274f95f6b7793c56d89f1e2cc543fa', 'earljaison@gmail.com', 'earlesti', 'Earl Jaison', 'Dela Cruz', 'Estipona', '1998-09-29', '09365754321', 'Male', 'BSEE', 'Earl Jaison', NULL),
+('983f67a5e6408dd8c80fb3df2048f404', 'mikee0101@gmail.com', '12345qwerty', 'Mikee', 'Hernando', 'Buenvenida', '1997-03-21', '09334562178', 'Female', 'BSBA', 'Mikee', NULL),
+('9c9c4de13c8bb8b64824133b0f7a63d9', 'narutokun@gmail.com', 'okmijnuhb', 'Naruto', 'Uzumaki', 'Uzumaki', '1997-07-14', '09296486426', 'Male', 'BEC', 'Naruto', NULL),
+('afad607105b900b08314a85c4519f437', 'dianamae@gmail.com', 'qwerty123', 'Diana Mae', 'Dela Cruz', 'Yabut', '1993-05-02', '09875738234', 'Female', 'BSA', 'Diana Mae', NULL),
+('bbfb11ca03ed09d07c3e5dc0c91811e9', 'samplebuser@gmail.com', 'samplebuser', 'SampleB', 'AccountB', 'UserB', '2000-07-26', '09384593858', 'Male', 'BSCE', 'SampleB', NULL),
+('c629b5b1e1a02104c752dc4da89b6443', 'jenny_pot@gmail.com', 'poiuyt', 'Jenny', 'Ester', 'Potrero', '1998-05-22', '09498938756', 'Female', 'BSHRM', 'Jenny', NULL),
+('e1d17aa01131632250a78398c4487eb1', 'sampleduser@gmail.com', 'sampleduser', 'SampleD', 'Account', 'User', '1996-02-25', '09876545678', 'Female', 'BSBA', 'SampleD', NULL);
 
 --
 -- Indexes for dumped tables
@@ -231,6 +264,7 @@ ALTER TABLE `tbl_logs`
 -- Indexes for table `tbl_mood`
 --
 ALTER TABLE `tbl_mood`
+  ADD PRIMARY KEY (`MoodLogID`),
   ADD KEY `UserID` (`UserID`);
 
 --
@@ -275,15 +309,20 @@ ALTER TABLE `tbl_avatar`
 ALTER TABLE `tbl_logs`
   MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tbl_mood`
+--
+ALTER TABLE `tbl_mood`
+  MODIFY `MoodLogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
 -- AUTO_INCREMENT for table `tbl_preference`
 --
 ALTER TABLE `tbl_preference`
-  MODIFY `PreferenceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `PreferenceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `tbl_time`
 --
 ALTER TABLE `tbl_time`
-  MODIFY `LogTimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `LogTimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Constraints for dumped tables
 --
