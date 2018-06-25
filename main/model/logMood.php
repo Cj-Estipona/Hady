@@ -25,11 +25,12 @@
   if($action == "submitMood") {
     $passMood = $request_body->passMood;
     $passMoodArr = $request_body->passMoodArr;
+    $passTitle = $request_body->passTitle;
     $passJournal = $request_body->passJournal;
     $moodDate = date('Y-m-d H:i:s');
 
-    $queryMood = "INSERT INTO tbl_mood(`UserID`, `MoodLvl`, `MoodFeel`, `MoodJournal`, `MoodDate`)
-      VALUES('".$userID."','".$passMood."','".$passMoodArr."','".$passJournal."','".$moodDate."')";
+    $queryMood = "INSERT INTO tbl_mood(`UserID`, `MoodLvl`, `MoodFeel`,`JournalTitle`, `MoodJournal`, `MoodDate`)
+      VALUES('".$userID."','".$passMood."','".$passMoodArr."','".$passTitle."','".$passJournal."','".$moodDate."')";
     $resultMood = mysqli_query($connection1, $queryMood) or die ("Failed to query database ".mysqli_error());
     if($resultMood){
       echo "success";

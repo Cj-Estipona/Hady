@@ -1,11 +1,187 @@
+<style>
+  .spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+  }
 
-<h1>{{message}}</h1>
-<div id="moodTrack-div" class="row">
-  <canvas id="bar" class="chart chart-bar"
-        chart-data="data"
-        chart-labels="labels"
-        chart-colors="colors"
-        chart-options="options"
-        chart-dataset-override="dataOverride">
-  </canvas>
+  .spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+  }
+
+  .spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  }
+
+  @-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+  .navOptions {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+  }
+  .navOptions ul {
+    margin-bottom: 0;
+  }
+  .viewOptions {
+    float: right;
+  }
+  .dateOptions {
+    float: left;
+  }
+  .dateOptions .btn{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #56A4BE;
+    border-color: #56A4BE;
+    color: #EFEEF1;
+  }
+  .viewOptions .btn{
+    background-color: #56A4BE;
+    border-color: #56A4BE;
+    color: #EFEEF1;
+  }
+  .btn:hover, .btn:focus, .btn:active{
+    color: #EFEEF1;
+    background-color: #77DFF0;
+    border-color: #77DFF0;
+  }
+  #moodTrack-div .navOptions .viewOptions .list-inline .activeClass{
+    color: #EFEEF1;
+    background-color: #77DFF0;
+    border-color: #77DFF0;
+  }
+  .dateOptions li, .viewOptions li {
+    padding: 0;
+  }
+  #faceDiv {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    max-height: 400px;
+  }
+  #faceDiv img {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+  }
+  .best-content{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 32px;
+    max-height: 400px;
+  }
+  .best-content h4{
+    padding-top: 20px;
+    margin-top: 0;
+  }
+  .best-content{
+    font-size: 16px;
+  }
+  .journal-section{
+    text-align: center;
+    padding-bottom: 30px;
+    /*max-height: 400px;*/
+    height: 236px;
+  }
+  #columnFace{
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+    border-right: 1px solid rgba(30, 30, 30, 0.6);
+    border-left: 1px solid rgba(30, 30, 30, 0.6);
+  }
+  #columnBest{
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+  }
+  #myJournal {
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+      border-left: 1px solid rgba(30, 30, 30, 0.6);
+    border-right: 1px solid rgba(30, 30, 30, 0.6);
+  }
+  .chart-content{
+    margin-bottom: 10px;
+  }
+</style>
+<div class="spinner" ng-if="loadingIcon" ng-init="loadMethods()">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+<div id="moodTrack-div" class="row" ng-if="!loadingIcon">
+  <div class="navOptions">
+    <div class="dateOptions">
+      <ul class="list-inline">
+        <li><button class="btn" ng-click="leftRightDate('add')"><i class="fa fa-caret-left fa-2x"></i></button></li>
+        <li><button class="btn" ng-click="leftRightDate('minus')" ng-disabled="(weekAdd==0 ? true : false )"><i class="fa fa-caret-right fa-2x"></i></button></li>
+      </ul>
+    </div>
+    <div class="viewOptions">
+      <ul class="list-inline">
+        <li><a>Download</a></li>
+        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Daily' }">Daily</button></li>
+        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Weekly' }">Weekly</button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="chart-content">
+    <canvas id="bar" class="chart chart-bar"
+          chart-data="data"
+          chart-labels="labels"
+          chart-colors="colors"
+          chart-options="options"
+          chart-dataset-override="dataOverride">
+    </canvas>
+  </div>
+
+  <div class="col-md-4" id="columnFace">
+    <div id="faceDiv">
+      <h3>Average Mood</h3>
+      <img ng-src="{{emotionFace}}" class="img-responsive">
+    </div>
+  </div>
+  <div class="col-md-4" id="columnBest">
+    <div class="best-content">
+      <h4>Best Day of the Week:</h4>
+      <span class="bestWorsttDay">{{bestDay}}</span>
+      <h4>Worst Day of the Week:</h4>
+      <span class="bestWorstDay">{{worstDay}}</span>
+      <h4>Top 5 Mood</h4>
+      <span>{{topMood}}</span>
+    </div>
+  </div>
+  <div class="col-md-4" id="myJournal">
+    <div class="journal-section">
+      <h3>My Journal</h3>
+    </div>
+  </div>
 </div>

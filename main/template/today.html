@@ -163,6 +163,16 @@
     margin-right: 15px;
     margin-bottom: 10px;
   }
+  #formTitle{
+    width: 100%;
+  }
+  #titleJournal {
+    background-color: #D6D5D7;
+    outline: none;
+    color: #090909;
+    margin-bottom: 10px;
+    width: 100%;
+  }
   .submit-mood{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -240,6 +250,7 @@
                               dnd-selected="models.selected = item"
                               dnd-horizontal-list="true"
                               ng-class="{'selected': models.selected === item} "
+                              ng-mouseup="moveRemove(item, listName)"
                               class="list-group-item"
                               >
                               {{item.label}}
@@ -252,10 +263,15 @@
     </div>
 
     <div class="dailyJournal">
+      <form class="form-inline">
+        <div class="form-group" id="formTitle">
+          <input class="form-control" type="text" placeholder="Journal Title" ng-model="journalTitle" id="titleJournal">
+        </div>
+      </form>
       <textarea class="form-control" rows="5" type="textarea" placeholder="Consider this as your daily journal and write anything you want." ng-model="journal" id="journalArea"></textarea>
     </div>
 
     <center>
-      <a class="btn btn-md submit-mood" ng-click="submitMood()" ng-disabled="submitLimit">SUBMIT</a>
+      <a class="btn btn-md submit-mood" ng-click="!submitLimit && submitMood()" ng-disabled="submitLimit">SUBMIT</a>
     </center>
 </div>

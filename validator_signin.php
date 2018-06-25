@@ -55,6 +55,13 @@
     $_SESSION['currentSessionID'] = substr(md5(uniqid()), 20);
     $dateLogin = date('Y-m-d H:i:s');
 
+  	if($access == 1){
+  		$_SESSION['admin'] = true;
+  	}
+  	else{
+  		$_SESSION['admin'] = false;
+  	}
+
     $queryChange = "UPDATE tbl_preference SET isLogin = 1 WHERE  UserID = '$id'";
     $result1 = mysqli_query($connection1, $queryChange) or die("Failed to query database 2 ".mysqli_error($connection1));
 

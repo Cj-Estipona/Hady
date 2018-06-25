@@ -33,7 +33,7 @@
     <script src="../js/bootbox.min.js"></script>
     <script src="../js/typed.js"></script>
     <script src="../js/scrollreveal.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">-->
 
   </head>
 

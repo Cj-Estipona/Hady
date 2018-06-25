@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2018 at 08:42 PM
+-- Generation Time: Jun 26, 2018 at 12:37 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -99,6 +99,7 @@ CREATE TABLE `tbl_mood` (
   `UserID` varchar(60) NOT NULL,
   `MoodLvl` varchar(10) NOT NULL,
   `MoodFeel` varchar(250) DEFAULT NULL,
+  `JournalTitle` varchar(50) DEFAULT 'Untitled Journal',
   `MoodJournal` varchar(600) DEFAULT NULL,
   `MoodDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -107,18 +108,38 @@ CREATE TABLE `tbl_mood` (
 -- Dumping data for table `tbl_mood`
 --
 
-INSERT INTO `tbl_mood` (`MoodLogID`, `UserID`, `MoodLvl`, `MoodFeel`, `MoodJournal`, `MoodDate`) VALUES
-(1, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Sad,Lonely,Excited,Dreamy,Happy', 'I was very lonely and sad today but I am happy also', '2018-06-18 14:04:20'),
-(2, '03103672f98952c8f16b443f143f31e4', 'Low', 'Happy,Sad,Lonely,Weird', 'This was very Happy to use', '2018-06-18 16:00:00'),
-(3, '03103672f98952c8f16b443f143f31e4', 'High', 'fasdfasdf', 'fasdfwefcaw', '2018-06-18 01:15:25'),
-(4, '03103672f98952c8f16b443f143f31e4', 'Very High', 'fasdvrthwe', 'gasdfvwerg', '2018-06-17 15:59:59'),
-(5, '03103672f98952c8f16b443f143f31e4', 'High', 'asdfasdfasdf', 'gaerfvaerf', '2018-06-18 07:32:47'),
-(6, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'fasdfva', 'vasdfs', '2018-06-18 15:06:14'),
-(7, '03103672f98952c8f16b443f143f31e4', 'Low', 'fanlsjdoifanpsd', 'fnaojujlfuiewrp', '2018-06-18 15:06:14'),
-(18, '03103672f98952c8f16b443f143f31e4', 'Low', 'Blissful,Ecstatic,Flirty', 'akjsdnfajsndkfjbakdjsdbfalsdf', '2018-06-19 04:37:25'),
-(19, '03103672f98952c8f16b443f143f31e4', 'Low', 'Sad,Dreamy,Lonely,Stressed', 'fnalksndfnalsdknfalkneofbw', '2018-06-19 04:39:00'),
-(20, '03103672f98952c8f16b443f143f31e4', 'High', 'Happy,Cheerful,Amused', 'alndflanowiebfipainwepifnaoiwef', '2018-06-19 04:39:55'),
-(21, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'Flirty,Energetic,Excited,Calm', 'hgsdrgfbsdrgahert', '2018-06-19 04:41:55');
+INSERT INTO `tbl_mood` (`MoodLogID`, `UserID`, `MoodLvl`, `MoodFeel`, `JournalTitle`, `MoodJournal`, `MoodDate`) VALUES
+(1, '03103672f98952c8f16b443f143f31e4', 'Low', 'Sad,Lonely,Excited,Dreamy,Happy', 'Untitled Journal', 'I was very lonely and sad today but I am happy also', '2018-06-17 04:30:20'),
+(2, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Happy,Sad,Lonely,Weird', 'Untitled Journal', 'This was very Happy to use', '2018-06-17 07:00:00'),
+(3, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'fasdfasdf', 'Untitled Journal', 'fasdfwefcaw', '2018-06-17 12:16:25'),
+(4, '03103672f98952c8f16b443f143f31e4', 'High', 'fasdvrthwe', 'Untitled Journal', 'gasdfvwerg', '2018-06-18 01:15:07'),
+(5, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'asdfasdfasdf', 'Untitled Journal', 'gaerfvaerf', '2018-06-18 04:45:47'),
+(6, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'fasdfva', 'Untitled Journal', 'vasdfs', '2018-06-18 08:05:14'),
+(7, '03103672f98952c8f16b443f143f31e4', 'Very High', 'fanlsjdoifanpsd', 'Untitled Journal', 'fnaojujlfuiewrp', '2018-06-18 13:45:14'),
+(18, '03103672f98952c8f16b443f143f31e4', 'High', 'Blissful,Ecstatic,Flirty', 'Untitled Journal', 'akjsdnfajsndkfjbakdjsdbfalsdf', '2018-06-19 06:02:25'),
+(19, '03103672f98952c8f16b443f143f31e4', 'Low', 'Sad,Dreamy,Lonely,Stressed', 'Untitled Journal', 'fnalksndfnalsdknfalkneofbw', '2018-06-19 09:05:00'),
+(20, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'Happy,Cheerful,Amused', 'Untitled Journal', 'alndflanowiebfipainwepifnaoiwef', '2018-06-20 08:12:55'),
+(21, '03103672f98952c8f16b443f143f31e4', 'Very High', 'Flirty,Energetic,Excited,Calm', 'Untitled Journal', 'hgsdrgfbsdrgahert', '2018-06-20 10:03:19'),
+(22, '03103672f98952c8f16b443f143f31e4', 'Low', 'asdf,hrth,werg', 'Untitled Journal', 'gsdfgwer', '2018-06-20 12:13:41'),
+(23, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'grsth,eqqw,bsdw', 'Untitled Journal', 'gaerhqerht', '2018-06-20 22:36:41'),
+(24, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'jgbpwje,gnwpierg', 'Untitled Journal', 'qabgoerpqiwe', '2018-06-21 00:23:41'),
+(25, '03103672f98952c8f16b443f143f31e4', 'Very High', 'netr,jerw', 'Untitled Journal', 'qwefq243t42gq', '2018-06-21 23:21:41'),
+(26, '03103672f98952c8f16b443f143f31e4', 'Low', 'gvnaoern,fnow', 'Untitled Journal', 'qbalwjeovbqowe', '2018-06-22 02:11:29'),
+(27, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'kgo,vnoep,bogroni', 'Untitled Journal', 'berjhner', '2018-06-22 05:56:29'),
+(28, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'bsfb,serbws,wefrfg', 'Untitled Journal', 'rgwerggolpi', '2018-06-22 10:29:19'),
+(29, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'bsd,bryjn,jmrt', 'Untitled Journal', 'nedbw wrty', '2018-06-22 14:49:19'),
+(30, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'gnqpier,rngoie,gqw', 'Untitled Journal', 'fbqiuwe', '2018-06-23 00:16:13'),
+(31, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'lpi,geo,vbeo', 'Untitled Journal', 'neripwpier', '2018-06-23 03:43:13'),
+(32, '03103672f98952c8f16b443f143f31e4', 'High', 'fqow,fnqp', 'Untitled Journal', 'fbquweoq', '2018-06-23 07:08:19'),
+(33, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'verfvs,vwerg,werg', 'Untitled Journal', 'bwergtbw wervwer', '2018-06-16 07:15:34'),
+(42, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'asdf,gqreg,qwef', 'Untitled Journal', 'fvqwegnoiwoei', '2018-06-13 00:35:13'),
+(43, '03103672f98952c8f16b443f143f31e4', 'High', 'qawef,fqwef,fq', 'Untitled Journal', 'fqweijfp', '2018-06-13 03:27:33'),
+(44, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'fqwlek', 'Untitled Journal', 'fnqlwe', '2018-06-10 22:40:19'),
+(51, '03103672f98952c8f16b443f143f31e4', 'Low', 'vqmwla,asdf,asdf', 'Untitled Journal', 'fasldfnoawinepf', '2018-06-24 05:31:57'),
+(53, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Amused,Calm,Stressed,Restless,Sad', 'Untitled Journal', 'badfvar', '2018-06-24 07:57:44'),
+(56, '03103672f98952c8f16b443f143f31e4', 'Neutral', 'vav,qwefq', 'Untitled Journal', 'wefqweff', '2018-06-24 20:23:32'),
+(57, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Restless,Sad,Rejected,Lonely', 'The Sad Truth', 'I am very sad, I dont know why', '2018-06-25 09:17:46'),
+(58, '03103672f98952c8f16b443f143f31e4', 'Very Low', 'Sad,depressed', 'The Making', 'dbxekbcdo', '2018-06-25 21:33:21');
 
 -- --------------------------------------------------------
 
@@ -150,7 +171,7 @@ INSERT INTO `tbl_preference` (`PreferenceID`, `UserID`, `IsLogin`, `TextNotif`, 
 (14, '64d5e552222ec2d3a47308934aed251f', 0, 1, '2018-04-22 23:17:12', '2018001', 'themeDefault'),
 (15, '9c9c4de13c8bb8b64824133b0f7a63d9', 0, 1, '2018-04-22 23:19:04', '2018006', 'themeDefault'),
 (16, 'c629b5b1e1a02104c752dc4da89b6443', 0, 1, '2018-04-22 23:22:05', '2018007', 'themeDefault'),
-(17, '03103672f98952c8f16b443f143f31e4', 0, 0, '2018-06-14 00:16:47', '2018004', 'themeNightSky'),
+(17, '03103672f98952c8f16b443f143f31e4', 1, 0, '2018-06-14 00:16:47', '2018004', 'themeDefault'),
 (18, '61014b5f9e191862f081add449b636bb', 0, 1, '2018-06-14 06:24:18', '2018003', 'themeDarkSky'),
 (19, 'bbfb11ca03ed09d07c3e5dc0c91811e9', 0, 1, '2018-06-14 06:36:11', '2018006', 'themeNightSky'),
 (20, 'e1d17aa01131632250a78398c4487eb1', 0, 1, '2018-06-19 09:13:29', '2018005', 'themeDefault');
@@ -188,7 +209,24 @@ INSERT INTO `tbl_time` (`LogTimeID`, `UserID`, `SessionID`, `Login`, `Logout`, `
 (18, '03103672f98952c8f16b443f143f31e4', '6ac2f7604d77', '2018-06-20 01:20:13', '2018-06-20 03:00:08', 99),
 (19, '03103672f98952c8f16b443f143f31e4', 'aa298860ab35', '2018-06-20 05:11:49', '2018-06-20 12:25:04', 433),
 (20, '03103672f98952c8f16b443f143f31e4', '517d16e5f453', '2018-06-20 12:36:38', '2018-06-20 12:36:48', 0),
-(21, '03103672f98952c8f16b443f143f31e4', 'a60a601b5e80', '2018-06-20 12:39:25', '2018-06-20 12:39:35', 0);
+(21, '03103672f98952c8f16b443f143f31e4', 'a60a601b5e80', '2018-06-20 12:39:25', '2018-06-20 12:39:35', 0),
+(22, '03103672f98952c8f16b443f143f31e4', '4551d21205ac', '2018-06-20 12:46:04', '2018-06-20 12:46:44', 0),
+(23, '03103672f98952c8f16b443f143f31e4', '7339183c4cd8', '2018-06-20 13:31:55', '2018-06-21 08:32:06', 1140),
+(24, '03103672f98952c8f16b443f143f31e4', 'd39934c5a192', '2018-06-21 08:41:31', '2018-06-21 14:32:49', 351),
+(25, '03103672f98952c8f16b443f143f31e4', '4b8d5b304953', '2018-06-21 14:36:10', '2018-06-22 07:37:19', 1021),
+(26, '03103672f98952c8f16b443f143f31e4', 'a072d6db5b35', '2018-06-22 08:24:19', '2018-06-22 16:18:04', 473),
+(27, '03103672f98952c8f16b443f143f31e4', 'f312116cf090', '2018-06-23 13:38:02', '2018-06-23 14:08:18', 30),
+(28, '03103672f98952c8f16b443f143f31e4', 'f6281581f62b', '2018-06-23 16:09:28', '2018-06-24 11:17:17', 1147),
+(29, '03103672f98952c8f16b443f143f31e4', 'd11ab5f5f248', '2018-06-24 11:17:33', '2018-06-25 04:18:03', 1020),
+(30, '03103672f98952c8f16b443f143f31e4', '2cd4c7b1e327', '2018-06-25 06:09:32', '2018-06-25 07:26:56', 77),
+(31, '03103672f98952c8f16b443f143f31e4', 'eab39a50a61c', '2018-06-25 08:16:23', '2018-06-25 13:30:17', 313),
+(32, '03103672f98952c8f16b443f143f31e4', '6dfe2e43fb80', '2018-06-25 13:52:23', '2018-06-25 14:32:25', 40),
+(33, '03103672f98952c8f16b443f143f31e4', '0b669df338d4', '2018-06-25 15:08:06', '2018-06-25 15:08:15', 0),
+(34, '!Qaz2wsx', '8f629ae7bb03', '2018-06-25 15:08:36', '2018-06-25 15:08:36', NULL),
+(35, '!Qaz2wsx', '51408f0252a3', '2018-06-25 15:13:08', '2018-06-25 15:13:08', NULL),
+(36, '03103672f98952c8f16b443f143f31e4', '92ed3d926b23', '2018-06-25 15:18:01', '2018-06-25 15:18:11', 0),
+(37, '!Qaz2wsx', 'ffdbc3708d09', '2018-06-25 15:18:22', '2018-06-25 15:18:22', NULL),
+(38, '03103672f98952c8f16b443f143f31e4', 'a8b40341633e', '2018-06-25 15:49:36', '2018-06-25 15:49:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -312,7 +350,7 @@ ALTER TABLE `tbl_logs`
 -- AUTO_INCREMENT for table `tbl_mood`
 --
 ALTER TABLE `tbl_mood`
-  MODIFY `MoodLogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `MoodLogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `tbl_preference`
 --
@@ -322,7 +360,7 @@ ALTER TABLE `tbl_preference`
 -- AUTO_INCREMENT for table `tbl_time`
 --
 ALTER TABLE `tbl_time`
-  MODIFY `LogTimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `LogTimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- Constraints for dumped tables
 --

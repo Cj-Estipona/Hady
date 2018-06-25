@@ -2,6 +2,7 @@
   session_start();
   include 'db_conn.php';
   $userID = "";
+  $output = '';
 
   if($_POST["action"] == "fetch")
   {

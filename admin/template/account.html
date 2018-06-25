@@ -1,0 +1,335 @@
+<style>
+  [ng-click],
+  [data-ng-click],
+  [x-ng-click], a {
+      cursor: pointer;
+  }
+  h2{
+    text-align: center;
+  }
+  .left-content{
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+    border-color: #ffffff;
+  }
+  #account-div{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+  #account-div .left-content{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+  #account-div .left-content i{
+    margin-right: 7px;
+  }
+  #account-div .left-content img {
+    display:block;
+    margin:auto;
+  }
+  #imageModal{
+    color: #2E2E2E;
+  }
+  #image_data{
+    width: inherit;
+  }
+  .left-content .list-group .list-group-item{
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border:none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .left-content a{
+    color: #EFEEF1;
+    text-decoration: none;
+  }
+  .left-content a:hover, .left-content a:focus, .left-content a:active{
+    color: #77DFF0;
+  }
+  .floatRight{
+    float: right;
+  }
+
+  #inputPass .btn {
+    float: right;
+    margin-right: 10px;
+  }
+  #inputPass input {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  #inputPass .showPassword {
+    margin-left: 10px;
+  }
+  #inputPass input[type="password"],#inputPass input[type="text"] {
+    width: 75%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #EFEEF1;
+    color: #EFEEF1;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  #inputPass input[type="password"]:focus,#inputPass input[type="text"]:focus {
+    border-bottom: 2px solid #77DFF0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .avatarImage{
+    margin-bottom: 10px;
+  }
+  .text-toggle i, .text-toggle div {
+    display: inline-block;
+  }
+  .btn-switch {
+      position: relative;
+      float: right;
+      width: 40px;
+      height: 20px;
+      cursor: pointer;
+      background-color: #F27878;
+      border: 2px solid #F27878;
+      border-radius: 40px;
+  }
+  .btn-switch-circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50px;
+  }
+
+  .btn-switch--on {
+      background-color: #80CDBE;
+      border: 2px solid #80CDBE;
+  }
+  .btn-switch-circle--on {
+      left: auto;
+      right: 0;
+  }
+  .right-content{
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 21px;
+  }
+  .right-content .list-group .list-group-item{
+    background: transparent;
+    border-left: none;
+    border-bottom: none;
+    /*border-left-color: rgba(30, 30, 30, 0.6);
+    border-bottom-color: rgba(30, 30, 30, 0.6);*/
+    border-top: none;
+    border-right: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .right-content input[type="email"],.right-content input[type="text"],.right-content input[type="tel"],.right-content input[type="date"], .right-content select.right-input {
+    background: transparent;
+    border: none;
+    color: #EFEEF1;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .right-content select option{
+    color: #2E2E2E;
+  }
+  .right-content a{
+    color: #EFEEF1;
+    text-decoration: none;
+  }
+  .right-content a:hover, .right-content a:focus, .right-content a:active{
+    color: #77DFF0;
+  }
+  .right-content input[type="email"]:focus,.right-content input[type="text"]:focus,.right-content input[type="tel"]:focus,.right-content input[type="date"]:focus, select.form-control:focus {
+    border-bottom: 2px solid #77DFF0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .right-content .heading {
+    background: rgba(30, 30, 30, 0.6);
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    font-size: 15px;
+  }
+  .right-content .list-group .list-group-item p{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top:5px;
+  }
+  @media only screen and (max-width: 768px) {
+    #account-div{
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+</style>
+<!--modal for the avatars-->
+<div id="imageModal" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title"><b>Select your Avatar</b></h4>
+   </div>
+   <div class="modal-body">
+     <div id="image_data" class="container" compile="modalData"></div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+
+<div class="row" id="account-div" ng-init="loadMethods()">
+  <h2>{{message}}</h2>
+
+  <!--alert-->
+  <div ng-class="alertClass" ng-show="successful">
+    <span class="close" ng-click="showHideAlert()">&times;</span>
+    {{alertMessage}}
+  </div>
+
+  <div class="col-lg-4 col-md-3 left-content">
+    <img ng-src="{{imgSrc}}" height="140px" width="140px;" class="img-responsive" ng-click="viewModalAvatar()">
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item"><i class="fa fa-calendar-o"></i>Date Created: <span class="floatRight">{{dateCreated}}</span></li>
+        <a data-toggle="collapse" data-target="#inputPass"><li class="list-group-item"><i class="fa fa-pencil-square-o"></i>Change Password</li></a>
+        <div class="collapse" id="inputPass">
+          <form ng-submit="updatePassword()" name="updatePasswordForm">
+          <center>
+            <input type="password" name="old_password" class="form-control" placeholder="Old Password" ng-model="updatePass.oldPassword" required>
+            <input ng-attr-type="{{ showPassword ? 'text' : 'password' }}" name="new_password" class="form-control" placeholder="New Password" ng-model="updatePass.newPassword" required>
+            <input ng-attr-type="{{ showPassword ? 'text' : 'password' }}" name="new_password" class="form-control" placeholder="Confirm New Password" ng-model="updatePass.confirmPassword" required>
+          </center>
+            <input type="checkbox" ng-model="showPassword" class="showPassword">&nbsp;Show/Hide Password
+            <input type="submit" class="btn btn-info btn-sm" name="Update" value="Update" ng-disabled="updatePasswordForm.$invalid">
+          </form>
+        </div>
+        <li class="list-group-item text-toggle"><i class="fa fa-bell-o"></i>
+          Text Reminder
+          <div class="btn-switch" ng-class="{'btn-switch--on':toggle.switch}" ng-model="toggle.switch" ng-click="updateTextNotif(!toggle.switch)">
+            <div class="btn-switch-circle" ng-class="{'btn-switch-circle--on':toggle.switch}" ng-model="toggle.switch"></div>
+          </div>
+        </li>
+
+        <a><li class="list-group-item"><i class="fa fa-question-circle-o"></i>Help</li></a>
+        <a><li class="list-group-item"><i class="fa fa-file-text-o"></i>Terms and Conditions</li></a>
+        <a ng-click="logout()"><li class="list-group-item"><i class="fa fa-sign-out"></i>Sign Out</li></a>
+    </ul>
+  </div>
+
+  <div class="col-lg-8 col-md-9 right-content">
+    <div class="heading">ACCOUNT DETAILS</div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <label>Nickname</label>
+        <div class="input-group">
+          <input type="text" class="form-control right-input" focus-me="inputFocusNickname" ng-model="Nickname" ng-readonly="!readonlyAttr.Nickname" ng-keydown="$event.keyCode === 13 && updateUserInfo('Nickname')">
+          <div class="input-group-btn" ng-init="editButtonNickname=true">
+            <a class="btn" ng-click="readonlyAttr.Nickname = true; inputFocusNickname=true; editButtonNickname=false" ng-show="editButtonNickname"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonNickname==false" ng-click = "editButtonNickname = !editButtonNickname; unsave('Nickname')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonNickname==false" ng-click = "editButtonNickname = !editButtonNickname; updateUserInfo('Nickname')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <label>Email</label>
+        <div class="input-group">
+          <input type="email" class="form-control right-input" focus-me="inputFocusEmail" ng-model="Email" ng-readonly="!readonlyAttr.Email" ng-keydown="$event.keyCode === 13 && updateUserInfo('Email')">
+          <div class="input-group-btn" ng-init="editButtonEmail=true">
+            <a class="btn" ng-click="readonlyAttr.Email = true; inputFocusEmail=true; editButtonEmail=false" ng-show="editButtonEmail"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonEmail==false" ng-click = "editButtonEmail = !editButtonEmail; unsave('Email')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonEmail==false" ng-click = "editButtonEmail = !editButtonEmail; updateUserInfo('Email')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" ng-init="editButtonFullName=true">
+        <label>Full Name</label>
+        <div class="input-group" ng-show="editButtonFullName">
+          <input type="text" class="form-control right-input" ng-model="fullName" readonly>
+          <div class="input-group-btn">
+            <a class="btn" ng-click="readonlyAttr.FName=true; inputFocusFName=true; editButtonFullName=false">
+              <i class="fa fa-pencil-square-o fa-lg"></i>
+            </a>
+          </div>
+        </div>
+        <div class="input-group" ng-show="editButtonFullName==false">
+          <input type="text" class="form-control right-input" focus-me="inputFocusFName" ng-model="FName" required>
+          <input type="text" class="form-control right-input" ng-model="MName">
+          <input type="text" class="form-control right-input" ng-model="LName" required>
+          <div class="input-group-btn">
+            <a class="btn" ng-click="readonlyAttr.FName = true; inputFocusFName=true" ng-show="editButtonFullName"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonFullName==false" ng-click = "editButtonFullName = !editButtonFullName; unsave('fullName')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonFullName==false" ng-click = "editButtonFullName = !editButtonFullName; updateUserInfo('fullName')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <label>Birth Date</label>
+        <div class="input-group">
+          <input type="date" class="form-control right-input" focus-me="inputFocusBDate" ng-model="BDate" ng-readonly="!readonlyAttr.BDate">
+          <div class="input-group-btn" ng-init="editButtonBDate=true">
+            <a class="btn" ng-click="readonlyAttr.BDate = true; inputFocusBDate=true; editButtonBDate=false" ng-show="editButtonBDate"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonBDate==false" ng-click = "editButtonBDate = !editButtonBDate; unsave('BDate')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonBDate==false" ng-click = "editButtonBDate = !editButtonBDate; updateUserInfo('BDate')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <label>Mobile Number</label>
+        <div class="input-group">
+          <input type="tel" maxlength="11" class="form-control right-input" focus-me="inputFocusMNumber" ng-model="MNumber" ng-readonly="!readonlyAttr.MNumber">
+          <div class="input-group-btn" ng-init="editButtonMNumber=true">
+            <a class="btn" ng-click="readonlyAttr.MNumber = true; inputFocusMNumber=true; editButtonMNumber=false" ng-show="editButtonMNumber"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonMNumber==false" ng-click = "editButtonMNumber = !editButtonMNumber; unsave('MNumber')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonMNumber==false" ng-click = "editButtonMNumber = !editButtonMNumber; updateUserInfo('MNumber')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <label>Course</label>
+        <div class="input-group">
+          <select class="form-control right-input" focus-me="inputFocusCourse" ng-model="Course" ng-disabled="!readonlyAttr.Course" ng-options="x for x in courseName">
+          </select>
+          <input type="hidden" ng-model="Course" ng-readonly="!readonlyAttr.Course">
+          <div class="input-group-btn" ng-init="editButtonCourse=true">
+            <a class="btn" ng-click="readonlyAttr.Course = true; inputFocusCourse=true; editButtonCourse=false" ng-show="editButtonCourse"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonCourse==false" ng-click = "editButtonCourse = !editButtonCourse; unsave('Course')"><i class="fa fa-times fa-lg"></i></a>
+            <a class="btn" ng-show="editButtonCourse==false" ng-click = "editButtonCourse = !editButtonCourse; updateUserInfo('Course')"><i class="fa fa-check fa-lg"></i></a>
+          </div>
+        </div>
+      </li>
+      <div class="heading">CONTACT US</div>
+      <a href="mailto:hadysupport@gmail.com" target="_blank">
+        <li class="list-group-item" style="padding-top:29px;padding-bottom:15px;"><i class="fa fa-envelope-o fa-lg" style="margin-right:7px;"></i>
+          Help
+          <p style="font-size:12px;"><i>Give us your feedback or if you have any concern.</i></p>
+        </li>
+      </a>
+    </ul>
+  </div>
+</div>

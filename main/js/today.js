@@ -1,6 +1,7 @@
 angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout", function($scope,$http,$timeout){
   $scope.message = "";
   $scope.journal = "";
+  $scope.journalTitle = "";
   $scope.successful = false;
   $scope.emotionFace = "../resources/greenFace.png";
   $scope.faceMood = "sliderDiv5";
@@ -32,6 +33,17 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
       $scope.models.lists.B.splice($scope.models.lists.B.indexOf(item),1);
     }
   };
+  $scope.moveRemove = function(item,listName) {
+    if(listName == 'A'){
+      //var dataPush = $scope.models.lists.A.indexOf(item);
+      $scope.models.lists.B.push(item);
+      $scope.models.lists.A.splice($scope.models.lists.A.indexOf(item),1);
+    } else {
+      //var dataPush2 = $scope.models.lists.B.indexOf(item);
+      $scope.models.lists.A.push(item);
+      $scope.models.lists.B.splice($scope.models.lists.B.indexOf(item),1);
+    }
+  };
 
   /*$scope.logNow = function(){
     var object = $scope.models.lists.B;
@@ -60,7 +72,7 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
     var object = $scope.models.lists.B;
     var result = object.map(a => a.label);
     console.log("String Array", result.toString());
-    $http.post("model/logMood.php?action=submitMood",  {'passMood':$scope.moodLabel,'passMoodArr':result.toString(),'passJournal':$scope.journal})
+    $http.post("model/logMood.php?action=submitMood",  {'passMood':$scope.moodLabel,'passMoodArr':result.toString(),'passTitle':$scope.journalTitle,'passJournal':$scope.journal})
     .then(function(response){
       if (response.data=="success") {
         //console.log("Data inserted to database");
@@ -78,6 +90,7 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
     $scope.faceMood = "sliderDiv5";
     $scope.moodLabel =  moodLabelArray[4];
     $scope.journal = "";
+    $scope.journalTitle = "";
     $scope.models.lists.B = [];
     $scope.searchText = "";
     $scope.slider.value = 5;
