@@ -1,8 +1,8 @@
 <?php
 	include 'db_conn.php';
-	//header('Content-Type: application/json');
-	//$userid = trim(@$_GET['id']);
-	$userid = $_POST['data'];
+	header('Content-Type: application/json');
+	$userid = trim(@$_GET['id']);
+	//$userid = $_POST['data'];
 	$data = array();
 	if ($connection1 == false){
 		echo 'Unable to connect to Database server!<br>';

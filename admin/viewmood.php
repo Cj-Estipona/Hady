@@ -134,31 +134,68 @@
       	console.log("MY ID",id);
 
         $.ajax({
-      		url:"data.php",
+      		url:"data.php?id="+id+"",
       		method: "POST",
           data:{data:id},
       		success: function(data) {
-      			console.log(data);
+      			console.log(data.data);
       			var user = [];
       			var mood = [];
+      			user.push("DATE");
+      			mood.push(0);
 
       			for(var i in data){
-      				user.push("USERID "+ data[i].UserID);
-      				mood.push(data[i].Moods)
+      				user.push("Date: " + data[i].MoodDate);
+      				if(data[i].MoodLvl == "Very Low"){
+      					mood.push(20);
+      				} else if (data[i].MoodLvl == "Low"){
+      					mood.push(40);
+      				} else if (data[i].MoodLvl == "Neutral"){
+      					mood.push(60);
+      				} else if (data[i].MoodLvl == "High"){
+      					mood.push(80);
+      				} else{
+      					mood.push(100);
+      				}
       			}
-
+      			var labelx = "Mood Levels of "+ data[0].LName +", " +data[0].FName;
       			var chartdata = {
       				labels: user,
       				datasets: [
       					{
-      						label: "Moods",
-      							backgroundColor: 'rgba(0,200,200,0.75)',
-      							borderColor: 'rgba(0,200,200,0.75)',
-      							hoverBackgroundColor: 'rgba(0,200,200,1)',
-      							hoverBorderColor: 'rgba(0,200,200,1)',
-      							data: mood
+      						label: labelx,
+      						backgroundColor: 'rgba(200,200,200,100)',
+      						borderColor: 'rgba(200,200,200,100)',
+      						hoverBackgroundColor: 'rgba(200,200,200,1)',
+      						hoverBorderColor: 'rgba(200,200,200,1)',
+      						data: mood
       					}
-      				]
+      				],
+              options: {
+                    title: {
+                      display: true,
+                      text: "HAHA",
+                      fontSize: 18,
+                      fontColor: '#EFEEF1'
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                max: 100,
+                                stepSize: 20,
+                                fontColor: '#EFEEF1',
+                                fontSize: 14
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontColor: '#EFEEF1',
+                                fontSize: 14
+                            }
+                        }]
+                    }
+                  }
       			};
 
       			var ctx = $("#mycanvas");
@@ -167,14 +204,15 @@
       				type: 'horizontalBar',
       				data: chartdata
       			});
-      			var data = JSON.parse(data);
+      			//var data = JSON.parse(data);
       		},
       		error: function(data){
       			console.log(data);
+      			console.log("There is an error in app.js");
       		}
       	});
-
       });
+
     </script>
 
   </body>
