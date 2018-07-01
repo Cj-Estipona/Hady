@@ -24,6 +24,8 @@
     $avePerDayArr = array(); //array for the average mood of user per day
     $avePerWeekHolder = 0;
     $avePerWeek = 0;
+    $strMood = "";
+    $moodFeelHolder = array(); //storing the mood string
 
     //call the query
     $resultData = getUserWeekData($connection1,$first,$last,$userID);
@@ -31,7 +33,7 @@
     $counterTimes = 0;
     $dateFromLocal = new DateTime($first);
     $dateHolder =  $dateFromLocal->format('Y-m-d');
-    if ($rowNum > 0) {
+    if ($rowNum) {
       //get the table data and pass to array
       while ($row = mysqli_fetch_array($resultData)){
         $dataArray[]=$row;
@@ -126,13 +128,40 @@
           $moodLvl2 = 100;
         }
         $avePerWeekHolder += $moodLvl2;
+
+        //top 5 mood
+        $strMood .= $dataArray[$z]['MoodFeel'].",";
       }
+      $moodFeelHolder = explode(",",substr($strMood,0,-1));
       $avePerWeek = $avePerWeekHolder/$rowNum;
+
+      // new array containing frequency of values of $arr
+    	$arr_freq = array_count_values($moodFeelHolder);
+
+    	// arranging the new $arr_freq in decreasing
+    	// order of occurrences
+    	arsort($arr_freq);
+
+    	// $new_arr containing the keys of sorted array
+    	$new_arr = array_keys($arr_freq);
+      $newarr = array();
+      if (count($new_arr) < 6) {
+        $newarr = array_filter($new_arr, function($value) { return $value !== ''; });
+      } else {
+        $counter = 0;
+        while ($counter < 5) {
+          array_push($newarr,$new_arr[$counter]);
+          $counter++;
+        }
+        $newarr = array_filter($newarr, function($value) { return $value !== ''; });
+      }
     } else {
       for ($x=0; $x < 7 ; $x++) {
         $scopeData[$x] = 0;
         $scopeDate[$x] = '';
       }
+      $newarr = [];
+      $arr_freq = [];
     }
 
 
@@ -141,16 +170,31 @@
     $interval = $date1->diff($date2);
     $interval->format('%d%');*/
 
+    //knowing the best day and the worst day of the user
+    $bestDay = array();
+    $worstDay = array();
+    if ($avePerDayArr) {
+      $bestDay = array_keys($avePerDayArr, max($avePerDayArr));
+      $worstDay = array_keys($avePerDayArr, min(array_diff($avePerDayArr, array(0))));
+    } else {
+      $bestDay = [];
+      $worstDay = [];
+    }
+
+
+
     //$output['moodDate'] = $scopeData;
     $output['moodData'] = $scopeData;
     $output['moodDate'] = $scopeDate;
     $output['daysOfWeek'] = $daysOfArray;
     $output['weekAverage'] = $avePerWeek;
-    $output['bestDay'] = array_keys($avePerDayArr, max($avePerDayArr));
-    $output['worstDay'] = array_keys($avePerDayArr, min(array_diff($avePerDayArr, array(0))));
+    $output['bestDay'] = $bestDay;
+    $output['worstDay'] = $worstDay;
+    $output['topMood'] = $newarr;
+    $output['journalData'] = $dataArray;
 
-    $output['firstday'] = $avePerDayArr;
-    $output['lastday'] =  $avePerWeek;
+    $output['firstday'] = $dataArray;
+    $output['lastday'] =  $arr_freq;
 
 
     echo json_encode($output);
@@ -162,5 +206,7 @@
     $resultData = mysqli_query($connection1, $selectData) or die("Failed to query database ".mysqli_error());
     return $resultData;
   }
+
+
 
 ?>

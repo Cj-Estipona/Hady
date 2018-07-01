@@ -105,9 +105,17 @@
   }
   .journal-section{
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     /*max-height: 400px;*/
-    height: 236px;
+    height: 256px;
+  }
+  .dateEntry{
+    font-size: 16px;
+  }
+  .journalBody{
+    height: 120px;
+    overflow:auto;
+    font-size: 16px;
   }
   #columnFace{
     background: rgba(30, 30, 30, 0.6);
@@ -115,21 +123,37 @@
     background-repeat: no-repeat;
     border-right: 1px solid rgba(30, 30, 30, 0.6);
     border-left: 1px solid rgba(30, 30, 30, 0.6);
+    border-top: 1px solid rgba(30, 30, 30, 0.6);
   }
   #columnBest{
     background: rgba(30, 30, 30, 0.6);
     background-image: none;
     background-repeat: no-repeat;
+    border-top: 1px solid rgba(30, 30, 30, 0.6);
   }
   #myJournal {
     background: rgba(30, 30, 30, 0.6);
     background-image: none;
     background-repeat: no-repeat;
-      border-left: 1px solid rgba(30, 30, 30, 0.6);
+    border-left: 1px solid rgba(30, 30, 30, 0.6);
     border-right: 1px solid rgba(30, 30, 30, 0.6);
+    border-top: 1px solid rgba(30, 30, 30, 0.6);
+
   }
   .chart-content{
     margin-bottom: 10px;
+  }
+  select{
+    background: transparent;
+    border: none;
+    color: #EFEEF1;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 16px;
+  }
+  select option{
+    color: #2E2E2E;
   }
 </style>
 <div class="spinner" ng-if="loadingIcon" ng-init="loadMethods()">
@@ -182,6 +206,19 @@
   <div class="col-md-4" id="myJournal">
     <div class="journal-section">
       <h3>My Journal</h3>
+      <form name="myForm">
+        <label for="repeatSelect"> Journal Title: </label>
+        <select name="repeatSelect" id="repeatSelect" ng-model="journalData.model" ng-change="selectJournal()">
+          <option ng-repeat="option in journalData.availableOptions | filter:{JournalTitle: '!NULL'}" value="{{ {'MoodJournal':option.MoodJournal, 'MoodDate': option.MoodDate} }}">{{option.JournalTitle}}</option>
+        </select>
+      </form>
+      <div class="dateEntry">
+        <p>Entry Date: {{journalEntryDate}}</p>
+      </div>
+      <div class="journalBody">
+        <p>{{journalBody}}</p>
+      </div>
+      <!--<p>{{journalData.availableOptions | filter: {'MoodLogID':65} }}</p>-->
     </div>
   </div>
 </div>

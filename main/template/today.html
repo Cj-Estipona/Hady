@@ -209,11 +209,6 @@
 </style>
 
 <h2>{{message}}</h2>
-<!--alert-->
-<div ng-class="alertClass" ng-show="successful">
-  <span class="close" ng-click="successful=!successful">&times;</span>
-  {{alertMessage}}
-</div>
 
 <div class="row" id="todayPage" ng-init="loadMethods()">
   <div id="faceDiv">
@@ -272,6 +267,11 @@
     </div>
 
     <center>
+      <!--alert-->
+      <div ng-class="alertClass" ng-show="successful">
+        <span class="close" ng-click="successful=!successful">&times;</span>
+        {{alertMessage}}
+      </div>
       <a class="btn btn-md submit-mood" ng-click="!submitLimit && submitMood()" ng-disabled="submitLimit">SUBMIT</a>
     </center>
 </div>

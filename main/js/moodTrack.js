@@ -17,17 +17,31 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
     ['','21:45','','','','18:29',''],
     ['','','','','','22:49','']*/
   ];
+  $scope.journalData = {
+    model: [],
+    availableOptions: ''
+   };
   $scope.toolTipArray = [];
   $scope.averageWeek = 0;
   $scope.bestDay = "None";
   $scope.worstDay = "None";
-  $scope.topMood = "Happy, Sad, Lonely, Chicken, Mang Insal";
+  $scope.topMood = "";
   $scope.loadingIcon = true;
+
+  $scope.selectJournal = function () {
+    $scope.journalDate = JSON.parse($scope.journalData.model).MoodDate;
+    var entryDate = new Date($scope.journalDate);
+    $scope.journalEntryDate = entryDate.toLocaleString();
+    $scope.journalBody = JSON.parse($scope.journalData.model).MoodJournal;
+    //console.log((JSON.parse($scope.journalData.model)).MoodJournal);
+  };
 
   $scope.loadMethods = function(){
     $scope.weeklyView();
   };
   $scope.leftRightDate = function(choice) {
+    $scope.journalEntryDate = "";
+    $scope.journalBody = "";
     if (choice == 'add') {
       $scope.weekAdd += 7;
     } else {
@@ -64,28 +78,51 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
     console.log("Last",lastday);
     $http.post("model/trackMood.php?action=getCurrMood",{'passFirstday':firstday,'passLastday':lastday})
     .then(function successCallback(response){
-      console.log("php",response.data.firstday);
-      console.log(response.data.lastday);
+      console.log("New Array", response.data.firstday);
+      console.log("CATS", response.data.lastday);
       $scope.data = response.data.moodData;
       $scope.date = response.data.moodDate;
+      $scope.journalData.availableOptions = response.data.journalData;
       $scope.toolTipArray = response.data.daysOfWeek;
       $scope.averageWeek = response.data.weekAverage;
-      if(response.data.bestDay.length > 1){
-        $scope.bestDay = $scope.labels[response.data.bestDay[0]];
-        for (var i = 1; i < response.data.bestDay.length; i++) {
-          $scope.bestDay = $scope.bestDay.concat(", " + $scope.labels[response.data.bestDay[i]]);
-        }
+      if (!response.data.topMood.length) {
+        var obj = response.data.topMood;
+        var result = Object.keys(obj).map(function(key) {
+          return [obj[key]];
+        });
+        $scope.topMood = result.toString();
       } else {
-        $scope.bestDay = $scope.labels[response.data.bestDay[0]];
+        $scope.topMood = response.data.topMood.join(', ');
       }
-      if (response.data.worstDay.length > 1) {
-        $scope.worstDay = $scope.labels[response.data.worstDay[0]];
-        for (var k = 1; k < response.data.worstDay.length; k++) {
-          $scope.worstDay = $scope.worstDay.concat(", " + $scope.labels[response.data.worstDay[k]]);
-        }
+
+
+
+      if (response.data.bestDay.length == 0) {
+        $scope.bestDay = "None";
       } else {
-        $scope.worstDay = $scope.labels[response.data.worstDay[0]];
+        if(response.data.bestDay.length > 1){
+          $scope.bestDay = $scope.labels[response.data.bestDay[0]];
+          for (var k = 1; k < response.data.bestDay.length; k++) {
+            $scope.bestDay = $scope.bestDay.concat(", " + $scope.labels[response.data.bestDay[k]]);
+          }
+        } else {
+          $scope.bestDay = $scope.labels[response.data.bestDay[0]];
+        }
       }
+
+      if (response.data.worstDay == 0) {
+        $scope.worstDay = $scope.bestDay;
+      } else {
+        if (response.data.worstDay.length > 1) {
+          $scope.worstDay = $scope.labels[response.data.worstDay[0]];
+          for (var j = 1; j < response.data.worstDay.length; j++) {
+            $scope.worstDay = $scope.worstDay.concat(", " + $scope.labels[response.data.worstDay[j]]);
+          }
+        } else {
+          $scope.worstDay = $scope.labels[response.data.worstDay[0]];
+        }
+      }
+
       $scope.chartTitle = firstday.substring(3) + " - " + labelLastDay.substring(3);
       $scope.loadingIcon = false;
       console.log($scope.data.length);

@@ -71,7 +71,7 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
   $scope.submitMood = function(){
     var object = $scope.models.lists.B;
     var result = object.map(a => a.label);
-    console.log("String Array", result.toString());
+    console.log("String Array", $scope.moodLabel);
     $http.post("model/logMood.php?action=submitMood",  {'passMood':$scope.moodLabel,'passMoodArr':result.toString(),'passTitle':$scope.journalTitle,'passJournal':$scope.journal})
     .then(function(response){
       if (response.data=="success") {
@@ -80,7 +80,8 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
         $scope.checkMood();
         $scope.resetMood();
       } else {
-        console.log("error");
+        //console.log("error");
+        console.log(response.data);
       }
     });
   };
@@ -159,7 +160,7 @@ $scope.showAlertBox = function(alertBool, alertClass, alertMessage) {
   $scope.alertMessage = alertMessage;
   $timeout(function () {
         $scope.successful = false;
-    }, 10000);
+    }, 7000);
 };
 
 
