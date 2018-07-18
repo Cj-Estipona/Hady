@@ -170,6 +170,9 @@
       font-family: 'Ubuntu', sans-serif;
       font-size: 17px;
     }
+    .alert{
+      display: none;
+    }
 
   </style>
 
@@ -220,7 +223,7 @@
               </form>
 
               <br>
-                <a href="#"><p class="text text-primary">Forgot password?</p></a>
+                <a href="reset_password.php?action=2" id="forgotPass"><p class="text text-primary">Forgot password?</p></a>
                 <p>By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
                 <!--<a href="sign_up.php"><p class="text text-info">Create an account.</p></a>-->
             </div>

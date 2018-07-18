@@ -1,3 +1,120 @@
-<div>
-  <h1>{{message}}</h1>
+<style>
+  div.panel{
+    float: left;
+    width: 25%;
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 25px;
+    overflow: hidden;
+  }
+  @media only screen and (max-width: 768px) {
+    div.panel{
+      float: left;
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+  .nav-tabs{
+    width: 100%;
+    font-size: 16px;
+  }
+  .nav-tabs a{
+    color: #EFEEF1 !important;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+  .nav-tabs .active a{
+    background-color: #51B47B !important;
+    border-color: #51B47B;
+    color: #EFEEF1 !important;
+  }
+  .nav-tabs a:hover{
+    background-color: #51B47B !important;
+    border-color: #51B47B;
+  }
+  .panel-transparent {
+      background: rgba(30, 30, 30, 0.3) !important;
+      border: 0 none !important;
+      color: #EFEEF1;
+  }
+
+  .panel-transparent .panel-heading{
+      background: rgba(30,30,30,0.3)!important;
+      border: 0 none;
+      color: #EFEEF1;
+      font-size: 25px;
+  }
+
+  .panel-transparent .panel-body{
+      background: rgba(0,0,0,0)!important;
+      padding: 0;
+      font-size: 16px;
+  }
+  .panel-transparent .panel-footer{
+    background: rgba(30,30,30,0.3)!important;
+    border: 0 none !important;
+  }
+  #breatheStart{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #56A4BE;
+    border-color: #56A4BE;
+    color: #EFEEF1;
+    font-size: 16px;
+  }
+  #breatheStart:hover, #breatheStart:focus, #breatheStart:active{
+    color: #EFEEF1;
+    background-color: #77DFF0;
+    border-color: #77DFF0;
+  }
+  .description{
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+  h2{
+    text-align: center;
+  }
+</style>
+<div id="activities-Container">
+  <div class="contain">
+    <h2>{{message}}</h2>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="activities/#relax">Relax</a></li>
+      <li><a data-toggle="tab" href="activities/#learn">Learn</a></li>
+      <li><a data-toggle="tab" href="activities/#extras">Extras</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="relax" class="tab-pane fade in active">
+        <div class="panel panel-transparent">
+          <div class="panel-heading">BREATHE</div>
+          <div class="panel-body"><img src="../resources/sunsetRelax.jpg" class="img-responsive" style="width:100%;">
+            <div class="description">
+              <br>Description:<br>At some point in your life, you’ve probably heard, “Just take a deep breath and calm down.”  It’s a classic piece of advice, and for very good reason. The benefits of deep breathing are innumerable.  Breathing exercises have a variety of benefits for the body that not only make you healthier, but can reduce your stress and anxiety levels as well.</div>
+            </div>
+          <div class="panel-footer"><a href="#/breatheRelax" id="breatheStart" class="btn">Start</a></div>
+        </div>
+
+      </div>
+      <div id="learn" class="tab-pane fade">
+        <div class="panel panel-transparent" ng-repeat="activity in activityList | orderBy: 'id'">
+          <div class="panel-heading">{{activity.activityTitle}}</div>
+          <div class="panel-body">{{activity.activityBody}}</div>
+          <div class="panel-footer">Panel Footer</div>
+        </div>
+      </div>
+      <div id="extras" class="tab-pane fade">
+        <div class="panel panel-default" ng-repeat="activity in activityList | orderBy: 'id'">
+          <div class="panel-heading">{{activity.activityTitle}}</div>
+          <div class="panel-body">{{activity.activityBody}}</div>
+          <div class="panel-footer">Panel Footer</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

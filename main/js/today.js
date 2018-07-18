@@ -3,7 +3,7 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
   $scope.journal = "";
   $scope.journalTitle = "";
   $scope.successful = false;
-  $scope.emotionFace = "../resources/greenFace.png";
+  $scope.emotionFace = "../resources/VERY HAPPY.png";
   $scope.faceMood = "sliderDiv5";
   var moodLabelArray = ["Very Low", "Low", "Neutral", "High", "Very High"];
   $scope.moodLabel =  moodLabelArray[4];
@@ -87,7 +87,7 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
   };
 
   $scope.resetMood = function() {
-    $scope.emotionFace = "../resources/greenFace.png";
+    $scope.emotionFace = "../resources/VERY HAPPY.png";
     $scope.faceMood = "sliderDiv5";
     $scope.moodLabel =  moodLabelArray[4];
     $scope.journal = "";
@@ -114,27 +114,27 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
             //console.log('on change ' + $scope.slider.value); // logs 'on change slider-id'
             switch ($scope.slider.value) {
               case 1:
-                $scope.emotionFace = "../resources/redFace.png";
+                $scope.emotionFace = "../resources/VERY SAD.png";
                 $scope.faceMood = "sliderDiv";
                 $scope.moodLabel = moodLabelArray[0];
                 break;
               case 2:
-                $scope.emotionFace = "../resources/orangeFace.png";
+                $scope.emotionFace = "../resources/SAD.png";
                 $scope.faceMood = "sliderDiv2";
                 $scope.moodLabel = moodLabelArray[1];
                 break;
               case 3:
-                $scope.emotionFace = "../resources/lightorangeFace.png";
+                $scope.emotionFace = "../resources/NEUTRAL.png";
                 $scope.faceMood = "sliderDiv3";
                 $scope.moodLabel = moodLabelArray[2];
                 break;
               case 4:
-                $scope.emotionFace = "../resources/lightgreenFace.png";
+                $scope.emotionFace = "../resources/HAPPY.png";
                 $scope.faceMood = "sliderDiv4";
                 $scope.moodLabel = moodLabelArray[3];
                 break;
               default:
-                $scope.emotionFace = "../resources/greenFace.png";
+                $scope.emotionFace = "../resources/VERY HAPPY.png";
                 $scope.faceMood = "sliderDiv5";
                 $scope.moodLabel = moodLabelArray[4];
                 break;

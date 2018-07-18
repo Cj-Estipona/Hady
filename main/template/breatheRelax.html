@@ -1,0 +1,280 @@
+<style>
+  .watch-face {
+  height: 170px;
+  width: 170px;
+  margin: 0 auto;
+  }
+
+  .circle {
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  position: absolute;
+  mix-blend-mode: screen;
+  transform: translate(0, 0);
+  }
+
+  .circle:nth-child(odd) {
+  background: #61bea2;
+  }
+
+  .circle:nth-child(even) {
+  background: #529ca0;
+  }
+
+  .circle:nth-child(1) {
+  animation: circle-1 5s ease alternate infinite;
+  }
+
+  .circle:nth-child(2) {
+  animation: circle-2 5s ease alternate infinite;
+  }
+
+  .circle:nth-child(3) {
+  animation: circle-3 5s ease alternate infinite;
+  }
+
+  .circle:nth-child(4) {
+  animation: circle-4 5s ease alternate infinite;
+  }
+
+  .circle:nth-child(5) {
+  animation: circle-5 5s ease alternate infinite;
+  }
+
+  .circle:nth-child(6) {
+  animation: circle-6 5s ease alternate infinite;
+  }
+
+  @keyframes circle-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-35px, -50px);
+  }
+  }
+
+  @keyframes circle-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(35px, 50px);
+  }
+  }
+
+  @keyframes circle-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-60px, 0);
+  }
+  }
+
+  @keyframes circle-4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 0);
+  }
+  }
+
+  @keyframes circle-5 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-35px, 50px);
+  }
+  }
+
+  @keyframes circle-6 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(35px, -50px);
+  }
+  }
+  .spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+  }
+
+  .spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+  }
+
+  .spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  }
+
+  @-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+  #HadyAvatar{
+    height: 600px;
+    max-width: 100%;
+  }
+  #titleHeading{
+    color: #EFEEF1;
+  }
+  hr{
+    background-color: #51B47B;
+    height: 1px;
+    border: 0;
+  }
+  #breatheContainer{
+    width: 80%;
+    margin: 0 auto;
+  }
+  @media only screen and (max-width: 768px) {
+    #breatheContainer{
+      width: 100%;
+    }
+    #HadyAvatar{
+      display: none;
+    }
+    .speech-bubble {
+      width: 290px;
+    }
+  }
+  .left-content-breathe{
+    margin-top: 40px;
+  }
+  .speech-bubble p {
+    margin: 0;
+    font-size: 15px;
+  }
+  .speech-bubble {
+  	position: relative;
+  	background: #00aabb;
+  	border-radius: .4em;
+    padding: 10px;
+    width: 100%;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .speech-bubble:after {
+  	content: '';
+  	position: absolute;
+  	right: 0;
+  	top: 50%;
+  	width: 0;
+  	height: 0;
+  	border: 20px solid transparent;
+  	border-left-color: #00aabb;
+  	border-right: 0;
+  	border-top: 0;
+  	margin-top: -10px;
+  	margin-right: -20px;
+  }
+  #mainExercise{
+    padding-top: 50px;
+  }
+  .timer{
+    text-align: center;
+    font-size: 25px;
+    margin-top:150px;
+  }
+  .indicator{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom:70px;
+  }
+  #btnBack{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #56A4BE;
+    border-color: #56A4BE;
+    color: #EFEEF1;
+    font-size: 16px;
+    margin-top: 40px;
+  }
+  #btnBack:hover, #btnBack:focus, #btnBack:active{
+    color: #EFEEF1;
+    background-color: #77DFF0;
+    border-color: #77DFF0;
+  }
+</style>
+
+<div id="breatheContainer">
+  <h1 id="titleHeading">{{message}}</h1>
+  <hr>
+    <div class="row" ng-if="starter">
+      <div class="col-sm-5 left-content-breathe">
+        <div class="spinner" ng-if="loadingIcon" ng-init="delayMessage()" >
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <div class="speech-bubble" ng-repeat="instruction in instructionList" ng-if="!loadingIcon && !finish" >
+          <p>{{instruction.instructionMsg}}</p>
+        </div>
+        <div class="speech-bubble" ng-if="!loadingIcon && finish" >
+          <p>Great Job!  </p>
+        </div>
+        <div class="speech-bubble" ng-if="!loadingIcon && finish" >
+          <p>Did you know that when we practice deep breathing exercises,
+            the breath helps to remove toxins from our vital organs and promote improved blood flow throughout our body. </p>
+        </div>
+        <center><a href="#/activities" id="btnBack" class="btn" ng-if="!loadingIcon && finish">Go Back</a></center>
+      </div>
+
+      <div class="col-sm-7 right-content-breathe">
+          <img src="../resources/1530340779585_COUNSELOR CLIEN.png" class="img-responsive" alt="Hady Logo" id="HadyAvatar" ng-click="startBreathing(1000)">
+      </div>
+    </div>
+
+    <div id="mainExercise" ng-if="!starter">
+      <div class="indicator">
+        <b>{{display}}</b>
+      </div>
+
+      <div class="watch-face">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+
+      <div class="timer">
+        <b>{{counter | secondsToDateTime | date:'mm:ss'}}</b>
+      </div>
+    </div>
+
+
+</div>

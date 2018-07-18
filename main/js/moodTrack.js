@@ -1,7 +1,9 @@
 angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", function($scope,$http){
   $scope.defaultClass = true;
   $scope.activeView = 'Weekly';
+  $scope.weekEquivalent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   $scope.weekAdd = 0;
+  $scope.dayAdd = 0;
   $scope.labels = [];
   $scope.data = [
     /*[40, 80, 80, 60, 20, 100, 20],
@@ -22,6 +24,7 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
     availableOptions: ''
    };
   $scope.toolTipArray = [];
+  $scope.chartTitle = "";
   $scope.averageWeek = 0;
   $scope.bestDay = "None";
   $scope.worstDay = "None";
@@ -39,21 +42,36 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
   $scope.loadMethods = function(){
     $scope.weeklyView();
   };
-  $scope.leftRightDate = function(choice) {
+  $scope.leftRightDate = function(choice, viewActive) {
     $scope.journalEntryDate = "";
     $scope.journalBody = "";
-    if (choice == 'add') {
-      $scope.weekAdd += 7;
+    if (viewActive == 'Weekly') {
+      if (choice == 'add') {
+        $scope.weekAdd += 7;
+      } else {
+        $scope.weekAdd -= 7;
+      }
+      $scope.weeklyView();
     } else {
-      $scope.weekAdd -= 7;
+      if (choice == 'add') {
+        $scope.dayAdd += 1;
+      } else {
+        $scope.dayAdd -= 1;
+      }
+      $scope.loadDailyView();
     }
-    $scope.weeklyView();
     console.log($scope.weekAdd);
   };
 
 
 
   $scope.weeklyView = function () {
+    $scope.journalDate = "";
+    $scope.journalEntryDate = "";
+    $scope.journalBody = "";
+
+    $scope.dayAdd = 0;
+    $scope.activeView = 'Weekly';
     var curr = new Date(); // get current date
     curr.setDate(curr.getDate()-$scope.weekAdd);
     curr.setHours(0,0,0,0);
@@ -83,6 +101,7 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
       $scope.data = response.data.moodData;
       $scope.date = response.data.moodDate;
       $scope.journalData.availableOptions = response.data.journalData;
+      $scope.journalData.model = $scope.journalData.availableOptions[0];
       $scope.toolTipArray = response.data.daysOfWeek;
       $scope.averageWeek = response.data.weekAverage;
       if (!response.data.topMood.length) {
@@ -94,7 +113,6 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
       } else {
         $scope.topMood = response.data.topMood.join(', ');
       }
-
 
 
       if (response.data.bestDay.length == 0) {
@@ -202,12 +220,12 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
         };
 
       $scope.dataOverride = [];
-      console.log($scope.dataOverride[0]);
 
       //setting the override
       for (var x = 0; x < $scope.data.length; x++){
         $scope.dataOverride.push({label:[],backgroundColor:[],borderColor:[],borderWidth:1});
       }
+      console.log("Override",$scope.dataOverride[0]);
       for (var z = 0; z < $scope.data.length; z++){
         var colorFillBar = '';
         var borderFillBar ='';
@@ -238,19 +256,173 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
         }
       }
       console.log("New Over", $scope.dataOverride);
-      if ($scope.averageWeek >= 0 && $scope.averageWeek <= 20 ) {
-        $scope.emotionFace = "../resources/redFace.png";
+      if ($scope.averageWeek > 0 && $scope.averageWeek <= 20 ) {
+        $scope.emotionFace = "../resources/VERY SAD.png";
       } else if ($scope.averageWeek >= 21 && $scope.averageWeek <= 40 ) {
-        $scope.emotionFace = "../resources/orangeFace.png";
+        $scope.emotionFace = "../resources/SAD.png";
       } else if ($scope.averageWeek >= 41 && $scope.averageWeek <= 60 ) {
-        $scope.emotionFace = "../resources/lightorangeFace.png";
+        $scope.emotionFace = "../resources/NEUTRAL.png";
       } else if ($scope.averageWeek >= 61 && $scope.averageWeek <= 80 ) {
-        $scope.emotionFace = "../resources/lightgreenFace.png";
-      } else {
-        $scope.emotionFace = "../resources/greenFace.png";
+        $scope.emotionFace = "../resources/HAPPY.png";
+      } else if ($scope.averageWeek == 0) {
+        $scope.emotionFace = "../resources/notavailable.png";
+      }else {
+        $scope.emotionFace = "../resources/VERY HAPPY.png";
       }
     });
   }; //weeklyView function
+
+  $scope.loadDailyView = function () {
+    $scope.journalDate = "";
+    $scope.journalEntryDate = "";
+    $scope.journalBody = "";
+    
+    $scope.weekAdd = 0;
+    $scope.activeView = 'Daily';
+    var curr = new Date(); // get current date
+    var dailyDate =  new Date(curr.setDate(curr.getDate()-$scope.dayAdd)).toDateString(); //get the daily date
+    var todayString = $scope.weekEquivalent[curr.getDay()]; //get the specific day of the week
+    var nextDate =  new Date(curr.setDate(curr.getDate()+1)).toDateString(); //get the daily date+1
+    console.log("String date",todayString);
+    //console.log(nextDate);
+    $http.post("model/trackMood.php?action=getDailyMood",{'passDailyMood': dailyDate, 'passNextDate':nextDate})
+    .then(function successCallback(response){
+      console.log("Daily View Data",response.data.moodData);
+      console.log("Daily View Date",response.data.moodDate);
+      console.log("Daily Average", response.data.dailyAverage);
+      console.log("Daily Mood", response.data.dailyMood);
+      console.log("Journal",response.data.journalData);
+
+      $scope.data1 = response.data.moodData;
+      $scope.date1 = response.data.moodDate;
+      $scope.journalData.availableOptions = response.data.journalData;
+      $scope.journalData.model = $scope.journalData.availableOptions[0];
+      $scope.averageWeek = response.data.dailyAverage;
+      if (!response.data.dailyMood.length) {
+        var obj = response.data.dailyMood;
+        var result = Object.keys(obj).map(function(key) {
+          return [obj[key]];
+        });
+        $scope.topMood = result.toString();
+      } else {
+        $scope.topMood = response.data.dailyMood.join(', ');
+      }
+
+      $scope.labels1 = [todayString];
+      $scope.chartTitle1 = dailyDate;
+
+      $scope.options1 = {
+            title: {
+              display: true,
+              text: $scope.chartTitle1,
+              fontSize: 18,
+              fontColor: '#EFEEF1'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 100,
+                        stepSize: 20,
+                        fontColor: '#EFEEF1',
+                        fontSize: 14
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: '#EFEEF1',
+                        fontSize: 14
+                    }
+                }]
+            },
+            tooltips: {
+              mode: 'single',
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  var dataset = data.datasets[tooltipItem.datasetIndex];
+                  var index = tooltipItem.index;
+                  var labelMood = "";
+                  switch (dataset.data[index]) {
+                    case 20:
+                      labelMood="Very Low";
+                      break;
+                    case 40:
+                      labelMood="Low";
+                      break;
+                    case 60:
+                      labelMood="Neutral";
+                      break;
+                    case 80:
+                      labelMood="High";
+                      break;
+                    case 100:
+                      labelMood="Very High";
+                      break;
+                    default:
+                      labelMood = "";
+                  }
+                  return dataset.label[index] + ': ' + labelMood;
+                }
+              }
+            }
+        };
+
+      $scope.dataOverride1 = [];
+
+      //setting the override
+      for (var x = 0; x < $scope.data1.length; x++){
+        $scope.dataOverride1.push({label:[],backgroundColor:[],borderColor:[],borderWidth:1});
+      }
+      for (var z = 0; z < $scope.data1.length; z++){
+        var colorFillBar = '';
+        var borderFillBar ='';
+        for(var i = 0; i < $scope.data1[z].length; i++) {
+          //console.log("inner loop", $scope.data[x][i]);
+          if($scope.data1[z][i] == 20){
+            colorFillBar = 'rgba(255, 63, 61, 0.5)';
+            borderFillBar = 'rgba(255, 63, 61, 1)';
+          } else if ($scope.data1[z][i] == 40) {
+            colorFillBar = 'rgba(255, 106, 55, 0.5)';
+            borderFillBar = 'rgba(255, 106, 55, 1)';
+          } else if ($scope.data1[z][i] == 60) {
+            colorFillBar = 'rgba(255, 148, 62, 0.5)';
+            borderFillBar = 'rgba(255, 148, 62, 1)';
+          } else if ($scope.data1[z][i] == 80) {
+            colorFillBar = 'rgba(208, 255, 68, 0.5)';
+            borderFillBar = 'rgba(208, 255, 68, 1)';
+          } else if ($scope.data1[z][i] == 100) {
+            colorFillBar = 'rgba(102, 255, 102, 0.5)';
+            borderFillBar = 'rgba(102, 255, 102, 1)';
+          } else {
+            colorFillBar = 'rgba(0, 0, 0, 0.8)';
+            borderFillBar = 'rgba(0, 0, 0, 1)';
+          }
+          $scope.dataOverride1[z].label.push($scope.date1[z][i]);
+          $scope.dataOverride1[z].backgroundColor.push(colorFillBar);
+          $scope.dataOverride1[z].borderColor.push(borderFillBar);
+        }
+      }
+      //console.log("OVERRIDE",$scope.dataOverride1);
+
+
+
+
+      if ($scope.averageWeek > 0 && $scope.averageWeek <= 20 ) {
+        $scope.emotionFace = "../resources/VERY SAD.png";
+      } else if ($scope.averageWeek >= 21 && $scope.averageWeek <= 40 ) {
+        $scope.emotionFace = "../resources/SAD.png";
+      } else if ($scope.averageWeek >= 41 && $scope.averageWeek <= 60 ) {
+        $scope.emotionFace = "../resources/NEUTRAL.png";
+      } else if ($scope.averageWeek >= 61 && $scope.averageWeek <= 80 ) {
+        $scope.emotionFace = "../resources/HAPPY.png";
+      } else if ($scope.averageWeek == 0) {
+        $scope.emotionFace = "../resources/notavailable.png";
+      }else {
+        $scope.emotionFace = "../resources/VERY HAPPY.png";
+      }
+    });
+
+  };//daily view
 
 
 }]);

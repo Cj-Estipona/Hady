@@ -146,6 +146,7 @@
     <script src="js/account.js"></script>
     <script src="js/app_service.js"></script>
     <script src="js/body.js"></script>
+    <script src="js/breatheRelax.js"></script>
     <script>
       var idleTime = 0;
 

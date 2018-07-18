@@ -200,9 +200,96 @@
     echo json_encode($output);
   }
 
+
+  //function in getting the daily mood of the user
+  if ($action=="getDailyMood") {
+    $passDailyMood = new DateTime($request_body->passDailyMood);
+    $passNextDate = new DateTime($request_body->passNextDate);
+    $dailyDate = $passDailyMood->format('Y-m-d H:i:s');
+    $nextDate = $passNextDate->format('Y-m-d H:i:s');
+    $dailyViewDate = substr($dailyDate,0,10) . ' 00:00:00';
+    $nextViewDate = substr($nextDate,0,10) . ' 00:00:00';
+    $dataArray = array(); //array for the result of the first query which is to get the data within the day
+    $scopeData = array();
+    $scopeDate = array();
+    $dailyMood = array();
+    $dataHolder = array();
+    $moodLvl = 0;
+    $dailyAverage = 0;
+    $strMood = "";
+
+    //call the query
+    $resultData = getUserDailyData($connection1,$dailyViewDate,$nextViewDate,$userID);
+    $rowNumDaily = mysqli_num_rows($resultData);
+
+    if($rowNumDaily) {
+      for ($i=0; $i < $rowNumDaily ; $i++) {
+        $scopeData[$i] = array();
+        $scopeDate[$i] = array();
+      }
+      $index = 0;
+      while ($row = mysqli_fetch_array($resultData)){
+        //get the table data and pass to array
+        $dataArray[]=$row;
+
+        //get the equivalent of moodlvl
+        if ($row['MoodLvl'] == 'Very Low') {
+          $moodLvl = 20;
+        } elseif ($row['MoodLvl'] == 'Low') {
+          $moodLvl = 40;
+        } elseif ($row['MoodLvl'] == 'Neutral') {
+          $moodLvl = 60;
+        } elseif ($row['MoodLvl'] == 'High') {
+          $moodLvl = 80;
+        } else {
+          $moodLvl = 100;
+        }
+
+        //average for the whole day addition
+        $dailyAverage += $moodLvl;
+
+        //Daily mood
+        if ($row['MoodFeel'] != "") {
+          $strMood .= $row['MoodFeel'].",";
+        }
+
+        array_push($scopeData[$index],$moodLvl);
+        array_push($scopeDate[$index],substr($row['MoodDate'],11,-3));
+        $index++;
+
+      }//while
+
+      //average mood
+      $dailyAverage = $dailyAverage/count($scopeData);
+
+      //daily mood store into array
+      $dailyMood = explode(",",substr($strMood,0,-1));
+
+
+    }else {
+      $scopeData[0] = 0;
+      $dailyAverage = 0;
+    }
+    $outputDaily['moodData'] = $scopeData;
+    $outputDaily['moodDate'] = $scopeDate;
+    $outputDaily['dailyAverage'] = $dailyAverage;
+    $outputDaily['dailyMood'] = array_unique($dailyMood);
+    $outputDaily['journalData'] = $dataArray;
+
+
+    echo json_encode($outputDaily);
+  }
+
   //Select the data within the week
   function getUserWeekData ($connection1,$first,$last,$userID) {
     $selectData = "SELECT * FROM `tbl_mood` WHERE UserID = '$userID' AND MoodDate >= '$first' AND MoodDate < '$last' ORDER BY MoodDate ASC";
+    $resultData = mysqli_query($connection1, $selectData) or die("Failed to query database ".mysqli_error());
+    return $resultData;
+  }
+
+  //select the data within the day
+  function getUserDailyData ($connection1,$dailyViewDate,$nextViewDate,$userID) {
+    $selectData = "SELECT * FROM `tbl_mood` WHERE UserID = '$userID' AND MoodDate >= '$dailyViewDate' AND MoodDate < '$nextViewDate' ORDER BY MoodDate ASC";
     $resultData = mysqli_query($connection1, $selectData) or die("Failed to query database ".mysqli_error());
     return $resultData;
   }

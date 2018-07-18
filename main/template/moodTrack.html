@@ -165,25 +165,32 @@
   <div class="navOptions">
     <div class="dateOptions">
       <ul class="list-inline">
-        <li><button class="btn" ng-click="leftRightDate('add')"><i class="fa fa-caret-left fa-2x"></i></button></li>
-        <li><button class="btn" ng-click="leftRightDate('minus')" ng-disabled="(weekAdd==0 ? true : false )"><i class="fa fa-caret-right fa-2x"></i></button></li>
+        <li><button class="btn" ng-click="leftRightDate('add',activeView)"><i class="fa fa-caret-left fa-2x"></i></button></li>
+        <li><button class="btn" ng-click="leftRightDate('minus',activeView)" ng-disabled="(weekAdd==0 && dayAdd==0 ? true : false )"><i class="fa fa-caret-right fa-2x"></i></button></li>
       </ul>
     </div>
     <div class="viewOptions">
       <ul class="list-inline">
-        <li><a>Download</a></li>
-        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Daily' }">Daily</button></li>
-        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Weekly' }">Weekly</button></li>
+        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Daily' }" ng-click="loadDailyView()">Daily</button></li>
+        <li><button ng-class="{'btn btn-lg' : defaultClass, activeClass : activeView == 'Weekly' }" ng-click="weeklyView()">Weekly</button></li>
       </ul>
     </div>
   </div>
   <div class="chart-content">
-    <canvas id="bar" class="chart chart-bar"
+    <canvas id="bar" ng-if="activeView == 'Weekly'" class="chart chart-bar"
           chart-data="data"
           chart-labels="labels"
           chart-colors="colors"
           chart-options="options"
           chart-dataset-override="dataOverride">
+    </canvas>
+
+    <canvas id="bar1" ng-if="activeView == 'Daily'" class="chart chart-bar"
+          chart-data="data1"
+          chart-labels="labels1"
+          chart-colors="colors1"
+          chart-options="options1"
+          chart-dataset-override="dataOverride1">
     </canvas>
   </div>
 
@@ -195,11 +202,14 @@
   </div>
   <div class="col-md-4" id="columnBest">
     <div class="best-content">
-      <h4>Best Day of the Week:</h4>
-      <span class="bestWorsttDay">{{bestDay}}</span>
-      <h4>Worst Day of the Week:</h4>
-      <span class="bestWorstDay">{{worstDay}}</span>
-      <h4>Top 5 Mood</h4>
+      <div ng-if="activeView == 'Weekly'">
+        <h4>Best Day of the Week:</h4>
+        <span class="bestWorsttDay">{{bestDay}}</span>
+        <h4>Worst Day of the Week:</h4>
+        <span class="bestWorstDay">{{worstDay}}</span>
+        <h4>Top 5 Mood</h4>
+      </div>
+      <h4 ng-if="activeView == 'Daily'">My Mood/s</h4>
       <span>{{topMood}}</span>
     </div>
   </div>
@@ -218,7 +228,6 @@
       <div class="journalBody">
         <p>{{journalBody}}</p>
       </div>
-      <!--<p>{{journalData.availableOptions | filter: {'MoodLogID':65} }}</p>-->
     </div>
   </div>
 </div>

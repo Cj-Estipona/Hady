@@ -75,7 +75,7 @@
             <a class="btn btn-lg signUp-btn" href="sign_up.php">Sign Up for Free</a>
           </div>
           <div class="col col-sm-6 left-content">
-            <img src="resources/LogoChatPNG.png" class="img-responsive" alt="Hady Logo" id="headerLogo">
+            <img src="resources/1530340779585_COUNSELOR CLIEN.png" class="img-responsive" alt="Hady Logo" id="headerLogo">
           </div>
 
         </div>
