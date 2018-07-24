@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="resources/iconLogo.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
@@ -185,9 +186,9 @@
               <label><input type="checkbox" value="Show Password" name="showPassword" id="showPassword">Show Password</label>
             </div>
             <div id = "message3"></div>
-            <span class="error-password error">Missing Email</span>
+            <span class="error-password error"></span>
 
-            <input id="submit2" type="button" class="btn btn-info btn-lg" value="Send">
+            <input id="submit2" type="button" class="btn btn-info btn-lg" value="Change">
             <button id="login" type="button" class="btn btn-info btn-lg">Login</button><br><br>
 
           </form>
@@ -284,7 +285,7 @@
       });
 
       $('#submit2').click(function(e){
-        //console.log("HAHAHAHAHAH");
+        //console.log($('#email3').val());
         //$("#submit2").attr("disabled", "disabled");
         e.preventDefault();
         var data3 = $('#inForm3').serialize();
@@ -301,6 +302,7 @@
             }
             else {
               applyError(d.error);
+              //console.log(d.error);
             }
           }
         })

@@ -2,6 +2,7 @@
 // Initialize the session.
 // If you are using session_name("something"), don't forget it now!
 session_start();
+date_default_timezone_set("Asia/Manila");
 include '../../db_conn.php';
 $userID = $_SESSION['userId'];
 $sessionID = $_SESSION['currentSessionID'];
@@ -44,8 +45,8 @@ if(mysqli_affected_rows($connection1) > 0){
           );
         }
         // Finally, destroy the session.
-        session_destroy();
         echo "success";
+        session_destroy();
       } else {
         echo "There is no Time stamp Diff!";
       }

@@ -11,7 +11,9 @@
 
   $college = $_SESSION['College'];
   $adminID = $_SESSION['userId'];
+  
 
+  
   function debug_to_console( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -23,7 +25,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hady - Students</title>
+    <title>Hady - Journals</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -37,8 +39,9 @@
     <script src="../js/bootbox.min.js"></script>
     <script src="../js/typed.js"></script>
     <script src="../js/scrollreveal.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-
+	  <script src="lib/Chart.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
+	  <!--<script type ="text/javascript" src="js/app.js?newversion"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
   </head>
@@ -108,7 +111,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-main" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                         <li><a href="index.php"><i class="fa fa-home"></i><span class="textLink">Home</span></a></li>
+                        <li><a href="index.php"><i class="fa fa-home"></i><span class="textLink">Home</span></a></li>
                         <li><a href="users.php" class="active"><i class="fa fa-comments-o"></i><span class="textLink">Students</span></a></li>
                         <li><a href="#"><i class="fa fa-lightbulb-o"></i><span class="textLink">Activities</span></a></li>
                         <li><a href="#"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
@@ -123,11 +126,11 @@
         </div>
 
         <!--Main App-->
+        <div class="col-sm-9 col-lg-10 content">
 			<div class="col-sm-9 col-lg-10 content">
-			<canvas id="mycanvas"></canvas>
 			<?php
 				include '../db_conn.php';
-
+				$userid = trim(@$_GET['id']);
 				if ($connection1 == false)
 			{
 				echo 'Unable to connect to Database server!<br>';
@@ -138,18 +141,18 @@
 			 else
 			{
 
-				$sql = "SELECT UserID,
-						FName,
-						LName,
-						Course
+				$sql = "SELECT tbl_user.FName,
+						tbl_user.LName,
+                        DATE_FORMAT(tbl_mood.MoodDate,'%b/%d/%y') AS MoodDate,
+                        tbl_mood.JournalTitle,
+						tbl_mood.MoodJournal
 						FROM tbl_user
-						INNER JOIN tbl_college ON  tbl_user.Course = tbl_college.CourseName 
-						Where tbl_college.CollegeDept = '$college'
-                        	AND tbl_user.UserID <> '$adminID'
-						ORDER BY LName";
+						INNER JOIN tbl_mood ON  tbl_mood.UserID = tbl_user.UserID 
+						Where tbl_user.userID = '$userid'
+						AND tbl_mood.JournalTitle <> ''
+						";
 
 				$results = mysqli_query($connection1, $sql);
-
 				if($results == false)
 				{
 					echo 'Unable to perform database query<br>';
@@ -160,20 +163,14 @@
 				{
 					$linenumber=0;
 					echo '<table class = "listest">';
-					echo '<tr><th>No</th><th>Last Name</th><th>First Name </th><th>Course</th><th>Links</th></tr>';
+					echo '<tr><th>No</th><th>Date</th><th>Journal Title </th><th>Journal</th></tr>';
 					while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
 					{
 						echo '<tr>';
-						echo '<td>',++$linenumber,'</td>';
-						echo '<td>',$record['LName'],'</td>';
-						echo '<td>',$record['FName'],'</td>';
-						echo '<td>',$record['Course'],'</td>';
-
-						$moodview = "viewmood.php?id=".$record['UserID'] . "";
-						$journalview = "viewjournal.php?id=".$record['UserID'] . "";
-						echo "<td>";
-						echo "<a href='$moodview'>View Mood Chart </a> | <a href='$journalview'>View Journals</a>";
-						echo "</td>";
+						echo '<td style="width:10%;">',++$linenumber,'</td>';
+						echo '<td style="width:15%;">',$record['MoodDate'],'</td>';
+						echo '<td style="width:25%;">',$record['JournalTitle'],'</td>';
+						echo '<td style="width:50%;">',$record['MoodJournal'],'</td>';
 						echo '</tr>';
 					}
 					echo '</table>';
@@ -186,14 +183,14 @@
 
 			?>
         </div>
+      </div>
     </div>
 
 
-	<script>
-
-        var ucollege = '<?php echo $college; ?>';
+    <script>
       $(document).ready(function(){
         fetch_data();
+        //addRemove_active();
         //fetch data for user avatar
         function fetch_data() {
           var action = "fetchAvatar";
@@ -207,85 +204,7 @@
            }
           })
         }
-
-        $.ajax({
-      		url:"data/mooddata.php",
-      		method: "POST",
-      		success: function(data) {
-      			console.log(data.data);
-				var q = 0;
-				var w = 0;
-				var e = 0;
-				var r = 0;
-				var t = 0;
-      			var user = [];
-      			var mood = [];
-      			
-      		for(var i in data){
-  				if(data[i].MoodLvl == "Very Low"){
-      				q++;
-      			} else if (data[i].MoodLvl == "Low"){
-      				w++;
-      			} else if (data[i].MoodLvl == "Neutral"){
-					e++;
-      			} else if (data[i].MoodLvl == "High"){
-      				r++;
-      			} else{
-      				t++;
-      			}
-      		}
-			user.push("Very Low");
-			mood.push(q);
-			user.push("Low");
-			mood.push(w);
-			user.push("Neutral");
-			mood.push(e);
-			user.push("High");
-			mood.push(r);
-			user.push("Very High");
-			mood.push(t);
-      		var labelx = "Mood logs in the college of " + ucollege + "";
-      		var ctx = $("#mycanvas");
-      		var barGraph = new Chart(ctx, {
-      			type: 'bar',
-      			data:{
-						labels: user,
-						datasets: [
-						{
-							label: labelx,
-							backgroundColor: 'rgba(200,200,200,.75)',
-							borderColor: 'rgba(200,200,200,.75)',
-							hoverBackgroundColor: 'rgba(200,200,200,1)',
-							hoverBorderColor: 'rgba(200,200,200,1)',
-							data: mood
-						}
-					]},
-				options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                fontSize: 14
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontSize: 14
-                            }
-                        }]
-                    }
-                  }
-			});
-      			//var data = JSON.parse(data);
-      		},
-      		error: function(data){
-      			console.log(data);
-      			console.log("There is an error in app.js");
-      		}
-      	});
       });
-
     </script>
-
   </body>
 </html>

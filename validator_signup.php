@@ -1,5 +1,6 @@
 <?php
   include 'db_conn.php';
+  date_default_timezone_set("Asia/Manila");
 
   $backError = array();
   $backResponse = array();

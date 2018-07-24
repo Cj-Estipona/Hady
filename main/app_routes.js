@@ -28,5 +28,9 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
   .when('/breatheRelax', {
     templateUrl: 'template/breatheRelax.html',
     controller: 'BreatheCtrl'
+  })
+  .when('/hopeRelax', {
+    templateUrl: 'template/hopeRelax.html',
+    controller: 'HopeCtrl'
   });
 }]);

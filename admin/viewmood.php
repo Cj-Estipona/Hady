@@ -1,5 +1,6 @@
 
 <?php
+include '../db_conn.php';
   session_start();
   if(!$_SESSION['admin']){
 		$_SESSION['isLogin'] = false;
@@ -9,7 +10,9 @@
   }
   debug_to_console($_SESSION['userId']);
 
-
+  $college = $_SESSION['College'];
+  $adminID = $_SESSION['userId'];
+  
   function debug_to_console( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -21,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hady - Home</title>
+    <title>Hady - Moods</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -76,11 +79,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-main" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.php" class="active"><i class="fa fa-home"></i><span class="textLink">Engagement</span></a></li>
-                        <li><a href=""><i class="fa fa-bar-chart"></i><span class="textLink">Mood Tracking</span></a></li>
-                        <li><a href="users.php"><i class="fa fa-comments-o"></i><span class="textLink">Users</span></a></li>
+                         <li><a href="index.php"><i class="fa fa-home"></i><span class="textLink">Home</span></a></li>
+                        <li><a href="users.php" class="active"><i class="fa fa-comments-o"></i><span class="textLink">Students</span></a></li>
                         <li><a href="#"><i class="fa fa-lightbulb-o"></i><span class="textLink">Activities</span></a></li>
                         <li><a href="#"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
+						<li><a href="logout.php" onclick="return confirm('Are you sure?');" ><i class="fa fa-power-off"></i><span class="textLink">Logout</span></a>
                     </ul>
                 </div>
                 <div class="navbar-footer">
@@ -134,7 +137,7 @@
       	console.log("MY ID",id);
 
         $.ajax({
-      		url:"data.php?id="+id+"",
+      		url:"data/usermood.php?id="+id+"",
       		method: "POST",
           data:{data:id},
       		success: function(data) {
@@ -201,7 +204,7 @@
       			var ctx = $("#mycanvas");
 
       			var barGraph = new Chart(ctx, {
-      				type: 'horizontalBar',
+      				type: 'line',
       				data: chartdata
       			});
       			//var data = JSON.parse(data);

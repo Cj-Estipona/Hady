@@ -1,13 +1,98 @@
 <style>
+  /*For blinking cursor*/
+  .typed-cursor {
+    font-size: 35px;
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+    position: relative;
+    bottom: 50;
+  }
+  @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  @-webkit-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  @-moz-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  .typed{
+    display: inline;
+  }
   #HadyAvatr{
     height: 800px;
-
+  }
+  #chat-page-intro{
+    background-color: blue;
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    max-width: 600px;
+    margin-bottom: 30px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  #chat-page-intro h2{
+    position: relative;
+    bottom: 50;
+  }
+  #chat-page-intro h3{
+    position: relative;
+    bottom: 50;
+  }
+  #chat-page{
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  #startHead{
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  .btn-startChat{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #51B47B;
+    border-color: #51B47B;
+    color: #EFEEF1;
+    font-size: 20px;
+    position: relative;
+    bottom: 30;
+  }
+  .btn-startChat:hover, .btn-startChat:focus, .btn-startChat:active{
+    color: #EFEEF1;
+    background-color: #56BE9F;
+    border-color: #56BE9F;
+  }
+  #chat-main{
+    height: 100vh;
+    background-color: #EFEEF1;
   }
 </style>
 
-<div>
-  <h1>{{message}}</h1>
-  <center>
+<div id="chat-page">
+  <!--<center>
   <img src="../resources/1530340779585_COUNSELOR CLIEN.png" class="img-responsive" alt="Hady Avatar" id="HadyAvatr">
-</center>
+</center>-->
+  <div id="chat-page-intro" ng-if="getStarted">
+    <img src="../resources/counsellorHead.png" id="startHead" class="img-responsive">
+    <h2 id="typedHeaders" class="typed"></h2>
+    <h3>"Always Caring. Always Here"</h3>
+    <button class="btn btn-startChat" ng-click="setChat()">Get Started</button>
+  </div>
+
+  <div id="chat-main" ng-if="!getStarted">
+
+  </div>
 </div>

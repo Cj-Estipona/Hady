@@ -1,5 +1,5 @@
 <?php
-	include 'db_conn.php';
+	include '../../db_conn.php';
 	header('Content-Type: application/json');
 	$userid = trim(@$_GET['id']);
 	//$userid = $_POST['data'];
@@ -8,7 +8,7 @@
 		echo 'Unable to connect to Database server!<br>';
 	}
 	else{
-		$sql = "SELECT tbl_mood.MoodDate, tbl_mood.MoodLvl, tbl_user.FName, tbl_user.LName
+		$sql = "SELECT DATE_FORMAT(tbl_mood.MoodDate,'%b/%d/%y') AS MoodDate ,tbl_mood.MoodLvl, tbl_user.FName, tbl_user.LName 
 				FROM tbl_mood
 				INNER JOIN tbl_user ON tbl_mood.UserID = tbl_user.UserID
 				Where tbl_mood.UserID = '$userid'

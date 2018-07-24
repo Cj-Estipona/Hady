@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="resources/iconLogo.png">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
@@ -264,32 +265,30 @@
                   <span id="optradio-span_error"></span>
                 </div>
               </div>
-              <div class="form-group" id="course-error">
-                <label for="Course">Course:</label>
-                  <select class="form-control" id="course" name="course">
-                    <option value="BSCS">BSCS</option>
-                    <option value="BSIT">BSIT</option>
-                    <option value="BSIS">BSIS</option>
-                    <option value="BSEMC">BSEMC</option>
-                    <option value="ABB">ABB</option>
-                    <option value="ABJO">ABJO</option>
-                    <option value="BSHRM">BSHRM</option>
-                    <option value="BSTM">BSTM</option>
-                    <option value="BSA">BSA</option>
-                    <option value="BSAcT">BSAcT</option>
-                    <option value="BSBA">BSBA</option>
-                    <option value="MGE">MGE</option>
-                    <option value="BEC">BEC</option>
-                    <option value="FM">FM</option>
-                    <option value="MKM">MKM</option>
-                    <option value="BSCE">BSCE</option>
-                    <option value="BSCpE">BSCpE</option>
-                    <option value="BSEE">BSEE</option>
-                    <option value="BSECE">BSECE</option>
-                    <option value="BSME">BSME</option>
-                  </select>
-                  <span id="course-span_error"></span>
+              <div class="col-md-6" style="padding-left:0px;">
+                <div class="form-group" id="college-error">
+                  <label for="College">College:</label>
+                    <select class="form-control" id="college" name="college">
+                      <option value="CCSS">CCSS</option>
+                      <option value="CAS">CAS</option>
+                      <option value="CBA">CBA</option>
+                      <option value="CEng">CEng</option>
+                      <option value="CEduc">CEduc</option>
+                      <option value="CDent">CDent</option>
+                    </select>
+                    <span id="college-span_error"></span>
+                </div>
               </div>
+              <div class="col-md-6" style="padding-right:0px;">
+                <div class="form-group" id="course-error">
+                  <label for="Course">Course:</label>
+                    <select class="form-control" id="course" name="course">
+                    </select>
+                    <span id="course-span_error"></span>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -423,8 +422,33 @@
       $form.find('input[type=date]').val("mm/dd/yyyy");
     }
 
+    function runCourses(){
+      collegeVal = $('#college').val();
+      $.ajax({
+        method: 'POST',
+        url: 'validator_courses.php',
+        data: {keywordCollege: collegeVal},
+        dataType: 'json',
+        success: function(response){
+          if (response.success) {
+            //console.log("Successful Course");
+            var optionsAsString = "";
+            for(var i = 0; i < response.output.length; i++) {
+                optionsAsString += "<option value='" + response.output[i] + "'>" + response.output[i] + "</option>";
+            }
+            $('select[name="course"]').append( optionsAsString );
+          }
+        }
+      });
+    }
+
 
     $(document).ready(function(){
+      runCourses();
+      $( "#college" ).change(function() {
+        runCourses();
+        $('select[name="course"]').children('option').remove();
+      });
 
       //button register
       $("#btnregister").click(function(){
@@ -448,6 +472,13 @@
         validateInput("email");
         validateInput("password");
         validateInput("confirmPass");
+
+        if(!getID("BDate").value){
+          $("#BDate-error_message").html("Please enter your birthdate");
+          $("#BDate-error_message").show();
+          addError("BDate");
+          errBDate = true;
+        }
 
         if(errFName || errMName || errLName || errBDate || errMNumber || errEmail || errPassword || errConfirmPass || hasInputErr || !hasAvatar){
           var dialog = bootbox.dialog({
@@ -535,8 +566,8 @@
           $("#BDate-error_message").show();
           addError("BDate");
           errBDate = true;
-        }
-        else {
+          console.log(getID("BDate").value);
+        } else {
           $("#BDate-error_message").hide();
           removeError("BDate");
           errBDate = false;

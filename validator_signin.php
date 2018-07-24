@@ -1,6 +1,7 @@
 <?php
   include 'db_conn.php';
   session_start();
+  date_default_timezone_set("Asia/Manila");
 
   $errors = array();
   $response = array();
@@ -32,6 +33,9 @@
     $id = $row['UserID'];
     $nickname = $row['Nickname'];
 	$access = $row['access_type'];
+	$course = $row['Course'];
+
+	//QUERY
 
     if(empty($row['Email']) || empty($row['Password'])){
       $errors['email'] = 'Invalid Email';
@@ -39,6 +43,13 @@
     }
   }
 
+  	if($access != null)
+	{
+		$querySearch = "SELECT CollegeDept FROM tbl_college Where CourseName = '$course'";
+		$result = mysqli_query($connection1, $querySearch) or die("Failed to query database 1".mysqli_error($connection1));
+		$row = mysqli_fetch_array($result);
+		$college = $row['CollegeDept'];
+	}
 
   $response['errors'] = $errors;
   if(!empty($errors)){
@@ -52,6 +63,8 @@
     $_SESSION['isLogin'] = true;
     $_SESSION['userId'] = $id;
     $_SESSION['nickname'] = $nickname;
+	if($access!= null)
+	{$_SESSION['College'] = $college;}
     $_SESSION['currentSessionID'] = substr(md5(uniqid()), 20);
     $dateLogin = date('Y-m-d H:i:s');
 

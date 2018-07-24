@@ -9,7 +9,9 @@
   }
   debug_to_console($_SESSION['userId']);
 
-
+  $college = $_SESSION['College'];
+  $adminID = $_SESSION['userId'];
+  
   function debug_to_console( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -107,11 +109,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-main" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.php" class="active"><i class="fa fa-home"></i><span class="textLink">Engagement</span></a></li>
-                        <li><a href=""><i class="fa fa-bar-chart"></i><span class="textLink">Mood Tracking</span></a></li>
-                        <li><a href="users.php"><i class="fa fa-comments-o"></i><span class="textLink">Users</span></a></li>
+                        <li><a href="index.php" class="active"><i class="fa fa-home"></i><span class="textLink">Home</span></a></li>
+                        <li><a href="users.php"><i class="fa fa-comments-o"></i><span class="textLink">Students</span></a></li>
                         <li><a href="#"><i class="fa fa-lightbulb-o"></i><span class="textLink">Activities</span></a></li>
                         <li><a href="#"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
+						<li><a href="logout.php" onclick="return confirm('Are you sure?');" ><i class="fa fa-power-off"></i><span class="textLink">Logout</span></a></li>
                     </ul>
                 </div>
                 <div class="navbar-footer">
@@ -125,7 +127,7 @@
         <div class="col-sm-9 col-lg-10 content">
 			<div class="col-sm-9 col-lg-10 content">
 			<?php
-				include 'db_conn.php';
+				include '../db_conn.php';
 
 				if ($connection1 == false)
 			{
@@ -142,6 +144,9 @@
 						LName,
 						Course
 						FROM tbl_user
+						INNER JOIN tbl_college ON  tbl_user.Course = tbl_college.CourseName 
+						Where tbl_college.CollegeDept = '$college'
+                        	AND tbl_user.UserID <> '$adminID'
 						ORDER BY LName";
 
 				$results = mysqli_query($connection1, $sql);
@@ -155,8 +160,9 @@
 				else
 				{
 					$linenumber=0;
+					echo "<h3>List of registered users in the college of $college</h3>";
 					echo '<table class = "listest">';
-					echo '<tr><th>No</th><th>Last Name</th><th>First Name </th><th>Course</th><th>Links</th></tr>';
+					echo '<tr><th>No</th><th>Last Name</th><th>First Name </th><th>Course</th></tr>';
 					while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
 					{
 						echo '<tr>';
@@ -164,11 +170,6 @@
 						echo '<td>',$record['LName'],'</td>';
 						echo '<td>',$record['FName'],'</td>';
 						echo '<td>',$record['Course'],'</td>';
-
-						$viewlink = "viewmood.php?id=".$record['UserID'] . "";
-						echo "<td>";
-						echo "<a href='$viewlink'>View Mood Chart </a>";
-						echo "</td>";
 						echo '</tr>';
 					}
 					echo '</table>';
@@ -180,7 +181,6 @@
 			}
 
 			?>
-			<button id='hellos'>HAHAHHA</button>
         </div>
       </div>
     </div>

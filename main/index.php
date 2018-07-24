@@ -1,6 +1,7 @@
 
 <?php
   session_start();
+  date_default_timezone_set("Asia/Manila");
 
   if (!$_SESSION['isLogin']) {
     header("Location: ../sign_in.php");
@@ -22,6 +23,7 @@
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="../resources/iconLogo.png">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/navbar-fixed-side.css" />
@@ -147,6 +149,7 @@
     <script src="js/app_service.js"></script>
     <script src="js/body.js"></script>
     <script src="js/breatheRelax.js"></script>
+    <script src="js/hopeRelax.js"></script>
     <script>
       var idleTime = 0;
 

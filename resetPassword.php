@@ -18,7 +18,7 @@
         $response['success'] = false;
         $response['message'] = "Sorry! This email is not yet registered";
       } else {
-        $link = "localhost/Hady/reset_password.php?action=3&email=".$row['Email']."&userCode=".$row['UserID']."";
+        $link = "www.hadycares.com/reset_password.php?action=3&email=".$row['Email']."&userCode=".$row['UserID']."";
         $to = $row['Email'];
         $subject = "Reset Password";
         $message =

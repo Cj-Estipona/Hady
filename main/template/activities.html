@@ -44,7 +44,7 @@
       background: rgba(30,30,30,0.3)!important;
       border: 0 none;
       color: #EFEEF1;
-      font-size: 25px;
+      font-size: 20px;
   }
 
   .panel-transparent .panel-body{
@@ -56,7 +56,7 @@
     background: rgba(30,30,30,0.3)!important;
     border: 0 none !important;
   }
-  #breatheStart{
+  #breatheStart, #hopeStart{
     padding-left: 20px;
     padding-right: 20px;
     background-color: #56A4BE;
@@ -64,7 +64,20 @@
     color: #EFEEF1;
     font-size: 16px;
   }
-  #breatheStart:hover, #breatheStart:focus, #breatheStart:active{
+  #breatheStart:hover, #breatheStart:focus, #breatheStart:active, #hopeStart:hover, #hopeStart:focus, #hopeStart:active{
+    color: #EFEEF1;
+    background-color: #77DFF0;
+    border-color: #77DFF0;
+  }
+  .btn-Read{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #56A4BE;
+    border-color: #56A4BE;
+    color: #EFEEF1;
+    font-size: 16px;
+  }
+  .btn-Read:hover, .btn-Read:focus, .btn-Read:active{
     color: #EFEEF1;
     background-color: #77DFF0;
     border-color: #77DFF0;
@@ -78,6 +91,10 @@
   h2{
     text-align: center;
   }
+  .fileImage{
+    width: 150px;
+    height: 150px;
+  }
 </style>
 <div id="activities-Container">
   <div class="contain">
@@ -85,13 +102,13 @@
 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="activities/#relax">Relax</a></li>
-      <li><a data-toggle="tab" href="activities/#learn">Learn</a></li>
+      <li><a data-toggle="tab" href="activities/#learn" ng-click="getLearn()">Learn</a></li>
       <li><a data-toggle="tab" href="activities/#extras">Extras</a></li>
     </ul>
 
     <div class="tab-content">
       <div id="relax" class="tab-pane fade in active">
-        <div class="panel panel-transparent">
+        <div class="panel panel-transparent" id="breathe">
           <div class="panel-heading">BREATHE</div>
           <div class="panel-body"><img src="../resources/sunsetRelax.jpg" class="img-responsive" style="width:100%;">
             <div class="description">
@@ -100,20 +117,33 @@
           <div class="panel-footer"><a href="#/breatheRelax" id="breatheStart" class="btn">Start</a></div>
         </div>
 
+        <div class="panel panel-transparent" id="hopeman">
+          <div class="panel-heading">I GUESS</div>
+          <div class="panel-body"><img src="../resources/sprout.jpg" class="img-responsive" style="width:100%;">
+            <div class="description">
+              <br>Description:<br>These activities are meant to help temporarily soothe or reduce one’s intense or difficult emotions.  By engaging in pleasant activities or redirecting one’s attention on a meaningful, focused activity.</div>
+            </div>
+          <div class="panel-footer"><a href="#/hopeRelax" id="hopeStart" class="btn">Start</a></div>
+        </div>
+
       </div>
       <div id="learn" class="tab-pane fade">
-        <div class="panel panel-transparent" ng-repeat="activity in activityList | orderBy: 'id'">
-          <div class="panel-heading">{{activity.activityTitle}}</div>
-          <div class="panel-body">{{activity.activityBody}}</div>
-          <div class="panel-footer">Panel Footer</div>
+        <div class="panel panel-transparent" ng-repeat="activity in activityList | orderBy: 'ActID'">
+          <div class="panel-heading">{{activity.ActivityName}}</div>
+          <div class="panel-body"><center><img src="../resources/noImage.png" class="img-responsive fileImage"></center>
+
+            <div class="description">
+              <br><b>About:</b><br>{{activity.ActivityDesc}}</div>
+            </div>
+          <div class="panel-footer"><a target="_blank" ng-href='model/viewFile.php?idAction={{activity.ActID}}' class="btn btn-Read">Read</a></div>
         </div>
       </div>
       <div id="extras" class="tab-pane fade">
-        <div class="panel panel-default" ng-repeat="activity in activityList | orderBy: 'id'">
+        <!--<div class="panel panel-default" ng-repeat="activity in activityList | orderBy: 'id'">
           <div class="panel-heading">{{activity.activityTitle}}</div>
           <div class="panel-body">{{activity.activityBody}}</div>
           <div class="panel-footer">Panel Footer</div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>

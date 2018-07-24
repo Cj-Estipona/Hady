@@ -194,9 +194,11 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
             if(result){
               $http.post("model/destroy.php")
               .then(function(response){
-                if(response.data == "success"){
+                if(response.data == "success" || typeof response.data == 'undefined'){
+                  console.log(response.data);
                   $window.location.href = '../sign_in.php';
                 } else {
+                  console.log(response.data);
                   $scope.showAlertBox(true,"alert alert-danger",response.data);
                 }
               });

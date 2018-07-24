@@ -1,0 +1,132 @@
+<style>
+  @media only screen and (max-width: 768px) {
+    .well{
+      min-width: 100%;
+      margin: 0;
+    }
+  }
+  h1 {
+  margin: 20px;
+  }
+  .container-fluids{
+    padding: 20px;
+  }
+  .secretWord {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 3rem;
+  text-align: center;
+  }
+  #indicator{
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .letter-button:disabled {
+  opacity: 0.5;
+  color: black;
+  }
+  .letter-button{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .well{
+    background: rgba(30, 30, 30, 0.3) !important;
+    border: 0 none !important;
+    color: #EFEEF1;
+    width: 50%;
+  }
+  .speech-bubble p {
+    margin: 0;
+    font-size: 15px;
+    color: #EFEEF1;
+  }
+  .speech-bubble {
+  	position: relative;
+  	background: #00aabb;
+  	border-radius: .4em;
+    padding: 10px;
+    width: 100%;
+    float: right;
+    margin-right: -20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .speech-bubble:after {
+  	content: '';
+  	position: absolute;
+  	right: 0;
+  	top: 50%;
+  	width: 0;
+  	height: 0;
+  	border: 20px solid transparent;
+  	border-left-color: #00aabb;
+  	border-right: 0;
+  	border-top: 0;
+  	margin-top: -10px;
+  	margin-right: -20px;
+  }
+  #btnPhrase{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #51B47B;
+    border-color: #51B47B;
+    color: #EFEEF1;
+    font-size: 16px;
+  }
+  #btnPhrase:hover, #btnPhrase:focus, #btnPhrase:active{
+    color: #EFEEF1;
+    background-color: #51B47B;
+    border-color: #51B47B;
+  }
+</style>
+
+<div id="breatheContainer">
+  <h1 id="titleHeading">I GUESS</h1>
+  <hr>
+
+  <div class="container-fluids">
+      <div id="indicator">
+        <p ng-hide="win || lost" style="float:left;">
+          Guess Remaining: {{ missesAllowed - numMisses }}
+        </p>
+        <div class="timer" style="float:right;">
+          <b>{{counter | secondsToDateTime | date:'mm:ss'}}</b>
+        </div>
+        <br><br>
+        <ul class="list-inline">
+          <li ng-repeat="letter in secretWord">
+            <span ng-hide="letter.chosen || letter.name==' ' || letter.name==',' || letter.name=='.'">_</span>
+            <span ng-if="letter.name==' '">&nbsp;</span>
+            <!--<span ng-if="letter.name==','">,</span>
+            <span ng-if="letter.name=='.'">.</span>-->
+            <span ng-show="letter.chosen">{{ letter.name }}</span>
+          </li>
+        </ul>
+      </div>
+      <center>
+      <div class="well">
+        <div class="secretWord">
+          <p>
+            <span ng-show="win && !lost">Well done!</span>
+            <span ng-show="lost && !win">You still did a great job!</span>
+          </p>
+          <div class="letters">
+            <ul class="list-inline">
+              <li ng-repeat="letter in letters">
+                <button class="btn btn-info letter-button" ng-if="!(letter.name==' ' || letter.name==',' || letter.name=='.')"
+                        ng-disabled="letter.chosen"
+                        ng-click="try(letter);">{{letter.name}}</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </center>
+    </div>
+
+    <center><a ng-click="reset(true);" id="btnPhrase" class="btn btn-large">New Phrase</a></center
+
+
+</div>
