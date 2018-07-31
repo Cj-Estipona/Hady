@@ -164,6 +164,23 @@
      }
    }
 
+   if ($action == "getCourses") {
+     $coursesArray = array();
+     $output = array();
+     $coursesQuery = "SELECT * FROM `tbl_college` ORDER BY `tbl_college`.`CollegeDept` ASC";
+     $resultCourse = mysqli_query($connection1, $coursesQuery) or die("Failed to query database ".mysqli_error());
+     while ($rowCourses = mysqli_fetch_array($resultCourse)) {
+       $coursesArray[] = $rowCourses['CourseName'];
+     }
+     if (empty($coursesArray)) {
+       $output['success'] = false;
+     } else {
+       $output['success'] = true;
+     }
+     $output['courses'] = $coursesArray;
+     echo json_encode($output);
+   }
+
    //Function for Selecting User Prifle and Preference
    function selectFromUser($userID){
      $selectQuery = "SELECT tbl_user.*, tbl_preference.isLogin,tbl_preference.TextNotif,tbl_preference.DateCreated,tbl_preference.Theme FROM tbl_user INNER JOIN tbl_preference ON tbl_user.UserID = tbl_preference.UserID WHERE tbl_preference.UserID = '$userID'";

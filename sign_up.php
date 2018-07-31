@@ -185,7 +185,93 @@
      <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-info" />
 
    </form>-->
-     <div id="image_data" class="container"></div>
+     <div id="image_data" class="container">
+       <div class="avatarContainer">
+         <div class="row">
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/753631_character_512x512.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018001)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/813782_people_512x512.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018002)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/813784_people_512x512.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018003)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/825219_people_512x512.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018004)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/Astronaut_Character-256.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018005)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/825154_knight_512x512.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018006)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/people_character_avatar_smile_glyph_2-04-256.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018007)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/avatar_beanie_girl-256.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018008)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/cat.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018009)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/fire.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018010)"</center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/flower.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018011)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/hat.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018012)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/hold.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018013)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/meteor.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018014)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/moon.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018015)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/music.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018016)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/paw.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018017)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/queen.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018018)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/sun.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018019)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/fox.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018020)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/hamster.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018021)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/owl.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018022)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/panda.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018023)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/man1.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018024)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/woman1.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018025)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/man2.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018026)"></center>
+           </div>
+           <div class="col-sm-2 col-xs-3">
+             <center><img src="avatars/woman2.png" height="60px" width="60px" class="avatarImage" onclick="fetchAvatarID(2018027)"></center>
+           </div>
+         </div>
+       </div>
+     </div>
    </div>
    <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -411,7 +497,8 @@
      }
 
     function fetchAvatarID(data){
-      $("#disabledInput").val(data.value);
+      //console.log(data);
+      $("#disabledInput").val(data);
       hasAvatar = true;
       $('#imageModal').modal('hide');
       //bootbox.alert("You selected " + avaID);
@@ -691,7 +778,7 @@
 
       $("#btnavatar").click(function(){
         $('#imageModal').modal('show');
-        fetch_data();
+        //fetch_data();
         /*$('#image_form')[0].reset();
         $('.modal-title').text("Add Image");
         $('#image_id').val('');

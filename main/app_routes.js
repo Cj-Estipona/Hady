@@ -32,5 +32,9 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
   .when('/hopeRelax', {
     templateUrl: 'template/hopeRelax.html',
     controller: 'HopeCtrl'
+  })
+  .when('/contacts', {
+    templateUrl: 'template/contacts.html',
+    controller: 'ContactCtrl'
   });
 }]);

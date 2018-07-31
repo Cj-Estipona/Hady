@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/navbar-fixed-side.css" />
     <link rel="stylesheet" type="text/css" href="css/rzslider.min.css"/>
-    <link rel="stylesheet" href="../font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
+    <link rel="stylesheet" href="../font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -150,6 +150,7 @@
     <script src="js/body.js"></script>
     <script src="js/breatheRelax.js"></script>
     <script src="js/hopeRelax.js"></script>
+    <script src="js/contacts.js"></script>
     <script>
       var idleTime = 0;
 

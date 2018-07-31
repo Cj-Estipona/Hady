@@ -1,0 +1,153 @@
+<style>
+  [ng-click],
+  [data-ng-click],
+  [x-ng-click], a {
+      cursor: pointer;
+  }
+  #contacts-container{
+    padding-top: 20px;
+    padding-bottom:20px;
+  }
+  .btn-back{
+    font-size: 25px;
+  }
+  .btn-back{
+    color: #EFEEF1;
+    text-decoration: none;
+  }
+  .btn-back:hover, .btn-back:focus, .btn-back:active{
+    color: #77DFF0;
+    text-decoration: none;
+  }
+  .pagination{
+    float: right;
+  }
+  #contacts-main{
+    padding: 20px 20px 20px 20px;
+    margin: 0 auto;
+    width: 75%;
+  }
+  #contacts-list{
+    background: rgba(30, 30, 30, 0.6);
+    background-image: none;
+    background-repeat: no-repeat;
+    border-color: transparent;
+  }
+  .list-group{
+    border-left: none;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  #contacts-list .list-group-item{
+    background: transparent;
+    border-left: none;
+    border-bottom: none;
+    /*border-left-color: rgba(30, 30, 30, 0.6);
+    border-bottom-color: rgba(30, 30, 30, 0.6);*/
+    border-top: none;
+    border-right: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .address{
+    font-size: 12px;
+    margin-left: 10px;
+  }
+  .founding{
+    font-size: 12px;
+  }
+  .pagination>li>a,
+ .pagination>li>span {
+  border: 1px solid rgba(30, 30, 30, 0.6);
+  background: rgba(30, 30, 30, 0.6);
+  color: #fff;
+}
+.pagination>li.activeClass>a,.pagination>li.activeClass>a:hover,.pagination>li>a:hover {
+  background: #77DFF0;
+  color: #fff;
+}
+@media only screen and (max-width: 768px) {
+  #contacts-main{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+</style>
+
+<div id="contacts-container">
+  <a href="#/account" class="btn-back">  <i class="fa fa-caret-left fa-md"></i>&nbsp;Back</a>
+  <div id="contacts-main">
+    <center><h2>{{message}}<h2></center>
+    <hr>
+    <div id="contacts-list">
+      <div class="row" ng-if="first">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="directory in directories1">
+              <p ng-bind-html="directory.psychologist"></p>
+              <p ng-bind-html="directory.address" class="address"></p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="directory in directories2">
+              <p ng-bind-html="directory.psychologist"></p>
+              <p ng-bind-html="directory.address" class="address"></p>
+            </li>
+          </ul>
+        </div>
+      </div> <!--row-->
+
+      <div class="row" ng-if="second">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="directory in directories3">
+              <p ng-bind-html="directory.psychologist"></p>
+              <p ng-bind-html="directory.address" class="address"></p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="directory in directories4">
+              <p ng-bind-html="directory.psychologist"></p>
+              <p ng-bind-html="directory.address" class="address"></p>
+            </li>
+          </ul>
+        </div>
+      </div> <!--row-->
+      <div class="row" ng-if="third">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="directory in directories5">
+              <p ng-bind-html="directory.psychologist"></p>
+              <p ng-bind-html="directory.address" class="address"></p>
+            </li>
+          </ul>
+        </div>
+      </div> <!--row-->
+
+
+
+
+    </div>
+    <hr>
+    <div class="pagination-container">
+      <ul class="pagination" id="hehe">
+        <li><a ng-click="previous(pageView)">Previous</a></li>
+        <li ng-class="{activeClass : activeView == 1}"><a ng-click="setActivePage(1)">1</a></li>
+        <li ng-class="{activeClass : activeView == 2}"><a ng-click="setActivePage(2)">2</a></li>
+        <li ng-class="{activeClass : activeView == 3}"><a ng-click="setActivePage(3)">3</a></li>
+        <li><a ng-click="next(pageView)">Next</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

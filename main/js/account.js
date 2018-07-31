@@ -10,6 +10,7 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
   $scope.bgTheme = ["themeDefault","themeDarkSky","themeNightSky","themeHimalayas","themeMountainSky"];
 
   $scope.loadMethods = function(){
+    $scope.getCourses();
     $scope.getUserInfo();
     $scope.getUserAvatar();
     $scope.getTextNotifStatus();
@@ -55,11 +56,11 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
   $scope.viewModalAvatar = function(){
     console.log("We will change the avatar");
     modal_img.modal('show');
-    $http.post("model/userProfile.php?action=displayImage")
+    /*$http.post("model/userProfile.php?action=displayImage")
     .then(function(response){
       $scope.modalData = response.data;
       //console.log(response.data);
-    });
+    });*/
   };
 
   $scope.updateAvatar = function(id){
@@ -81,6 +82,18 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
       } else {
         $scope.showAlertBox(true,"alert alert-success","Your password was successfully updated!");
         $scope.updatePass = {};
+      }
+    });
+  };
+
+  $scope.getCourses = function(){
+    $http.post("model/userProfile.php?action=getCourses")
+    .then(function(response){
+      //console.log(response.data);
+      if(response.data.success) {
+        $scope.courseName = response.data.courses;
+      } else {
+        $scope.showAlertBox(true,"alert alert-danger","Error retrieving courses.");
       }
     });
   };

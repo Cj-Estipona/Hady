@@ -310,9 +310,7 @@
                     </h4>
                   </div>
                   <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Hady is a chatbot and at the same time a self help tool application that will assist you whenever you are feeling down. Hady will guide you on how to reframe your negative thinking patterns into positive thoughts.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -322,9 +320,7 @@
                     </h4>
                   </div>
                   <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Hady will use Cognitive Behavioral Therapy technique to help you to alter you negative thoughts into a positive one. She will also make use of the PHQ-9 for a better diagnostic that will help you and the Guidance Counselor. </div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -334,9 +330,7 @@
                     </h4>
                   </div>
                   <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Hady is for everyone and not only for people with mental health problems. You can use Hady to unwind and free yourself from stress.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -346,9 +340,7 @@
                     </h4>
                   </div>
                   <div id="collapse4" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">You can use Hady for as long as you want because Hady offers variety of activities that you can use anytime and journalling that will keep track of your day.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -358,9 +350,7 @@
                     </h4>
                   </div>
                   <div id="collapse5" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">No! Hady is not a replacement to the professionals it is only a self help tool that you can use whenever you cannot go to a real counselor.</div>
                   </div>
                 </div>
               </div><!--accordian1-->
@@ -374,9 +364,7 @@
                     </h4>
                   </div>
                   <div id="collapse6" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Definetely Yes! Hady is free and available all the time just for you.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -386,9 +374,7 @@
                     </h4>
                   </div>
                   <div id="collapse7" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Yes, there are list of registered psychologist that you can see in the contact address page of the application.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -398,9 +384,7 @@
                     </h4>
                   </div>
                   <div id="collapse8" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Only you can see what you're saying during your conversation with Hady.</div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -410,9 +394,7 @@
                     </h4>
                   </div>
                   <div id="collapse9" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">Because we value your privacy, only when you give your approval that's the time when the guidance counselor can see your personal data (chat, moods, journal and preference). However, your basic personal information (name, birthdate, email, course, etc., ) can be seen by your guidance counselor.<i>*Please refer to our Terms and Conditions.</i></div>
                   </div>
                 </div>
                 <div class="panel panel-default panel-transparent">
@@ -422,9 +404,7 @@
                     </h4>
                   </div>
                   <div id="collapse10" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                    <div class="panel-body">As of now Hady can only understand the English language but we're trying our best to make Hady understand other languages especially Tagalog.</div>
                   </div>
                 </div>
               </div><!--accordion-->
@@ -442,11 +422,11 @@
             <ul class="list-group">
               <li class="list-group-item" style="border: 0 none;">
                 <i class='fa fa-phone fa-lg fa-pull-left'></i>
-                <p style="margin-bottom:0;">+63 9975683458</p>
+                <p style="margin-bottom:0;">+63 9975683459</p>
               </li>
               <li class="list-group-item" style="border: 0 none;">
                 <i class='fa fa-envelope fa-lg fa-pull-left'></i>
-                <a href="mailto:hadysupport@gmail.com">hadysupport@gmail.com</a>
+                <a href="mailto:hadysupport@gmail.com">counselorhady@gmail.com</a>
               </li>
               <li class="list-group-item" style="border: 0 none;">
                 <i class='fa fa-map-marker fa-lg fa-pull-left'></i>
