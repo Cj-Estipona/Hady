@@ -80,7 +80,8 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
     var last = first + 7; // last day is the first day + 6
 
     var firstday = new Date(curr.setDate(first)).toDateString();
-    var lastday = new Date(curr.setDate(last)).toDateString();
+    //var lastday = new Date(curr.setDate(last)).toDateString();
+    var lastday = new Date(curr.setDate(curr.getDate()+7)).toDateString();
 
     //FOR JUST THE LABEL OF LAST DAY OF THE WEEK
     var latest = new Date();
@@ -276,7 +277,7 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
     $scope.journalDate = "";
     $scope.journalEntryDate = "";
     $scope.journalBody = "";
-    
+
     $scope.weekAdd = 0;
     $scope.activeView = 'Daily';
     var curr = new Date(); // get current date
