@@ -77,7 +77,91 @@
   }
   #chat-main{
     height: 100vh;
-    background-color: #EFEEF1;
+  }
+  #inner-chat{
+    max-height: 90%;
+    background: rgba(245, 245, 245, 0.9);
+    background-image: none;
+    background-repeat: no-repeat;
+    padding: 15px;
+    padding-bottom: 0;
+    overflow: auto;
+    position: relative;
+  }
+  .single-message{
+    max-width:400px;
+    margin:5px 0px 5px 0px;
+    padding:5px 10px 5px 10px;
+    border:1px solid #b3b3b3;
+    border-radius:5px;
+  }
+  .single-message p{
+    font-size:14px;
+    margin-top:5px;
+  }
+  .single-message span{
+    float:right;
+    font-size:12px;
+  }
+  .clear{
+    clear:both;
+  }
+  #chat-input{
+    background: rgba(245, 245, 245, 1);
+    background-image: none;
+    background-repeat: no-repeat;
+    border-top: 1px solid #ffffff;
+    max-height: 10%;
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+  }
+  #text-input{
+    float: left;
+    resize: none;
+    width: 85%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    color: #000000;
+  }
+  #text-input::-webkit-scrollbar{
+    display: none;
+  }
+  #messageFrm{
+    margin-bottom: 0;
+  }
+  .send{
+    color: #ffffff;
+    padding: 5px;
+    font-size: 20px;
+    color: #51B47B;
+    line-height: 50px;
+  }
+  #messageFrm a:hover{
+    text-decoration: none;
+    color: #56BE9F;
+  }
+  @media only screen and (max-width: 768px) {
+    .single-message{
+      max-width:250px;
+    }
+    #inner-chat{
+      max-height:90%;
+    }
+    #chat-input{
+      max-height:10%;
+    }
+    .send{
+      padding: 3px;
+      font-size: 16px;
+      line-height: 50px;
+    }
+    #text-input{
+      width: 75%;
+    }
+
   }
 </style>
 
@@ -93,6 +177,23 @@
   </div>
 
   <div id="chat-main" ng-if="!getStarted">
-
+    <div id="outside-side">
+      <div id="inner-chat" scroll-glue>
+        <div class="chat-content" ng-repeat="chat in chatContent">
+          <div class="single-message" ng-style="chat.sentBy=='Christian' ? rightChat : leftChat">
+                <p>{{chat.message}}</p>
+                <br />
+                <span>{{chat.sentDate}}</span>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div id="chat-input">
+        <form method="POST" id="messageFrm">
+          <textarea name="message" id="text-input" cols="30" rows="2" class="form-control" placeholder="Please Type a message to send"></textarea>
+          <a class="send"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;Send</a>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

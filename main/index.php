@@ -140,6 +140,7 @@
     <script src="lib/angular-drag-and-drop-lists.min.js"></script>
     <script src="lib/Chart.min.js"></script>
     <script src="lib/angular-chart.min.js"></script>
+    <script src="lib/scrollglue.min.js"></script>
     <script src="app_routes.js"></script>
     <script src="js/today.js"></script>
     <script src="js/moodTrack.js"></script>
