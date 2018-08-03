@@ -193,7 +193,6 @@
     $output['worstDay'] = $worstDay;
     $output['topMood'] = $newarr;
     $output['journalData'] = $dataArray;
-
     $output['firstday'] = $dataArray;
     $output['lastday'] =  $arr_freq;
 

@@ -61,14 +61,26 @@
    }
 
    if($action == "textNotif") {
+     $output = array();
      $query1 = "SELECT * FROM tbl_preference WHERE UserID = '$userID'";
      $result1 = mysqli_query($connection1, $query1) or die("Failed to query database ".mysqli_error());
      $row = mysqli_fetch_array($result1);
      if($row){
-       echo $row['TextNotif'];
+       $output['textNotif'] = $row['TextNotif'];
      } else {
-       echo "There is an error selecting text notification.";
+       $output['textNotif'] = "There is an error selecting text notification.";
      }
+
+     $query2 = "SELECT * FROM tbl_privilage WHERE UserID = '$userID'";
+     $result2 = mysqli_query($connection1, $query2) or die("Failed to query database ".mysqli_error());
+     $row2 = mysqli_fetch_array($result2);
+     if($row2){
+       $output['allowStatus'] = $row2['ViewPriv'];
+     } else {
+       $output['allowStatus'] = "There is an error in privilage";
+     }
+
+     echo json_encode($output);
    }
 
    if($action == "updateTextNotif") {
@@ -80,6 +92,23 @@
      }
 
      $query1 = "UPDATE tbl_preference SET TextNotif='$notifStatus' WHERE UserID = '$userID'";
+     $result1 = mysqli_query($connection1, $query1) or die("Failed to query database ".mysqli_error());
+     if(mysqli_affected_rows($connection1) > 0){
+       echo "success";
+     } else {
+       echo "There is an error updating notification.";
+     }
+   }
+
+   if($action == "updatePrivilage") {
+     $passVar = $request_body->passVar;
+     if($passVar){
+       $allowStatus = 1;
+     } else {
+       $allowStatus = 0;
+     }
+
+     $query1 = "UPDATE tbl_privilage SET ViewPriv='$allowStatus' WHERE UserID = '$userID'";
      $result1 = mysqli_query($connection1, $query1) or die("Failed to query database ".mysqli_error());
      if(mysqli_affected_rows($connection1) > 0){
        echo "success";

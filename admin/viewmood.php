@@ -27,6 +27,7 @@ include '../db_conn.php';
     <title>Hady - Moods</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+	<link rel="icon" href="../resources/iconLogo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
@@ -57,6 +58,35 @@ include '../db_conn.php';
     .content{
       color: #000000;
     }
+			.listest {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+	}
+
+	.listest td, .listest th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+	.listest tr:nth-child(even){background-color: #f2f2f2;}
+
+	.listest tr:hover {background-color: #ddd;}
+
+	.listest th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #0045b5;
+		color: white;
+	}
+
+
+
+	.link:hover, .link:active {
+		background-color: #011a42;
+	}
 
   </style>
 
@@ -96,6 +126,59 @@ include '../db_conn.php';
         <!--Main App-->
         <div class="col-sm-9 col-lg-10 content">
 			       <canvas id="mycanvas"></canvas>
+				<?php
+					$userid = trim(@$_GET['id']);
+					include '../db_conn.php';
+
+					if ($connection1 == false)
+				{
+					echo 'Unable to connect to Database server!<br>';
+					if (DB_SHOWERROR)
+						echo 'ERROR DETAILS:', mysqli_connect_error(), '<br>';
+
+				}
+				 else
+				{
+
+					$sql = "SELECT tbl_question.Question, tbl_score.Score,  max( tbl_score.Date )
+							FROM tbl_question
+							INNER JOIN tbl_score ON tbl_question.QuestionID = tbl_score.QuestionID
+							Where tbl_score.UserID = '$userid'
+							GROUP BY tbl_score.QuestionID
+							";
+
+					$results = mysqli_query($connection1, $sql);
+
+					if($results == false)
+					{
+						echo 'Unable to perform database query<br>';
+						if (DB_SHOWERROR)
+							echo 'ERROR DETAILS:' , mysqli_error($connection1),'<br>';
+					}
+					else
+					{
+						$linenumber=0;
+						$totalscore = 0;
+						echo '<table class = "listest">';
+						echo '<tr><th>No</th><th>Question</th><th>Score </th></tr>';
+						while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
+						{
+							echo '<tr>';
+							echo '<td>',++$linenumber,'</td>';
+							echo '<td>',$record['Question'],'</td>';
+							echo '<td>',$record['Score'],'</td>';
+							echo '</tr>';
+							$totalscore += $record['Score'];
+						}
+						echo '<tr><th></th><th>Total Score</th><th>', $totalscore ,' </th></tr>';
+						echo '</table>';
+						@mysqli_free_result($results);
+					}
+
+				}
+						
+				?>   
+				
         </div>
       </div>
     </div>

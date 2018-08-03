@@ -411,6 +411,23 @@
                   <input class="form-control" id="disabledInput" name="disabledInput" type="text" placeholder="Select your avatar.." value"" readonly>
                 </div>
               </div>
+              <br>
+              <div class="form-group" id="optAllow-error">
+                <label for="Gender">Allow guidance counsellor to view your log data (Mood Levels and Journals)</label>
+                <div class="row">
+                  <div class="form-check form-check-inline col-sm-4">
+                    <label class="radio-inline">
+                      <input checked type="radio" name="optAllow" id="optAllow1" value=1>Yes
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline col-sm-4">
+                    <label class="radio-inline">
+                      <input type="radio" name="optAllow" id="optAllow2" value=0>No
+                    </label>
+                  </div>
+                  <span id="optAllow-span_error"></span>
+                </div>
+              </div>
 
               <div class="checkbox">
                 <label><input type="checkbox" value="Agreement" name="agreement" id="agreement" disabled>I accept the <a href="#" id="acceptAgreement">terms and conditions.</a> </label>
@@ -586,7 +603,8 @@
             success: function(response){
               console.log(response.query1);
               console.log(response.query2);
-              if(response.query1 && response.query2){
+              console.log(response.query3);
+              if(response.query1 && response.query2 && response.query3){
                 //bootbox.alert("You are now registered!");
                 bootbox.alert({
                     title: "<b>Registration</b>",

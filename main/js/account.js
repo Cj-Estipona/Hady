@@ -23,12 +23,20 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
   $scope.getTextNotifStatus = function(){
     $http.post("model/userProfile.php?action=textNotif")
     .then(function(response){
-      if(response.data == 1){
+      if(response.data.textNotif == 1){
         $scope.toggle.switch = true;
       }
       else {
         $scope.toggle.switch = false;
       }
+
+      if(response.data.allowStatus == 1){
+        $scope.toggle.switch2 = true;
+      }
+      else {
+        $scope.toggle.switch2 = false;
+      }
+      console.log(response.data);
     });
   };
 
@@ -37,6 +45,17 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
     .then(function(response){
       if(response.data == "success"){
         $scope.toggle.switch = notifValue;
+      } else {
+        console.log("There are some errors");
+      }
+    });
+  };
+
+  $scope.updatePrivilage = function(allowValue){
+    $http.post("model/userProfile.php?action=updatePrivilage", {'passVar':allowValue})
+    .then(function(response){
+      if(response.data == "success"){
+        $scope.toggle.switch2 = allowValue;
       } else {
         console.log("There are some errors");
       }

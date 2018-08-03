@@ -88,7 +88,7 @@
         <div class="container">
           <div class="row">
             <center>
-              <h2 id="typedFeatures" class="typed"></h2>
+              <h2 id="typedFeatures" class="typed">FEATURES</h2>
               <span class="titleLine"></span>
             </center>
             <div class="col-md-4">
@@ -139,7 +139,7 @@
         <div class="container">
           <div class="row">
             <center>
-              <h2 id="typedMood" class="typed"></h2>
+              <h2 id="typedMood" class="typed">MOOD CHART</h2>
               <span class="titleLine"></span>
             </center>
 
@@ -168,7 +168,7 @@
         <div class="container">
           <div class="row">
             <center>
-              <h2 id="typedActivities" class="typed"></h2>
+              <h2 id="typedActivities" class="typed">ACTIVITIES</h2>
               <span class="titleLine"></span>
             </center>
 
@@ -297,7 +297,7 @@
         <div class="container">
           <div class="row">
             <center>
-              <h2 id="typedFaq" class="typed"></h2>
+              <h2 id="typedFaq" class="typed">FAQs</h2>
               <span class="titleLine"></span>
             </center>
 
@@ -526,7 +526,7 @@
           backDelay: 1500,
         });
 
-        var type1 = new Typed('#typedFeatures',{
+        /*var type1 = new Typed('#typedFeatures',{
           strings:["FEATURES"],
           typeSpeed:60,
           backSpeed:40,
@@ -556,7 +556,7 @@
           backSpeed:40,
           backDelay:2500,
           loop:true
-        });
+        });*/
 
 
         window.sr = ScrollReveal();

@@ -26,6 +26,7 @@
     <title>Hady - Home</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+	<link rel="icon" href="../resources/iconLogo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
@@ -125,63 +126,7 @@
 
         <!--Main App-->
         <div class="col-sm-9 col-lg-10 content">
-			<div class="col-sm-9 col-lg-10 content">
-			<?php
-				include '../db_conn.php';
-
-				if ($connection1 == false)
-			{
-				echo 'Unable to connect to Database server!<br>';
-				if (DB_SHOWERROR)
-					echo 'ERROR DETAILS:', mysqli_connect_error(), '<br>';
-
-			}
-			 else
-			{
-
-				$sql = "SELECT UserID,
-						FName,
-						LName,
-						Course
-						FROM tbl_user
-						INNER JOIN tbl_college ON  tbl_user.Course = tbl_college.CourseName 
-						Where tbl_college.CollegeDept = '$college'
-                        	AND tbl_user.UserID <> '$adminID'
-						ORDER BY LName";
-
-				$results = mysqli_query($connection1, $sql);
-
-				if($results == false)
-				{
-					echo 'Unable to perform database query<br>';
-					if (DB_SHOWERROR)
-						echo 'ERROR DETAILS:' , mysqli_error($connection1),'<br>';
-				}
-				else
-				{
-					$linenumber=0;
-					echo "<h3>List of registered users in the college of $college</h3>";
-					echo '<table class = "listest">';
-					echo '<tr><th>No</th><th>Last Name</th><th>First Name </th><th>Course</th></tr>';
-					while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
-					{
-						echo '<tr>';
-						echo '<td>',++$linenumber,'</td>';
-						echo '<td>',$record['LName'],'</td>';
-						echo '<td>',$record['FName'],'</td>';
-						echo '<td>',$record['Course'],'</td>';
-						echo '</tr>';
-					}
-					echo '</table>';
-					echo 'Total records found: ', mysqli_num_rows($results) , '<br>';
-
-					@mysqli_free_result($results);
-				}
-
-			}
-
-			?>
-        </div>
+			<canvas id="mycanvas"></canvas>
       </div>
     </div>
 
@@ -203,27 +148,121 @@
            }
           })
         }
-
-		/*function viewmood (userID) {
-			var action = "HAHA";
-			console.log(action);
-			$.ajax({
-				url:"data.php",
-				method: "POST",
-				data:action,
-				success:function(data){
-					windows.location.href = 'viewmood.php'
-				}
-			})
-			alert(userID);
-		}*/
-		$('#hellos').click(function(){
-			console.log("Working");
-		});
-		/*$('#hello').click(function(){
-			console.log("Workingggg");
-		});*/
       });
     </script>
+	
+		<script>
+
+        var ucollege = '<?php echo $college; ?>';
+      $(document).ready(function(){
+        fetch_data();
+        //fetch data for user avatar
+        function fetch_data() {
+          var action = "fetchAvatar";
+          $.ajax({
+           url:"../select_avatar.php",
+           method:"POST",
+           data:{action:action},
+           success:function(data)
+           {
+            $('#UserAvatar').html(data);
+           }
+          })
+        }
+
+        $.ajax({
+      		url:"data/phqview.php",
+      		method: "POST",
+      		success: function(data) {
+      			console.log(data.data);
+				var q = 0;
+				var w = 0;
+				var e = 0;
+				var r = 0;
+				var t = 0;
+				var ids= '';
+      			var scores = [];
+      			var mood = [];
+				ids = data[0].UserID;		
+				
+      		for(var i in data){			
+				if(ids == data[i].UserID)
+				{
+					t += parseInt(data[i].Score);
+				} else {
+					if(t <9){
+						q++;
+					} else if(t>=9 && t<14){
+						w++;
+					} else if(t>=15 && t<20) {
+						e++;
+					} else {
+						r++;
+					}
+					t = parseInt(data[i].Score);
+					ids = data[i].UserID;
+				}
+      		}
+			if(t <9){
+						q++;
+					} else if(t>=9 && t<14){
+						w++;
+					} else if(t>=15 && t<20) {
+						e++;
+					} else {
+						r++;
+					}
+			scores.push("Minimal Symptoms");
+			mood.push(q);
+			scores.push("Minor depression");
+			mood.push(w);
+			scores.push("moderately Severe");
+			mood.push(e);
+			scores.push("Severe");
+			mood.push(r);
+			
+      		var labelx = "Provisional Diagnosis of PHQ-9 in the college of " + ucollege + "";
+      		var ctx = $("#mycanvas");
+      		var barGraph = new Chart(ctx, {
+      			type: 'bar',
+      			data:{
+						labels: scores,
+						datasets: [
+						{
+							label: labelx,
+							backgroundColor: 'rgba(200,200,200,.75)',
+							borderColor: 'rgba(200,200,200,.75)',
+							hoverBackgroundColor: 'rgba(200,200,200,1)',
+							hoverBorderColor: 'rgba(200,200,200,1)',
+							data: mood
+						}
+					]},
+				options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                fontSize: 14
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 14
+                            }
+                        }]
+                    }
+                  }
+			});
+      			//var data = JSON.parse(data);
+      		},
+      		error: function(data){
+      			console.log(data);
+      			console.log("There is an error in app.js");
+      		}
+      	});
+      });
+
+    </script>
+	
   </body>
 </html>

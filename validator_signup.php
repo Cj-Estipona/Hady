@@ -11,6 +11,7 @@
   $birthdate = $_POST['BDate'];
   $contact = $_POST['MNumber'];
   $gender = $_POST['optradio'];
+  $privilage = $_POST['optAllow'];
   $course = $_POST['course'];
   $nickName = $_POST['FName'];
   $email = $_POST['email'];
@@ -37,6 +38,15 @@
       $backResponse['query2'] = true;
     }else {
       $backResponse['query2'] = false;
+    }
+
+    $query3 = "INSERT INTO tbl_privilage(`UserID`,`ViewPriv`)
+      VALUES('".$userID."','".$privilage."')";
+    $result3 = mysqli_query($connection1, $query3) or die("Failed to query the query2 ".mysqli_error($connection1));
+    if($result3) {
+      $backResponse['query3'] = true;
+    }else {
+      $backResponse['query3'] = false;
     }
   }
 

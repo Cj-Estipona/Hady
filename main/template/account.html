@@ -321,6 +321,13 @@
             <div class="btn-switch-circle" ng-class="{'btn-switch-circle--on':toggle.switch}" ng-model="toggle.switch"></div>
           </div>
         </li>
+        <li class="list-group-item text-toggle"><i class="fa fa-info"></i>
+          Share my log data
+          <div class="btn-switch" ng-class="{'btn-switch--on':toggle.switch2}" ng-model="toggle.switch2" ng-click="updatePrivilage(!toggle.switch2)">
+            <div class="btn-switch-circle" ng-class="{'btn-switch-circle--on':toggle.switch2}" ng-model="toggle.switch2"></div>
+          </div>
+
+        </li>
 
         <a><li class="list-group-item"><i class="fa fa-question-circle-o"></i>Help</li></a>
         <a><li class="list-group-item"><i class="fa fa-file-text-o"></i>Terms and Conditions</li></a>

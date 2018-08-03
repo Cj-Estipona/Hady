@@ -178,7 +178,7 @@
   </style>
 
   <body>
-    <div class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel slide carousel-fade" data-ride="carousel" data-interval="20000">
     <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         <div class="item active"></div>

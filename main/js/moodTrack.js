@@ -129,8 +129,12 @@ angular.module("hadyWebApp").controller("MoodTrackCtrl", ["$scope","$http", func
         }
       }
 
-      if (response.data.worstDay == 0) {
-        $scope.worstDay = $scope.bestDay;
+      if (response.data.worstDay.length == 0 ) {
+        if (response.data.bestDay.length == 0) {
+          $scope.worstDay = "None";
+        } else {
+          $scope.worstDay = $scope.bestDay;
+        }
       } else {
         if (response.data.worstDay.length > 1) {
           $scope.worstDay = $scope.labels[response.data.worstDay[0]];

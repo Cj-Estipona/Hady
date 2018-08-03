@@ -18,7 +18,21 @@ angular.module("hadyWebApp").controller("TodayCtrl", ["$scope","$http","$timeout
   };
 
   $scope.loadMethods = function() {
+    $scope.getTextNotifStatus();
     $scope.checkMood();
+  };
+
+  $scope.getTextNotifStatus = function(){
+    $http.post("model/userProfile.php?action=textNotif")
+    .then(function(response){
+      if(response.data.allowStatus == 1){
+        $scope.note = "Note: Your log data can be viewed by your counselor. To change this you can go to your account settings.";
+      }
+      else {
+        $scope.note = "Note: Your counselor can not view your log data. To change this you can go to your account settings.";
+      }
+      //console.log(response.data);
+    });
   };
 
   // Generate initial model

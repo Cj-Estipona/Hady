@@ -28,6 +28,7 @@
     <title>Hady - Journals</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+	<link rel="icon" href="../resources/iconLogo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
@@ -148,8 +149,8 @@
 						tbl_mood.MoodJournal
 						FROM tbl_user
 						INNER JOIN tbl_mood ON  tbl_mood.UserID = tbl_user.UserID 
-						Where tbl_user.userID = '$userid'
-						AND tbl_mood.JournalTitle <> ''
+						Where tbl_mood.userID = '$userid'
+						AND tbl_mood.JournalTitle != 'NULL'
 						";
 
 				$results = mysqli_query($connection1, $sql);
