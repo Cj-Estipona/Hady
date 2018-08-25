@@ -3,6 +3,7 @@ angular.module("hadyWebApp").controller("IndexCtrl", ["$scope","HadyService","$t
       $http.post("model/userProfile.php?action=getInfo")
       .then(function(response){
         $rootScope.Nickname = response.data.Nickname;
+        HadyService.setNickname(response.data.Nickname);
         HadyService.setBgName(response.data.Theme);
         $scope.getBG();
       });

@@ -1,5 +1,6 @@
 angular.module("hadyWebApp").service('HadyService', function($http, $rootScope){
   this.bgName = "";
+  this.Nickname = "";
 
 
   this.getBgName = function(){
@@ -16,6 +17,11 @@ angular.module("hadyWebApp").service('HadyService', function($http, $rootScope){
 
   this.setNickname = function(data) {
     $rootScope.Nickname = data;
+    this.Nickname = data;
+  };
+
+  this.getNickname = function() {
+    return this.Nickname;
   };
 
 

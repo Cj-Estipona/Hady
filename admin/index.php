@@ -216,7 +216,7 @@
 			mood.push(q);
 			scores.push("Minor depression");
 			mood.push(w);
-			scores.push("moderately Severe");
+			scores.push("Moderately Severe");
 			mood.push(e);
 			scores.push("Severe");
 			mood.push(r);

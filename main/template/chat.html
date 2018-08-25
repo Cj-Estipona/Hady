@@ -1,4 +1,53 @@
 <style>
+[ng-click],
+[data-ng-click],
+[x-ng-click], a {
+    cursor: pointer;
+}
+.spinner {
+margin: 100px auto 0;
+width: 70px;
+text-align: center;
+float: left;
+margin-bottom: 10px;
+margin-left: 20px;
+}
+
+.spinner > div {
+width: 18px;
+height: 18px;
+background-color: #333;
+
+border-radius: 100%;
+display: inline-block;
+-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+-webkit-animation-delay: -0.32s;
+animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+-webkit-animation-delay: -0.16s;
+animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+0%, 80%, 100% { -webkit-transform: scale(0) }
+40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
   /*For blinking cursor*/
   .typed-cursor {
     font-size: 35px;
@@ -79,7 +128,7 @@
     height: 100vh;
   }
   #inner-chat{
-    max-height: 90%;
+    height: 90%;
     background: rgba(245, 245, 245, 0.9);
     background-image: none;
     background-repeat: no-repeat;
@@ -143,11 +192,28 @@
     text-decoration: none;
     color: #56BE9F;
   }
+  #quickReply{
+    padding-bottom: 15px;
+    color: #000000;
+  }
+  #quickReply .btn{
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid #00aabb;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+  }
+  #quickReply .btn:hover{
+    background-color: #00aabb;
+    color: #ffffff;
+  }
   @media only screen and (max-width: 768px) {
     .single-message{
-      max-width:250px;
+      max-width:240px;
     }
     #inner-chat{
+      margin-top: -10px;
       max-height:90%;
     }
     #chat-input{
@@ -177,22 +243,37 @@
   </div>
 
   <div id="chat-main" ng-if="!getStarted">
-    <div id="outside-side">
-      <div id="inner-chat" scroll-glue>
+    <div id="outside-chat">
+      <div id="inner-chat" scroll-glue=true>
         <div class="chat-content" ng-repeat="chat in chatContent">
-          <div class="single-message" ng-style="chat.sentBy=='Christian' ? rightChat : leftChat">
-                <p>{{chat.message}}</p>
+          <img class="img-responsive" ng-style="chat.SentBy !='Hady' ? rightDp : leftDp" ng-src="../avatars/{{chat.Icon}}" alt="dp" />
+          <div class="single-message" ng-style="chat.SentBy !='Hady' ? rightChat : leftChat">
+                <p ng-bind-html="chat.Message"></p>
                 <br />
-                <span>{{chat.sentDate}}</span>
+                <span>{{chat.SentDate}}</span>
           </div>
           <div class="clear"></div>
         </div>
+        <div class="spinner" ng-if="loadingChat">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <center>
+        <div id="quickReply" ng-if="quickReplies.length > 0">
+          <input class="btn" type="button" ng-repeat="btn in quickReplies" ng-value="btn" name="quickie" ng-click="SetText(btn)">
+        </div>
+        <center>
       </div>
       <div id="chat-input">
-        <form method="POST" id="messageFrm">
-          <textarea name="message" id="text-input" cols="30" rows="2" class="form-control" placeholder="Please Type a message to send"></textarea>
-          <a class="send"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;Send</a>
-        </form>
+        <div id="messageFrm" ng-show="!talkThe">
+          <textarea cols="30" rows="2" class="form-control" placeholder="Please Type a message to send" ng-model="$parent.userMessage" ng-keypress="($event.keyCode === 13 && !$event.shiftKey) && Send()" id="text-input"></textarea>
+          <a class="send" ng-click="Send()"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;Send</a>
+          <!--<a class="send" ng-click="Trial()"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;try</a>-->
+        </div>
+        <div id="messagess" ng-hide="!talkThe">
+          <p style="color:#000000;">Note: Please go to your guidance counselling office.</p><br>
+        </div>
       </div>
     </div>
   </div>

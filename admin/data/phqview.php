@@ -16,6 +16,11 @@ session_start();
 		INNER JOIN tbl_college ON tbl_user.Course = tbl_college.CourseName
 		Where tbl_college.CollegeDept = '$college'
         AND QuestionID <> 10
+		AND tbl_score.Date = (
+                                SELECT MAX(tbl_score.Date) 
+                                FROM tbl_score
+								WHERE tbl_user.userID = tbl_score. UserID
+                            )
 		group by UserID, QuestionID
 		";
 

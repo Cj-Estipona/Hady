@@ -58,7 +58,7 @@
     .content{
       color: #000000;
     }
-			.listest {
+	.listest {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -72,7 +72,7 @@
 
 	.listest tr:nth-child(even){background-color: #f2f2f2;}
 
-	.listest tr:hover {background-color: #ddd;}
+	.listest tr:hover {background-color: #dddd;}
 
 	.listest th {
 		padding-top: 12px;
@@ -125,7 +125,6 @@
 
         <!--Main App-->
 			<div class="col-sm-9 col-lg-10 content">
-			<canvas id="mycanvas"></canvas>
 			<?php
 				include '../db_conn.php';
 
@@ -139,14 +138,24 @@
 			 else
 			{
 
-				$sql = "SELECT UserID,
+				$sql = "SELECT tbl_user.UserID,
 						FName,
 						LName,
-						Course
+						Course,
+						tbl_privilage.ViewPriv,
+						tbl_score.Score
 						FROM tbl_user
-						INNER JOIN tbl_college ON  tbl_user.Course = tbl_college.CourseName 
+						INNER JOIN tbl_college ON  tbl_user.Course = tbl_college.CourseName
+						INNER JOIN tbl_privilage ON  tbl_privilage.UserID = tbl_user.UserID
+						INNER JOIN tbl_score ON  tbl_score.UserID = tbl_user.UserID
 						Where tbl_college.CollegeDept = '$college'
                         	AND tbl_user.UserID <> '$adminID'
+							AND tbl_score.QuestionID = 9
+                            AND tbl_score.Date = (
+                            	SELECT max(Date) FROM tbl_score
+                               WHERE tbl_user.userID = tbl_score. UserID
+                            )
+						GROUP BY tbl_user.UserID
 						ORDER BY LName";
 
 				$results = mysqli_query($connection1, $sql);
@@ -164,7 +173,10 @@
 					echo '<tr><th>No</th><th>Last Name</th><th>First Name </th><th>Course</th><th>Links</th></tr>';
 					while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
 					{
-						echo '<tr>';
+						if($record['Score']>0)
+							echo '<tr style="background-color:#FF0000; color: white;">';
+						else
+							echo '<tr>';
 						echo '<td>',++$linenumber,'</td>';
 						echo '<td>',$record['LName'],'</td>';
 						echo '<td>',$record['FName'],'</td>';
@@ -173,7 +185,18 @@
 						$moodview = "viewmood.php?id=".$record['UserID'] . "";
 						$journalview = "viewjournal.php?id=".$record['UserID'] . "";
 						echo "<td>";
-						echo "<a href='$moodview'>View Mood Chart </a> | <a href='$journalview'>View Journals</a>";
+						if($record['Score']>0){
+							echo "<a href='$moodview' style='color:white;'>View Mood Chart </a>";
+							if ($record['ViewPriv'] == 1){
+								echo " | <a href='$journalview' style='color:white;'>View Journals</a>";
+							}
+						}
+						else{
+							echo "<a href='$moodview'>View Mood Chart </a>";
+							if ($record['ViewPriv'] == 1){
+								echo " | <a href='$journalview'>View Journals</a>";
+							}
+						}
 						echo "</td>";
 						echo '</tr>';
 					}
@@ -191,8 +214,6 @@
 
 
 	<script>
-
-        var ucollege = '<?php echo $college; ?>';
       $(document).ready(function(){
         fetch_data();
         //fetch data for user avatar
@@ -208,82 +229,6 @@
            }
           })
         }
-
-        $.ajax({
-      		url:"data/mooddata.php",
-      		method: "POST",
-      		success: function(data) {
-      			console.log(data.data);
-				var q = 0;
-				var w = 0;
-				var e = 0;
-				var r = 0;
-				var t = 0;
-      			var user = [];
-      			var mood = [];
-      			
-      		for(var i in data){
-  				if(data[i].MoodLvl == "Very Low"){
-      				q++;
-      			} else if (data[i].MoodLvl == "Low"){
-      				w++;
-      			} else if (data[i].MoodLvl == "Neutral"){
-					e++;
-      			} else if (data[i].MoodLvl == "High"){
-      				r++;
-      			} else{
-      				t++;
-      			}
-      		}
-			user.push("Very Low");
-			mood.push(q);
-			user.push("Low");
-			mood.push(w);
-			user.push("Neutral");
-			mood.push(e);
-			user.push("High");
-			mood.push(r);
-			user.push("Very High");
-			mood.push(t);
-      		var labelx = "Mood logs in the college of " + ucollege + "";
-      		var ctx = $("#mycanvas");
-      		var barGraph = new Chart(ctx, {
-      			type: 'bar',
-      			data:{
-						labels: user,
-						datasets: [
-						{
-							label: labelx,
-							backgroundColor: 'rgba(200,200,200,.75)',
-							borderColor: 'rgba(200,200,200,.75)',
-							hoverBackgroundColor: 'rgba(200,200,200,1)',
-							hoverBorderColor: 'rgba(200,200,200,1)',
-							data: mood
-						}
-					]},
-				options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                fontSize: 14
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontSize: 14
-                            }
-                        }]
-                    }
-                  }
-			});
-      			//var data = JSON.parse(data);
-      		},
-      		error: function(data){
-      			console.log(data);
-      			console.log("There is an error in app.js");
-      		}
-      	});
       });
 
     </script>

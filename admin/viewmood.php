@@ -144,7 +144,12 @@ include '../db_conn.php';
 							FROM tbl_question
 							INNER JOIN tbl_score ON tbl_question.QuestionID = tbl_score.QuestionID
 							Where tbl_score.UserID = '$userid'
-							GROUP BY tbl_score.QuestionID
+                            AND tbl_score.Date = (
+                                    SELECT max(Date) FROM tbl_score
+									Where tbl_score.UserID = '$userid'
+                            )
+                            GROUP BY tbl_score.QuestionID
+							
 							";
 
 					$results = mysqli_query($connection1, $sql);
@@ -160,17 +165,68 @@ include '../db_conn.php';
 						$linenumber=0;
 						$totalscore = 0;
 						echo '<table class = "listest">';
-						echo '<tr><th>No</th><th>Question</th><th>Score </th></tr>';
+						echo '<tr><th>No</th><th>Questions</th><th>Answers </th></tr>';
 						while($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
 						{
-							echo '<tr>';
-							echo '<td>',++$linenumber,'</td>';
-							echo '<td>',$record['Question'],'</td>';
-							echo '<td>',$record['Score'],'</td>';
-							echo '</tr>';
-							$totalscore += $record['Score'];
+							if($record['Question']=='Have you thought that you would be better off dead or of hurting yourself in some ways?'&&$record['Score'] > 0){
+								echo '<tr style="background-color:#FF0000; color: white;">';
+								echo '<td>',++$linenumber,'</td>';
+								echo '<td>',$record['Question'],'</td>';
+								if($record['Score'] == 0){
+									echo '<td>Not at all</td>';
+								}
+								else if($record['Score'] == 1){
+									echo '<td>Several days</td>';
+								}
+								else if($record['Score'] == 2){
+									echo '<td>More than half the days</td>';
+								}
+								else{
+									echo '<td>Nearly everyday</td>';
+								}
+								echo '</tr>';
+								$totalscore += $record['Score'];
+								}
+							else if ($record['Question']=='How difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?'&&$record['Score'] > 0){
+								echo '<tr style="background-color:#FF0000; color: white;">';
+								echo '<td>',++$linenumber,'</td>';
+								echo '<td>',$record['Question'],'</td>';
+								if($record['Score'] == 0){
+									echo '<td>Not difficult at all</td>';
+								}
+								else if($record['Score'] == 1){
+									echo '<td>Somewhat difficult</td>';
+								}
+								else if($record['Score'] == 2){
+									echo '<td>Very difficult</td>';
+								}
+								else{
+									echo '<td>Extremely difficult</td>';
+								}
+								echo '</tr>';
+							}
+							else{
+								echo '<tr>';
+								echo '<td>',++$linenumber,'</td>';
+								echo '<td>',$record['Question'],'</td>';
+								if($record['Score'] == 0){
+									echo '<td>Not at all</td>';
+								}
+								else if($record['Score'] == 1){
+									echo '<td>Several days</td>';
+								}
+								else if($record['Score'] == 2){
+									echo '<td>More than half the days</td>';
+								}
+								else{
+									echo '<td>Nearly everyday</td>';
+								}
+								echo '</tr>';
+								$totalscore += $record['Score'];
+							}
+							
 						}
-						echo '<tr><th></th><th>Total Score</th><th>', $totalscore ,' </th></tr>';
+						echo '<tr><th colspan="2">Total Score</th><th>', $totalscore ,' </th></tr>';
 						echo '</table>';
 						@mysqli_free_result($results);
 					}
