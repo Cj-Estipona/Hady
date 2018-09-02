@@ -10,6 +10,7 @@
   $lName = $_POST['LName'];
   $birthdate = $_POST['BDate'];
   $contact = $_POST['MNumber'];
+  $studNum = $_POST['studNum'];
   $gender = $_POST['optradio'];
   $privilage = $_POST['optAllow'];
   $course = $_POST['course'];
@@ -21,8 +22,8 @@
   $userID = md5(time() . mt_rand(1,1000000));
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $query1 = "INSERT INTO tbl_user(`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`,`Nickname`)
-      VALUES('".$userID."','".$email."','".$password."','".$fName."','".$mName."','".$lName."','".$birthdate."','".$contact."','".$gender."','".$course."','".$nickName."')";
+    $query1 = "INSERT INTO tbl_user(`UserID`, `Email`, `Password`, `FName`, `MName`, `LName`, `BDate`, `MNumber`, `Gender`, `Course`,`Nickname`, `StudNumber`)
+      VALUES('".$userID."','".$email."','".md5($password)."','".$fName."','".$mName."','".$lName."','".$birthdate."','".$contact."','".$gender."','".$course."','".$nickName."','".$studNum."')";
     $result = mysqli_query($connection1, $query1) or die("Failed to query the query1 ".mysqli_error($connection1));
     if($result) {
       $backResponse['query1'] = true;

@@ -281,7 +281,7 @@
 </div>
 
 <body>
-  <div class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel slide carousel-fade" data-ride="carousel" data-interval="20000">
   <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active"></div>
@@ -382,6 +382,12 @@
           <div class="panel panel-info">
             <div class="panel-heading">Account Confirmation</div>
             <div class="panel-body">
+              <div class="form-group" id="studNum-error">
+                <label for="StudentNumber">Student Number:</label>
+                <input type="text" pattern="[0-9]{11}" title="Student Number" maxlength="11" class="form-control" id="studNum" name="studNum" placeholder="Enter Student Number">
+                <span id="studNum-span_error"></span>
+                <span id="studNum-error_message" class="error_message"></span>
+              </div>
               <div class="form-group" id="email-error">
                 <label for="Email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address">
@@ -433,8 +439,8 @@
                 <label><input type="checkbox" value="Agreement" name="agreement" id="agreement" disabled>I accept the <a href="#" id="acceptAgreement">terms and conditions.</a> </label>
               </div>
               <center>
-                <b><i>The system is still on process! <br>Please come back some other time. :)</i></b>
-                <!--<input type="button" class="btnReg btn btn-warning btn-lg" id="btnregister" value="Register">-->
+                <!--<b><i>The system is still on process! <br>Please come back some other time. :)</i></b>-->
+                <input type="button" class="btnReg btn btn-warning btn-lg" id="btnregister" value="Register">
               </center>
             </div>
           </div>
@@ -446,8 +452,8 @@
 
 
   <script>
-    var FName, MName, LName, BDate, MNumber, gender, course, email, emailCheck, emailString, password, confirmPass, inputLen, passShow, boolCheck=true;
-    var errFName, errMName, errLName, errBDate, errMNumber, errEmail, errPassword, errConfirmPass, hasInputErr, hasAvatar=false, checkClick=false;
+    var FName, MName, LName, BDate, MNumber, studNum, gender, course, email, emailCheck, emailString, password, confirmPass, inputLen, passShow, boolCheck=true;
+    var errFName, errMName, errLName, errBDate, errMNumber, errStudNum, errEmail, errPassword, errConfirmPass, hasInputErr, hasAvatar=false, checkClick=false;
     var today = new Date();
     var yyyy = today.getFullYear();
     var hasNumber = /\d/;
@@ -570,6 +576,7 @@
         LName = getID("LName").value;
         BDate = getID("BDate").value;
         MNumber = getID("MNumber").value;
+        studNum = getID("MNumber").value;
         //gender = getID("optradio").value;
         course = getID("course").value;
         email = getID("email").value;
@@ -581,6 +588,7 @@
         validateInput("LName");
         validateInput("BDate");
         validateInput("MNumber");
+        validateInput("studNum");
         //validateInput("optradio");
         validateInput("email");
         validateInput("password");
@@ -593,7 +601,7 @@
           errBDate = true;
         }
 
-        if(errFName || errMName || errLName || errBDate || errMNumber || errEmail || errPassword || errConfirmPass || hasInputErr || !hasAvatar){
+        if(errFName || errMName || errLName || errBDate || errMNumber || errStudNum || errEmail || errPassword || errConfirmPass || hasInputErr || !hasAvatar){
           var dialog = bootbox.dialog({
               title: '<b>Reminders</b>',
               message: '<p class="text-center" style="color:red;">Please complete all the fields.</p><p class="text-center" style="color:red;">Enter valid data.</p><p class="text-center" style="color:red;">Please select an avatar.</p><p class="text-center" style="color:red;">Read and Accept our terms and conditions.</p>',
@@ -702,6 +710,20 @@
         }
       });
 
+      $("#studNum").focusout(function(){
+        if(getID("studNum").value.length < 11 || isNaN(getID("studNum").value) ){
+          $("#studNum-error_message").html("Please enter a valid student number");
+          $("#studNum-error_message").show();
+          addError("studNum");
+          errStudNum = true;
+        }
+        else {
+          $("#studNum-error_message").hide();
+          removeError("studNum");
+          errStudNum = false;
+        }
+      });
+
       $("#email").focusout(function(){
         if(validateEmail(getID("email").value)==false){
           $("#email-error_message").html("Please enter a valid email address");
@@ -780,8 +802,8 @@
       $("#acceptAgreement").click(function(){
         checkClick = true;
         bootbox.confirm({
-            title: "<b>Terms and Conditions</b>",
-            message: "Data Privacy Act of 2012..... ",
+            title: "<b>Disclaimer</b>",
+            message: "<p><br><br>In lieu of the Republic Act 10173 – Data Privacy Act of 2012 any data that are gathered and processed during usage of Hady will be kept in private and will be use for academic purposes.<br><br>The information contained on www.hadycares.com website and the chatbot is for general information purposes only. Hady assumes no responsibility for errors or omissions in the contents on the Service.<br><br>In no event shall Hady be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. Hady reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.<br><br>It is also worthy to note that this website or any content on it is not a replacement for professional counselor.<br> </p>",
             buttons: {
                 cancel: {
                     label: '<i class="fa fa-times"></i> Cancel',

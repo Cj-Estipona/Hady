@@ -26,14 +26,16 @@
     $errors['password'] = 'Password is needed!';
   }
 
+  //$hashPassword = md5($password);
+
   if(!empty($email) && !empty($password)){
-    $querySearch = "SELECT * FROM tbl_user WHERE  Email = '$email' AND Password = '$password'";
+    $querySearch = "SELECT * FROM tbl_user WHERE  Email = '$email' AND Password = MD5('$password')";
     $result = mysqli_query($connection1, $querySearch) or die("Failed to query database 1".mysqli_error($connection1));
     $row = mysqli_fetch_array($result);
     $id = $row['UserID'];
     $nickname = $row['Nickname'];
-	$access = $row['access_type'];
-	$course = $row['Course'];
+	  $access = $row['access_type'];
+	  $course = $row['Course'];
 
 	//QUERY
 
@@ -58,13 +60,14 @@
   }
   else {
     $response['success'] = true;
-	$response['access'] = $access;
+	  $response['access'] = $access;
     $response['message'] = 'SUCCESS!';
     $_SESSION['isLogin'] = true;
     $_SESSION['userId'] = $id;
     $_SESSION['nickname'] = $nickname;
-	if($access!= null)
-	{$_SESSION['College'] = $college;}
+    $_SESSION['course'] = $course;
+  	if($access!= null)
+  	{$_SESSION['College'] = $college;}
     $_SESSION['currentSessionID'] = substr(md5(uniqid()), 20);
     $dateLogin = date('Y-m-d H:i:s');
 

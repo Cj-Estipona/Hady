@@ -127,12 +127,13 @@
      $result1 = mysqli_query($connection1, $query1) or die("Failed to query database ".mysqli_error());
      $row = mysqli_fetch_array($result1);
      if($row){
-       if($row['Password'] != $oldPassword){
+       if($row['Password'] != md5($oldPassword)){
          echo "You have entered an invalid old password";
        } elseif ($newPassword != $confirmPassword) {
          echo "Please check your new password";
        } else {
-         $updateQuery = "UPDATE tbl_user SET Password='$confirmPassword' WHERE UserID = '$userID'";
+         //$hashPassword = md5($confirmPassword);
+         $updateQuery = "UPDATE tbl_user SET Password= MD5('$confirmPassword') WHERE UserID = '$userID'";
          $result2 = mysqli_query($connection1, $updateQuery) or die("Failed to query database ".mysqli_error());
          if(mysqli_affected_rows($connection1) > 0){
            echo "success";

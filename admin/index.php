@@ -1,48 +1,15 @@
-
+<?php include 'includes/heading.php'?>
 <?php
-  session_start();
-  if(!$_SESSION['admin']){
-		$_SESSION['isLogin'] = false;
-  }
-  if (!$_SESSION['isLogin']) {
-    header("Location: ../sign_in.php");
-  }
-  debug_to_console($_SESSION['userId']);
-
-  $college = $_SESSION['College'];
-  $adminID = $_SESSION['userId'];
-  
-  function debug_to_console( $data ) {
-    $output = $data;
-    if ( is_array( $output ) )
-        $output = implode( ',', $output);
-
-    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
-  }
- ?>
+  $adminCollege = $_SESSION['College'];
+  $currentPage = 'Dashboard';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hady - Home</title>
+    <title>Hady - Dashboard</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-	<link rel="icon" href="../resources/iconLogo.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/navbar-fixed-side.css" />
-    <link rel="stylesheet" href="../font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootbox.min.js"></script>
-    <script src="../js/typed.js"></script>
-    <script src="../js/scrollreveal.min.js"></script>
-	  <script src="lib/Chart.min.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
-	  <!--<script type ="text/javascript" src="js/app.js?newversion"></script>-->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-
+	   <?php include 'includes/imports.php'; ?>
   </head>
 
 
@@ -58,36 +25,55 @@
     }
     .content{
       color: #000000;
+      padding: 0;
     }
-			.listest {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-
-	}
-
-	.listest td, .listest th {
-		border: 1px solid #ddd;
-		padding: 8px;
-	}
-
-	.listest tr:nth-child(even){background-color: #f2f2f2;}
-
-	.listest tr:hover {background-color: #ddd;}
-
-	.listest th {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #0045b5;
-		color: white;
-	}
-
-
-
-	.link:hover, .link:active {
-		background-color: #011a42;
-	}
+    hr {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+    .dashboard-view{
+      padding-top: 50px;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .error{
+      color: #E53F22;
+    }
+    .well-lg{
+      font-size: 20px;
+    }
+    #bar-notif{
+      background-color: #0F2024;
+      padding: 10px, 10px, 10px, 10px;
+      margin-left: 0px;
+      margin-right: 0px;
+      color: #ffffff;
+      min-height: 50px;
+    }
+    #nav-notif li .notifClass, #nav-notif li .logsClass{
+      text-decoration: none;
+      color: #ffffff !important;
+    }
+    #nav-notif li .notifClass:hover, #nav-notif li .logsClass:hover, #nav-notif li .notifClass:focus, #nav-notif li .logsClass:focus, #nav-notif li .notifClass.active, #nav-notif li .logsClass.active{
+      background-color: #0F2024;
+      color: #77DFF0 !important;
+    }
+    .listNotif{
+      padding: 0;
+    }
+    .notificationClass {
+        height: auto;
+        max-height: 250px;
+        overflow-x: hidden;
+    }
+    .highlighter{
+      background-color: #F4FFCC;
+    }
+    center{
+      margin: 0 auto;
+    }
 
   </style>
 
@@ -95,174 +81,183 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-lg-2">
-          <nav class="navbar navbar-default navbar-fixed-side">
-            <div class="container-fluid navForeground">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" id="UserAvatar">
-
-                    </a>
-                    <div class="welcomeUser">
-                      <h4>Welcome,</h4>
-                      <h3><?php echo $_SESSION['nickname']?></h3>
-                    </div>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="navbar-main" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.php" class="active"><i class="fa fa-home"></i><span class="textLink">Home</span></a></li>
-                        <li><a href="users.php"><i class="fa fa-comments-o"></i><span class="textLink">Students</span></a></li>
-                        <li><a href="#"><i class="fa fa-lightbulb-o"></i><span class="textLink">Activities</span></a></li>
-                        <li><a href="#"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
-						<li><a href="logout.php" onclick="return confirm('Are you sure?');" ><i class="fa fa-power-off"></i><span class="textLink">Logout</span></a></li>
-                    </ul>
-                </div>
-                <div class="navbar-footer">
-                  <img src="../resources/LogoNamePNG.png" alt="Hady Logo" class="img-responsive">
-                </div>
-            </div>
-          </nav>
+          <?php include 'includes/navbar.php' ?>
         </div>
 
         <!--Main App-->
-        <div class="col-sm-9 col-lg-10 content">
-			<canvas id="mycanvas"></canvas>
+			<div class="col-sm-9 col-lg-10 content">
+        <div id="bar-notif">
+          <div class="notif-navigation" id="nav-notif">
+              <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle notifClass" data-toggle="dropdown">
+                      <span class="label label-pill label-danger countNotif"></span><i class="fa fa-lg fa-envelope"></i>&nbsp;&nbsp;Notifications
+                    </a>
+                    <ul class="dropdown-menu notificationClass"></ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle logsClass" data-toggle="dropdown">
+                      <span class="label label-pill label-danger countLogs"></span><i class="fa fa-lg fa-bell"></i>&nbsp;&nbsp;Logs
+                    </a>
+                    <ul class="dropdown-menu logClass"></ul>
+                  </li>
+
+              </ul>
+          </div>
+        </div>
+  			<div class="dashboard-view">
+
+          <h2>Dashboard</h2>
+          <hr>
+          <center><h2>This page section is under construction. We want to make things better for you! Please stay tuned.</h2></center>
+          <!--<div class="row">
+            <div class="col-md-4">
+              <div class="well well-lg">Total Number of Students: <span id="totalStudents"></span><br><span style="font-size:12px;"><i><?php echo $adminCollege; ?></i><span></div>
+            </div>
+            <div class="col-md-4">
+              <div class="well well-lg">Depression Cases: <br><span style="font-size:12px;"><i>Based on last record of PHQ-9</i><span></div>
+            </div>
+            <div class="col-md-4">
+              <div class="well well-lg">Pending PHQ-9: <br></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="panel panel-primary">
+                <div class="panel-heading">Panel with panel-primary class</div>
+                <div class="panel-body">Panel Content<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-info">
+                <div class="panel-heading">Depression Cases by Gender</div>
+                <div class="panel-body">Panel Content<br><br><br><br><img src="../resources/bar_chart_example2.png" class="img-responsive"><br><br><br><br><br><br></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-warning">
+                <div class="panel-heading">Depression Cases by Course</div>
+                <div class="panel-body">Panel Content<img src="../resources/2000px-Pie_chart_EP_election_2004.svg.png" class="img-responsive"><br><br><br><br><br><br></div>
+              </div>
+            </div>
+          </div>-->
+
+        </div>
       </div>
     </div>
+  </div>
 
 
-    <script>
-      $(document).ready(function(){
-        fetch_data();
-        //addRemove_active();
-        //fetch data for user avatar
-        function fetch_data() {
-          var action = "fetchAvatar";
-          $.ajax({
-           url:"../select_avatar.php",
-           method:"POST",
-           data:{action:action},
-           success:function(data)
-           {
-            $('#UserAvatar').html(data);
-           }
-          })
-        }
-      });
-    </script>
-	
-		<script>
-
-        var ucollege = '<?php echo $college; ?>';
-      $(document).ready(function(){
-        fetch_data();
-        //fetch data for user avatar
-        function fetch_data() {
-          var action = "fetchAvatar";
-          $.ajax({
-           url:"../select_avatar.php",
-           method:"POST",
-           data:{action:action},
-           success:function(data)
-           {
-            $('#UserAvatar').html(data);
-           }
-          })
-        }
-
+	<script>
+      //fetch data for user avatar
+      function fetch_data() {
+        var action = "fetchAvatar";
         $.ajax({
-      		url:"data/phqview.php",
-      		method: "POST",
-      		success: function(data) {
-      			console.log(data.data);
-				var q = 0;
-				var w = 0;
-				var e = 0;
-				var r = 0;
-				var t = 0;
-				var ids= '';
-      			var scores = [];
-      			var mood = [];
-				ids = data[0].UserID;		
-				
-      		for(var i in data){			
-				if(ids == data[i].UserID)
-				{
-					t += parseInt(data[i].Score);
-				} else {
-					if(t <9){
-						q++;
-					} else if(t>=9 && t<14){
-						w++;
-					} else if(t>=15 && t<20) {
-						e++;
-					} else {
-						r++;
-					}
-					t = parseInt(data[i].Score);
-					ids = data[i].UserID;
-				}
-      		}
-			if(t <9){
-						q++;
-					} else if(t>=9 && t<14){
-						w++;
-					} else if(t>=15 && t<20) {
-						e++;
-					} else {
-						r++;
-					}
-			scores.push("Minimal Symptoms");
-			mood.push(q);
-			scores.push("Minor depression");
-			mood.push(w);
-			scores.push("Moderately Severe");
-			mood.push(e);
-			scores.push("Severe");
-			mood.push(r);
-			
-      		var labelx = "Provisional Diagnosis of PHQ-9 in the college of " + ucollege + "";
-      		var ctx = $("#mycanvas");
-      		var barGraph = new Chart(ctx, {
-      			type: 'bar',
-      			data:{
-						labels: scores,
-						datasets: [
-						{
-							label: labelx,
-							backgroundColor: 'rgba(200,200,200,.75)',
-							borderColor: 'rgba(200,200,200,.75)',
-							hoverBackgroundColor: 'rgba(200,200,200,1)',
-							hoverBorderColor: 'rgba(200,200,200,1)',
-							data: mood
-						}
-					]},
-				options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                fontSize: 14
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontSize: 14
-                            }
-                        }]
+         url:"../select_avatar.php",
+         method:"POST",
+         data:{action:action},
+         success:function(data)
+         {
+          $('#UserAvatar').html(data);
+         }
+        })
+      }
+
+      function logoutExecute(){
+        bootbox.confirm({
+            title: "<b>Logout</b>",
+            size: "small",
+            message: "Are you sure you want to logout? ",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel',
+                    className: 'btn btn-danger'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Accept',
+                    className: 'btn btn-info'
+                }
+            },
+            callback: function (result) {
+                if(result){
+                  $.ajax({
+                    url:"model/destroy.php",
+                    method: "POST",
+                    success: function(response) {
+                      if(response.data == "success" || typeof response.data == 'undefined'){
+                        console.log(response.data);
+                        window.location.href = '../sign_in.php';
+                      } else {
+                        console.log(response.data);
+                      }
+                    },
+                    error: function(response){
+
                     }
-                  }
-			});
-      			//var data = JSON.parse(data);
-      		},
-      		error: function(data){
-      			console.log(data);
-      			console.log("There is an error in app.js");
-      		}
-      	});
+                  });
+                }else {
+                  console.log("cancel logout");
+                }
+            }
+        });
+      };
+
+      function getDashboard(){
+        $.ajax({
+          url:"model/getDashboard.php",
+          method:"POST",
+          success: function(response){
+            $('#totalStudents').html(response.totalStudents);
+          }
+        });
+      }
+
+      function load_unseen_notification(view = ''){
+        $.ajax({
+          url:"model/fetchNotif.php",
+          method:"POST",
+          data:{view:view},
+          dataType:"json",
+          success:function(data){
+            $('.notificationClass').html(data.notifications);
+            if(data.unseen_notifications > 0){
+              $('.countNotif').html(data.unseen_notifications);
+            }
+          }
+        });
+      }
+
+      $(document).ready(function(){
+        var counterTimer = false;
+        fetch_data();
+        getDashboard();
+        load_unseen_notification();
+
+        $(document).on('click', '.notifClass', function(){
+          counterTimer = true;
+          $('.countNotif').html('');
+          setTimeout(function() {
+            load_unseen_notification('yes');
+            counterTimer = false;
+          }, 10000);
+        })
+
+        $("#btnLogout").click(function(){
+          logoutExecute();
+        });
+
+        setInterval(function(){
+          if(!counterTimer){
+            load_unseen_notification();
+          }
+        }, 10000);
+
       });
 
     </script>
-	
+
   </body>
 </html>

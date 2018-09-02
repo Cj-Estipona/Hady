@@ -36,20 +36,24 @@
   }
 
   if($action == "setChat") {
-    $val++;
-    $querySet = "UPDATE tbl_preference SET ChatUse='$val' WHERE UserID = '$userID'";
+    $querySet = "UPDATE tbl_preference SET ChatUse=1 WHERE UserID = '$userID'";
     $resultSet = mysqli_query($connection1, $querySet) or die("Failed to query database ".mysqli_error());
+
+    $maxQuery = "SELECT MAX(Part) AS latestPhq FROM tbl_score WHERE UserID = '$userID'";
+    $maxResult = mysqli_query($connection1, $maxQuery) or die("Failed to query database ".mysqli_error());
+    $rowMax = mysqli_fetch_array($maxResult);
+    $maxPhq = $rowMax['latestPhq'] + 1;
     if(mysqli_affected_rows($connection1) > 0){
-      $queryInsert = "INSERT INTO tbl_score (`UserID`, `QuestionID`, `Part`) VALUES ('".$userID."',1,'".$val."'),
-      ('".$userID."',2,'".$val."'),
-      ('".$userID."',3,'".$val."'),
-      ('".$userID."',4,'".$val."'),
-      ('".$userID."',5,'".$val."'),
-      ('".$userID."',6,'".$val."'),
-      ('".$userID."',7,'".$val."'),
-      ('".$userID."',8,'".$val."'),
-      ('".$userID."',9,'".$val."'),
-      ('".$userID."',10,'".$val."')";
+      $queryInsert = "INSERT INTO tbl_score (`UserID`, `QuestionID`, `Part`) VALUES ('".$userID."',1,'".$maxPhq."'),
+      ('".$userID."',2,'".$maxPhq."'),
+      ('".$userID."',3,'".$maxPhq."'),
+      ('".$userID."',4,'".$maxPhq."'),
+      ('".$userID."',5,'".$maxPhq."'),
+      ('".$userID."',6,'".$maxPhq."'),
+      ('".$userID."',7,'".$maxPhq."'),
+      ('".$userID."',8,'".$maxPhq."'),
+      ('".$userID."',9,'".$maxPhq."'),
+      ('".$userID."',10,'".$maxPhq."')";
       $resultInsert = mysqli_query($connection1, $queryInsert) or die("Failed to query database ".mysqli_error());
       if ($resultInsert) {
         $output['success'] = true;
@@ -166,9 +170,12 @@
         $scoreQuestion = checkIfExisting(0, $scorePhq);
         break;
     }
-
+    $maxQuery = "SELECT MAX(Part) AS latestPhq FROM tbl_score WHERE UserID = '$userID'";
+    $maxResult = mysqli_query($connection1, $maxQuery) or die("Failed to query database ".mysqli_error());
+    $rowMax = mysqli_fetch_array($maxResult);
+    $maxPhq = $rowMax['latestPhq'];
     if ($question != 0 ) {
-      $queryScoreUp = "UPDATE tbl_score SET Score = '$scoreQuestion', Date = '$dateToday' WHERE QuestionID = '$question' AND UserID = '$userID'";
+      $queryScoreUp = "UPDATE tbl_score SET Score = '$scoreQuestion', Date = '$dateToday' WHERE QuestionID = '$question' AND UserID = '$userID' AND Part = $maxPhq";
       $resultScoreUp = mysqli_query($connection1, $queryScoreUp) or die("Failed to query database ".mysqli_error());
       if (mysqli_affected_rows($connection1) > 0) {
         $output['success'] = true;

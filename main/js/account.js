@@ -134,6 +134,7 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
       $scope.LName = response.data.LName;
       $scope.BDate = bdate;
       $scope.MNumber = response.data.MNumber;
+      $scope.studNumber = response.data.StudNumber;
       $scope.Course = response.data.Course;
       $scope.Theme = response.data.Theme;
       $rootScope.appBodyBG = response.data.Theme;

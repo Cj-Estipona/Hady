@@ -2,7 +2,8 @@
   font-family: 'Ubuntu', sans-serif;
 }
 .navbar-fixed-side .navbar-nav>li>.active {
-  color: #77DFF0;
+  background-color: #53A3BF;
+  color: #EFEEF1;
 }
 @media (max-width: 768px) {
   .content{
@@ -18,7 +19,7 @@
     border-top-width: 0;
     border-bottom-width: 0;
     border-radius: 0;
-    background: rgba(30, 30, 30, 0.9);
+    background: /*rgba(30, 30, 30, 1)*/#0F2024;
     background-image: none;
     background-repeat: no-repeat;
     border-color: transparent;
@@ -45,7 +46,8 @@
     text-align-last: justify;
   }
   .navbar-fixed-side .navbar-nav>li>a:hover, .navbar-fixed-side .navbar-nav>li>a:focus, .navbar-fixed-side .navbar-nav .dropdown-menu>li>a:hover, .navbar-fixed-side .navbar-nav .dropdown-menu>li>a:focus {
-    color: #77DFF0;
+    background-color: #53A3BF;
+    color: #EFEEF1;
   }
   .textLink{
     display: none;
@@ -62,7 +64,7 @@
     border-top-width: 0;
     border-bottom-width: 0;
     border-radius: 0;
-    background: rgba(30, 30, 30, 0.7);
+    background: /*rgba(30, 30, 30, 1)*/#0F2024;
     background-image: none;
     background-repeat: no-repeat;
     border-color: transparent;

@@ -95,6 +95,11 @@
     width: 150px;
     height: 150px;
   }
+  #msg{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 </style>
 <div id="activities-Container">
   <div class="contain">
@@ -103,7 +108,7 @@
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="activities/#relax">Relax</a></li>
       <li><a data-toggle="tab" href="activities/#learn" ng-click="getLearn()">Learn</a></li>
-      <li><a data-toggle="tab" href="activities/#extras">Extras</a></li>
+      <li><a data-toggle="tab" href="activities/#extras" ng-click="getNotif()">Extras</a></li>
     </ul>
 
     <div class="tab-content">
@@ -128,7 +133,7 @@
 
       </div>
       <div id="learn" class="tab-pane fade">
-        <div class="panel panel-transparent" ng-repeat="activity in activityList | orderBy: 'ActID'">
+        <div class="panel panel-transparent" ng-repeat="activity in activityList">
           <div class="panel-heading">{{activity.ActivityName}}</div>
           <div class="panel-body"><center><img src="../resources/noImage.png" class="img-responsive fileImage"></center>
 
@@ -139,11 +144,19 @@
         </div>
       </div>
       <div id="extras" class="tab-pane fade">
-        <!--<div class="panel panel-default" ng-repeat="activity in activityList | orderBy: 'id'">
-          <div class="panel-heading">{{activity.activityTitle}}</div>
-          <div class="panel-body">{{activity.activityBody}}</div>
-          <div class="panel-footer">Panel Footer</div>
-        </div>-->
+        <div class="panel panel-transparent" style="width:40%;">
+          <div class="panel-heading">Message from Guidance Office</div>
+          <div class="panel-body" id="msg">
+            <div class="alert alert-info" ng-if="hasMsg">
+              <p>{{msgFromGCO}}</p><br>
+              <p><b>WHEN: </b>{{timeOfMeeting}}</p>
+            </div>
+            <div class="alert alert-default" ng-if="!hasMsg">
+              <p>NO CURRENT MESSAGE</p><br>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

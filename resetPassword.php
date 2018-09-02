@@ -68,7 +68,7 @@
       $response['success'] = false;
       $response['error'] = "Your password must be 6 or more characters.";
     }else {
-      $queryNew = "UPDATE tbl_user SET Password='$confirmPass' WHERE UserID='$userID'";
+      $queryNew = "UPDATE tbl_user SET Password=MD5('$confirmPass') WHERE UserID='$userID'";
       $result = mysqli_query($connection1, $queryNew) or die("Failed to query database 1".mysqli_error($connection1));
       if (mysqli_affected_rows($connection1)>0) {
         $response['success'] = true;
