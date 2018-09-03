@@ -65,6 +65,33 @@
     }
   }
 
+  if($action == "setScore") {
+    $maxQuery = "SELECT MAX(Part) AS latestPhq FROM tbl_score WHERE UserID = '$userID' AND Score IN (SELECT Score FROM tbl_score WHERE UserID = '$userID' AND QuestionID = 9)";
+    $maxResult = mysqli_query($connection1, $maxQuery) or die("Failed to query database ".mysqli_error());
+    $rowMax = mysqli_fetch_array($maxResult);
+    $maxPhq = $rowMax['latestPhq'] + 1;
+    if(mysqli_affected_rows($connection1) > 0){
+      $queryInsert = "INSERT INTO tbl_score (`UserID`, `QuestionID`, `Part`) VALUES ('".$userID."',1,'".$maxPhq."'),
+      ('".$userID."',2,'".$maxPhq."'),
+      ('".$userID."',3,'".$maxPhq."'),
+      ('".$userID."',4,'".$maxPhq."'),
+      ('".$userID."',5,'".$maxPhq."'),
+      ('".$userID."',6,'".$maxPhq."'),
+      ('".$userID."',7,'".$maxPhq."'),
+      ('".$userID."',8,'".$maxPhq."'),
+      ('".$userID."',9,'".$maxPhq."'),
+      ('".$userID."',10,'".$maxPhq."')";
+      $resultInsert = mysqli_query($connection1, $queryInsert) or die("Failed to query database ".mysqli_error());
+      if ($resultInsert) {
+        $output['success'] = true;
+      }else {
+        $output['success'] = false;
+      }
+    } else {
+      $output['success'] = false;
+    }
+  }
+
   if ($action == "loadMessages") {
     $messageArray = array();
     $contentArray = array();

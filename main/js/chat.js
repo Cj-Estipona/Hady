@@ -95,6 +95,18 @@ angular.module("hadyWebApp").controller("ChatCtrl", ["$scope","$http","$timeout"
       }
     }
 
+    //PHQ Additional
+    if (val.result.action == 'toDoMenu1') {
+      $http.post("model/chatHady.php?action=setScore")
+      .then(function(response){
+        if (response.data.success) {
+          console.log('SUCESSFUL SET SCORE');
+        }else {
+          console.log('NOT SUCCESSFUL SET');
+        }
+      });
+    }
+
     //check if it is phq
     for (var z = 0; z < $scope.phqActions.length; z++) {
       if (val.result.action == $scope.phqActions[z]) {

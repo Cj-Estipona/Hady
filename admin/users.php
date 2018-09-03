@@ -111,8 +111,19 @@
                           <tbody>
                             <?php
                               $count = 1;
+                              $label = "";
                               while($row = mysqli_fetch_array($resultStudents))
                               {
+                                $idHolder = $row['UserID'];
+                                $queryPHQ = "SELECT COUNT(UserID) AS ValidatedNum FROM tbl_score WHERE UserID = '$idHolder' AND QuestionID = 9 AND Validated=0 ORDER BY Part DESC";
+                                $resultPHQ = mysqli_query($connection1, $queryPHQ) or die("Failed to query the query1 ".mysqli_error($connection1));
+                                $rowPHQ = mysqli_fetch_array($resultPHQ);
+                                if ($rowPHQ['ValidatedNum'] == 0) {
+                                  $label = "";
+                                } else {
+                                  $label = "<span class='label label-pill label-warning countUnread'>".$rowPHQ['ValidatedNum']."</span>";
+                                }
+
                                   echo"<tr class='filesList'>
 
                                       <td>".$count."</td>
@@ -122,7 +133,7 @@
                                       <td class='col-md-2'>".$row['Course']."</td>
                                       <td class='col-md-4 btnActions'>
                                         <a  href='model/viewProfile.php?idAction=".$row['UserID'] ."' class='abtn-profile'> <button class='btn btn-profile'> <i class='fa fa-user' ></i> Profile</button></a>
-                                        <a  href='model/viewPHQ.php?idAction=".$row['UserID'] ."' class='abtn-phq'> <button class='btn btn-phq'> <i class='fa fa-file' ></i> PHQ-9</button></a>
+                                        <a  href='model/viewPHQ.php?idAction=".$row['UserID'] ."' class='abtn-phq'> <button class='btn btn-phq'>".$label." <i class='fa fa-file' ></i> PHQ-9</button></a>
                                         <a  href='model/viewMood.php?idAction=".$row['UserID'] ."' class='abtn-mood'> <button class='btn btn-mood'> <i class='fa fa-heart' ></i> Mood</button></a>
                                       </td>
                                   </tr>";

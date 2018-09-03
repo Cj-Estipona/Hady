@@ -1,5 +1,6 @@
 <?php include '../includes/headingInner.php'?>
 <?php
+  date_default_timezone_set("Asia/Manila");
   $adminCollege = $_SESSION['College'];
   $currentPage = 'Students';
 ?>
@@ -214,7 +215,7 @@
                                     $btnValidate = "<a  href='#' class='abtn-profile'> <button onClick=toggleValidate('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-success'> <i class='fa fa-check-square-o' ></i> Validated</button></a>";
                                   }
                                   $datePHQ = new DateTime($rowPHQ['Date']);
-                                  $newDatePHQ = date_format($datePHQ, "F j, Y");
+                                  $newDatePHQ = date_format($datePHQ, "F j, Y - h:i A");
                                   echo"<tr class='filesList'>
                                       <td>".$count."</td>
                                       <td class=''>".$newDatePHQ."</td>

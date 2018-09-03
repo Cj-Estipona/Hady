@@ -66,39 +66,48 @@
         $totalScore += $rowSelectPhq['Score'];
       }
 
-      switch ($rowSelectPhq['Score']) {
-        case 0:
-          $notAtAll = "<i class='fa fa-check' ></i>";
-          $severalDays = " ";
-          $moreThan = " ";
-          $nearlyEvery = " ";
-          break;
-        case 1:
-            $notAtAll = " ";
-            $severalDays = "<i class='fa fa-check' ></i>";
+      if(isset($rowSelectPhq['Score'])){
+        switch ($rowSelectPhq['Score']) {
+          case 0:
+            $notAtAll = "<i class='fa fa-check' ></i>";
+            $severalDays = " ";
             $moreThan = " ";
             $nearlyEvery = " ";
             break;
-        case 2:
-            $notAtAll = " ";
-            $severalDays = " ";
-            $moreThan = "<i class='fa fa-check' ></i>";
-            $nearlyEvery = " ";
-            break;
-        case 3:
-            $notAtAll = " ";
-            $severalDays = " ";
-            $moreThan = " ";
-            $nearlyEvery = "<i class='fa fa-check' ></i>";
-            break;
+          case 1:
+              $notAtAll = " ";
+              $severalDays = "<i class='fa fa-check' ></i>";
+              $moreThan = " ";
+              $nearlyEvery = " ";
+              break;
+          case 2:
+              $notAtAll = " ";
+              $severalDays = " ";
+              $moreThan = "<i class='fa fa-check' ></i>";
+              $nearlyEvery = " ";
+              break;
+          case 3:
+              $notAtAll = " ";
+              $severalDays = " ";
+              $moreThan = " ";
+              $nearlyEvery = "<i class='fa fa-check' ></i>";
+              break;
 
-        default:
-          $notAtAll = " ";
-          $severalDays = " ";
-          $moreThan = " ";
-          $nearlyEvery = " ";
-          break;
+          default:
+            $notAtAll = " ";
+            $severalDays = " ";
+            $moreThan = " ";
+            $nearlyEvery = " ";
+            break;
+        }
+      } else {
+        $notAtAll = " ";
+        $severalDays = " ";
+        $moreThan = " ";
+        $nearlyEvery = " ";
       }
+
+
       $tableOutput .= "<tr>
         <td>".$rowSelectPhq['QuestionID']."</td>
         <td>".$rowSelectPhq['Question']."</td>

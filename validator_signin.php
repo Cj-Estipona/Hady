@@ -13,6 +13,7 @@
   $id = "";
   $access = "";
   $flag = false;
+  $anotherFlag = false;
 
   //$response['hello'] = $email;
 
@@ -42,9 +43,10 @@
     if(empty($row['Email']) || empty($row['Password'])){
       $errors['email'] = 'Invalid Email';
       $errors['password'] = 'Invalid Password';
+      $anotherFlag = true;
     }
 
-    if($row['IsEmailConfirmed'] == 0){
+    if($row['IsEmailConfirmed'] == 0 && !$anotherFlag){
       $errors['emailConfirmed'] = "Please Confirm you email account.";
       $flag = true;
     } else {
