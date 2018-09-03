@@ -610,6 +610,10 @@
         }else if(!$('#agreement').is(":checked") || !checkClick) {
           bootbox.alert("You need to read and accept the terms and conditions to continue. ");
         }else {
+          var dialog = bootbox.dialog({
+            message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Please wait while we register your account...</div>',
+            closeButton: false
+          });
           var dataForm = $('#signUpForm').serialize();
           console.log(dataForm);
           $.ajax({
@@ -618,20 +622,25 @@
             data: dataForm,
             dataType: 'json',
             success: function(response){
+              dialog.modal('hide');
               console.log(response.query1);
               console.log(response.query2);
               console.log(response.query3);
-              if(response.query1 && response.query2 && response.query3){
+              console.log(response.query4);
+              if(response.query1 && response.query2 && response.query3 && response.query4){
+
                 //bootbox.alert("You are now registered!");
                 bootbox.alert({
                     title: "<b>Registration</b>",
-                    message: "You are now registered!",
+                    message: "You are now registered!<br><br>Please check your email for account confirmation",
                     callback: function () {
                         //console.log('This was logged in the callback: ');
                         resetForm($("#signUpForm"));
                         window.location.replace("sign_in.php");
                     }
                 });
+              } else {
+                console.log(response.msg);
               }
             }
           });

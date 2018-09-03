@@ -171,7 +171,7 @@
       font-family: 'Ubuntu', sans-serif;
       font-size: 17px;
     }
-    .alert{
+    .alert1, .alert2, .alert3{
       display: none;
     }
 
@@ -200,9 +200,21 @@
             <div class="panel-body">
               <div id = "message"></div>
               <!--alert-->
-              <div class="alert alert-info alert-dismissible">
+              <div class="alert alert-info alert-dismissible alert1">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>You have been logout.</strong> <br>You have been inactive for 30 mins.
+              </div>
+
+              <!--alert-->
+              <div class="alert alert-info alert-dismissible alert2">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>Your account has been confirmed. You can now sign in.</p>
+              </div>
+
+              <!--alert-->
+              <div class="alert alert-danger alert-dismissible alert3">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p style="color:#000000;">Please Confirm Your Email Account.</p>
               </div>
 
               <form class="form-horizontal" method="POST" action="validator_signin.php" id="inForm">
@@ -252,7 +264,10 @@
         $('.alert').hide();
         var action = getUrlParameter('action');
         if(action==1){
-          $('.alert').show();
+          $('.alert1').show();
+        }
+        if(action==2){
+          $('.alert2').show();
         }
         $('form').submit(function(e){
           e.preventDefault();
@@ -269,14 +284,18 @@
               //console.log(d.hello);
               $('#message').html(d.message);
               if(d.success){
-                //$('#inForm').append('<div>'+d.message+'</div>');
-                $('#message').html(d.message);
-        				if(d.access == 1){
-        					window.location.replace("admin/index.php");
-        				}
-        				else{
-        					window.location.replace("main/index.php");
-        				}
+                if (d.confirmAlert) {
+                  $('.alert3').show();
+                } else {
+                  //$('#inForm').append('<div>'+d.message+'</div>');
+                  $('#message').html(d.message);
+          				if(d.access == 1){
+          					window.location.replace("admin/index.php");
+          				}
+          				else{
+          					window.location.replace("main/index.php");
+          				}
+                }
               }
               else {
                 if(d.errors.email){

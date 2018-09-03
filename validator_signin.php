@@ -12,7 +12,7 @@
   $nickname = "";
   $id = "";
   $access = "";
-
+  $flag = false;
 
   //$response['hello'] = $email;
 
@@ -43,6 +43,13 @@
       $errors['email'] = 'Invalid Email';
       $errors['password'] = 'Invalid Password';
     }
+
+    if($row['IsEmailConfirmed'] == 0){
+      $errors['emailConfirmed'] = "Please Confirm you email account.";
+      $flag = true;
+    } else {
+      $flag = false;
+    }
   }
 
   	if($access != null)
@@ -55,11 +62,18 @@
 
   $response['errors'] = $errors;
   if(!empty($errors)){
-    $response['success'] = false;
-    $response['message'] = 'FAIL!';
+    if ($flag) {
+      $response['success'] = true;
+      $response['confirmAlert'] = true;
+    } else {
+      $response['success'] = false;
+      $response['message'] = 'FAIL!';
+    }
+
   }
   else {
     $response['success'] = true;
+    $response['confirmAlert'] = false;
 	  $response['access'] = $access;
     $response['message'] = 'SUCCESS!';
     $_SESSION['isLogin'] = true;
