@@ -19,6 +19,7 @@
 <script src="../js/typed.js"></script>
 <script src="../js/scrollreveal.min.js"></script>
 <script src="lib/Chart.min.js"></script>
+<script src="lib/chartjs-plugin-labels.min.js"></script>
 <script src="lib/fullcalendar.min.js"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
 <!--<script type ="text/javascript" src="js/app.js?newversion"></script>-->

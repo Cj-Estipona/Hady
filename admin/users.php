@@ -72,6 +72,10 @@
       background-color: #4AA48A;
       color: #ffffff;
     }
+    .colorIndicator{
+      width: 150px;
+      height: 32px;
+    }
 
   </style>
 
@@ -90,11 +94,15 @@
           <hr>
           <?php
            include '../db_conn.php';
-           $selectStudents = "SELECT UserID, FName, LName, Course, StudNumber FROM tbl_user INNER JOIN tbl_college ON tbl_user.Course = tbl_college.CourseName WHERE tbl_college.CollegeDept = '$adminCollege' AND access_type IS NULL";
+           $countUnconfirmed = "SELECT COUNT(IsEmailConfirmed) As CountUnconfirmed FROM tbl_user INNER JOIN tbl_college ON tbl_user.Course = tbl_college.CourseName WHERE tbl_college.CollegeDept = '$adminCollege' AND access_type IS NULL AND IsEmailConfirmed = 0 ";
+           $countQuery = mysqli_query($connection1, $countUnconfirmed) or die("Failed to query the query1 ".mysqli_error($connection1));
+           $rowCount = mysqli_fetch_array($countQuery);
+           $selectStudents = "SELECT UserID, FName, LName, Course, StudNumber, IsEmailConfirmed FROM tbl_user INNER JOIN tbl_college ON tbl_user.Course = tbl_college.CourseName WHERE tbl_college.CollegeDept = '$adminCollege' AND access_type IS NULL ORDER BY IsEmailConfirmed DESC";
            $resultStudents = mysqli_query($connection1, $selectStudents) or die("Failed to query the query1 ".mysqli_error($connection1));
           ?>
           <!-- Advanced Tables -->
           <div class="panel panel-default">
+              <h3>&nbsp;&nbsp;&nbsp;Unconfirmed Account <span class="label label-warning"><?php echo $rowCount['CountUnconfirmed']; ?></span></h3>
               <div class="panel-body">
                   <div class="table-responsive">
                       <table class="table table-striped table-hover" id="dataTables-students">
@@ -114,6 +122,7 @@
                               $label = "";
                               while($row = mysqli_fetch_array($resultStudents))
                               {
+                                $emailConfirmed = "";
                                 $idHolder = $row['UserID'];
                                 $queryPHQ = "SELECT COUNT(UserID) AS ValidatedNum FROM tbl_score WHERE UserID = '$idHolder' AND QuestionID = 9 AND Validated=0 ORDER BY Part DESC";
                                 $resultPHQ = mysqli_query($connection1, $queryPHQ) or die("Failed to query the query1 ".mysqli_error($connection1));
@@ -123,8 +132,11 @@
                                 } else {
                                   $label = "<span class='label label-pill label-warning countUnread'>".$rowPHQ['ValidatedNum']."</span>";
                                 }
+                                if ($row['IsEmailConfirmed'] == 0) {
+                                  $emailConfirmed = "warning";
+                                }
 
-                                  echo"<tr class='filesList'>
+                                  echo"<tr class='".$emailConfirmed."'>
 
                                       <td>".$count."</td>
                                       <td class='col-md-2'>".$row['StudNumber']."</td>

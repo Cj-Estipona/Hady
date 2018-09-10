@@ -66,11 +66,11 @@
   }
 
   if($action == "setScore") {
-    $maxQuery = "SELECT MAX(Part) AS latestPhq FROM tbl_score WHERE UserID = '$userID' AND Score IN (SELECT Score FROM tbl_score WHERE UserID = '$userID' AND QuestionID = 9)";
+    $maxQuery = "SELECT MAX(Part) AS latestPhq FROM tbl_score WHERE UserID = '$userID' AND Score IN (SELECT Score FROM tbl_score WHERE UserID = '$userID' AND QuestionID = 9 AND Score IS NOT NULL)";
     $maxResult = mysqli_query($connection1, $maxQuery) or die("Failed to query database ".mysqli_error());
     $rowMax = mysqli_fetch_array($maxResult);
-    $maxPhq = $rowMax['latestPhq'] + 1;
-    if(mysqli_affected_rows($connection1) > 0){
+    if($rowMax['latestPhq'] != NULL){
+      $maxPhq = $rowMax['latestPhq'] + 1;
       $queryInsert = "INSERT INTO tbl_score (`UserID`, `QuestionID`, `Part`) VALUES ('".$userID."',1,'".$maxPhq."'),
       ('".$userID."',2,'".$maxPhq."'),
       ('".$userID."',3,'".$maxPhq."'),
