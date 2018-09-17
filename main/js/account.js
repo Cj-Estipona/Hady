@@ -208,6 +208,40 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
     $scope.readonlyAttr[item] = false;
   };
 
+  $scope.deleteAccount = function(){
+    bootbox.confirm({
+        title: "<b>DELETE ACCOUNT</b>",
+        size: "small",
+        message: "Confirm deletion of your account. This action cannot be undone. ",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Cancel',
+                className: 'btn btn-default'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Delete',
+                className: 'btn btn-danger'
+            }
+        },
+        callback: function (result) {
+            if(result){
+              $http.post("model/deleteAccount.php")
+              .then(function(response){
+                if(response.data == "success" || typeof response.data == 'undefined'){
+                  console.log(response.data);
+                  $window.location.href = '../';
+                } else {
+                  console.log(response.data);
+                  $scope.showAlertBox(true,"alert alert-danger",response.data);
+                }
+              });
+            }else {
+              console.log("cancel Delete");
+            }
+        }
+    });
+  };
+
   $scope.logout = function(){
     bootbox.confirm({
         title: "<b>Logout</b>",

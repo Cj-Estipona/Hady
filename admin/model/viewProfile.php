@@ -111,6 +111,9 @@
       margin-left: 10px;
       display: none;
     }
+    .dangerHeading{
+      font-size: 18px;
+    }
 
   </style>
 
@@ -305,6 +308,19 @@
 
 
           </div><!--row User Infor-->
+          <br><br>
+          <div class="panel panel-danger">
+            <div class="panel-heading dangerHeading"><i class="fa fa-exclamation-triangle fa-lg" style="margin-right:7px;"></i> Danger Zone</div>
+            <div class="panel-body">
+              <h3 class="text-danger">DELETE ACCOUNT</h3>
+              <div class="col-md-7">
+                <p style="font-size:16px;">Are you sure you want to delete this account? This will destroy all of his/her data and cannot be undone!</p>
+              </div>
+              <div class="col-md-5">
+                <center><button class="btn btn-danger btn-lg" id="dangerBtn">Delete Account</button></center>
+              </div>
+            </div>
+          </div>
 
         </div><!--ProfileView-->
       </div>
@@ -400,6 +416,45 @@
 
         $("#btnLogout").click(function(){
           logoutExecute();
+        });
+
+        $("#dangerBtn").click(function(){
+          bootbox.confirm({
+              title: "<b>DELETE ACCOUNT</b>",
+              size: "small",
+              message: "Confirm deletion of your account. This action cannot be undone. ",
+              buttons: {
+                  cancel: {
+                      label: '<i class="fa fa-times"></i> Cancel',
+                      className: 'btn btn-default'
+                  },
+                  confirm: {
+                      label: '<i class="fa fa-check"></i> Delete',
+                      className: 'btn btn-danger'
+                  }
+              },
+              callback: function (result) {
+                  if(result){
+                    $.ajax({
+                      url:"deleteAccount.php?userID=<?php echo $userID; ?>",
+                      method: "POST",
+                      success: function(response) {
+                        if(response.data == "success" || typeof response.data == 'undefined'){
+                          console.log(response.data);
+                          window.location.href = '../users.php';
+                        } else {
+                          console.log(response.data);
+                        }
+                      },
+                      error: function(response){
+
+                      }
+                    });
+                  }else {
+                    console.log("cancel Delete");
+                  }
+              }
+          });
         });
 
       });
