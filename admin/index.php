@@ -105,8 +105,27 @@
       background-color: #4AA48A;
       color: #ffffff;
     }
-    #studentChartGender, #moodChartGender{
+    #studentChartGender, #moodChartGender, #depressionChartGender{
       display: none;
+    }
+    .headingSched{
+      text-align: center;
+      background-color: #56BE9F;
+      margin:0px;
+      color: #ffffff;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .schedulePanel{
+      height: 250px;
+      overflow: auto;
+      padding: 0px;
+    }
+    .headingToday{
+      width: 100%;
+    }
+    .SchedTitle{
+      font-size: 16px;
     }
 
   </style>
@@ -125,16 +144,16 @@
               <ul class="nav navbar-nav">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle notifClass" data-toggle="dropdown">
-                      <span class="label label-pill label-danger countNotif"></span><i class="fa fa-lg fa-envelope"></i>&nbsp;&nbsp;Notifications
+                      <span class="label label-pill label-danger countNotif"></span><i class="fa fa-lg fa-envelope"></i>&nbsp;&nbsp;Messages
                     </a>
                     <ul class="dropdown-menu notificationClass"></ul>
                   </li>
-                  <li class="dropdown">
+                  <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle logsClass" data-toggle="dropdown">
                       <span class="label label-pill label-danger countLogs"></span><i class="fa fa-lg fa-bell"></i>&nbsp;&nbsp;Logs
                     </a>
                     <ul class="dropdown-menu logClass"></ul>
-                  </li>
+                  </li>-->
 
               </ul>
           </div>
@@ -207,15 +226,53 @@
           <div class="row">
             <div class="col-md-4">
               <div class="panel panel-primary wellLabel">
-                <div class="panel-heading"><h3>Today's Schedule</h3></div>
-                <div class="panel-body bodyPanel">
+                <div class="panel-heading"><h3>My Schedule</h3></div>
+                <div class="panel-body bodyPanel schedulePanel">
+                  <h4 class="headingToday headingSched"><i class="fa fa-md fa-calendar-check-o"></i> Today's Schedule</h4>
+                  <div class="">
+                    <ul class="list-group" id="todaysList">
 
+                    </ul>
+                  </div>
+
+                  <h4 class="headingUpcoming headingSched"><i class="fa fa-md fa-calendar-check-o"></i> Upcoming Schedule</h4>
+                  <div class="">
+                    <ul class="list-group" id="upcomingList">
+
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div class="col-md-8">
+              <div class="panel panel-primary wellLabel">
+                <div class="panel-heading"><h3>Depression Cases</h3><span style="font-size:12px;"><i>Based On Last PHQ-9</i><span></div>
+                <div class="panel-body bodyPanel">
+                  <br>
+                  <div>
+                    <canvas id="depressionGeneral" height="100">
+                  </div>
+                  <!--<div id="depressionDetails" class="collapse">
+                      <div class="form-group">
+                        <label for="sel1">Category:</label>
+                        <select class="form-control" id="depressionCategory" name="depressionCategory">
+                          <option value="Course">By Course</option>
+                          <option value="Gender">By Gender</option>
+                        </select>
+                        <i style="font-size: 12px;">NOTE: Percentage of depression cases</i>
+                      </div>
+                      <canvas id="depressionChartCourse" height="250"></canvas>
+                      <canvas id="depressionChartGender" height="250"></canvas>
+                  </div>-->
+                </div>
+
+                <!--<div class="panel-footer">
+                  <button type="button" class="btn btn-view" data-toggle="collapse" data-target="#depressionDetails">View Details</button>
+                </div>-->
+              </div>
+            </div>
           </div><!--SECOND ROW-->
-            <br><br><br>
-            <h1 style="text-align:center">More Features to Come....</h1>
         </div>
       </div>
     </div>
@@ -300,7 +357,7 @@
               }
               $('#MoodPanel').append("<img class='img-responsive emotionImg' src='"+emotionFace+"'/>");
             } else {
-              $('#MoodPanel').html("Oh No");
+              $('#MoodPanel').html("No Records Available");
             }
           }
         });
@@ -321,6 +378,29 @@
         });
       }
 
+      function load_schedule(){
+        $.ajax({
+          url:"model/loadSchedule.php",
+          method:"POST",
+          data:{action:"actionSched",adminID:'<?php echo $adminID; ?>'},
+          dataType:"json",
+          success:function(data){
+            if (data.hasTodaysSched) {
+              $('#todaysList').html(data.todaysList);
+            } else {
+              $('#todaysList').append("<center><h4>No schedules found</h4></center>");
+            }
+
+            if (data.hasUpcomingSched) {
+              $('#upcomingList').html(data.upcomingList);
+            } else {
+              $('#upcomingList').append("<center><h4>No schedules found</h4></center>");
+            }
+
+          }
+        });
+      }
+
       //STUDENT CHART
       function load_student_charts(varHolder, holderElement){
         var myBarStudent;
@@ -330,6 +410,7 @@
           $.ajax({
            url:"model/dashboardChart.php",
            method:"POST",
+           dataType:"json",
            data:{actionCourse:action},
            success:function(data)
            {
@@ -387,7 +468,7 @@
                    options: optionsStudents
                });
              }else {
-               $(".labelRecord").show();
+               $(".labelRecordStudent").show();
              }
            }
          });
@@ -403,6 +484,7 @@
           $.ajax({
            url:"model/dashboardChart.php",
            method:"POST",
+           dataType:"json",
            data:{actionCourse:action},
            success:function(data)
            {
@@ -473,20 +555,146 @@
                    options: optionsStudents
                });
              }else {
-               $(".labelRecord").show();
+               $(".labelRecordDepression").show();
              }
            }
          });
       }
 
+      //DEPRESSION GENERAL
+      function load_depressionGen_chart(){
+        var dataStudents = {};
+        var optionsStudents = {};
+          $.ajax({
+           url:"model/depressionChart.php",
+           method:"POST",
+           dataType:"json",
+           data:{action:"generalDepression"},
+           success:function(data)
+           {
+             console.log(data.genDep);
+             if (data.hasGenDep) {
+               dataStudents = {
+                   labels: ["No Depression", "Mild Depression", "Moderate Depression", "Moderately Severe Depression", "Severe Depression"],
+                   datasets: [{
+                       backgroundColor: [
+                         'rgba(54, 162, 235, 1)',
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+
+                      ],
+                      borderColor: [
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255,99,132,1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(75, 192, 192, 1)',
+                         'rgba(153, 102, 255, 1)',
+                     ],
+                     borderWidth: 1,
+                     data: data.genDep,
+                   }]
+               };
+               optionsStudents = {
+                   responsive:true,
+                   legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#333",
+                        }
+                    }
+
+               };
+               var ctxStudent = document.getElementById("depressionGeneral");
+               var myPieDepression = new Chart(ctxStudent, {
+                   type: 'pie',
+                   data: dataStudents,
+                   options: optionsStudents
+               });
+             }else {
+               $(".labelRecordGenDep").show();
+             }
+           }
+         });
+      }
+
+      //MOOD CHART
+      /*function load_depressionDetails_charts(varHolder, holderElement){
+        //console.log("WORKING");
+        var myBarStudent;
+        var action = varHolder;
+        var dataStudents = {};
+        var optionsStudents = {};
+          $.ajax({
+           url:"model/depressionChart.php",
+           method:"POST",
+           dataType:"json",
+           data:{actionCourse:action},
+           success:function(data)
+           {
+             if (true) {
+               dataStudents = {
+                   labels: ["BSCS","BSIT","BSEMC"],
+                   datasets: [{
+                     label: '# of Votes 2017',
+                     backgroundColor: '#ff0000',
+                     data: [16, 14, 8]
+                   }]
+               };
+               optionsStudents = {
+                  legend: {
+                     display: false
+                  },
+                   responsive:true,
+                   scales: {
+                       xAxes: [{
+                           ticks: {
+                               display: false
+                           },
+                           gridLines: {
+                               drawOnChartArea: true
+                           }
+                       }],
+                       yAxes: [{
+                           ticks: {
+                               stepSize:10,
+                               beginAtZero: true,
+                               suggestedMax: 100
+                           }
+                       }]
+                   }
+
+               };
+               var ctxStudent = document.getElementById(holderElement);
+               var myBarStudent = new Chart(ctxStudent, {
+                   type: 'bar',
+                   data: dataStudents,
+                   options: optionsStudents
+               });
+               /*myBarStudent.data.datasets.push({
+          	    label: '# of Votes 2017',
+                backgroundColor: '#ff0000',
+                data: [16, 14, 8]
+              });
+             }else {
+               $(".labelRecord").show();
+             }
+           }
+         });
+      }*/
 
       $(document).ready(function(){
         var counterTimer = false;
         fetch_data();
         getDashboard();
         load_unseen_notification();
+        load_schedule();
         load_student_charts("Course", "studentChartCourse");
         load_mood_charts("CourseMood", "moodChartCourse");
+        //load_depressionDetails_charts("CourseDepression", "depressionChartCourse");
+        load_depressionGen_chart();
 
         $(document).on('click', '.notifClass', function(){
           counterTimer = true;

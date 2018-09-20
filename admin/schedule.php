@@ -144,7 +144,7 @@
             right:'month,agendaWeek,agendaDay'
           },
           events: {
-            url: 'loadEvents.php',
+            url: 'loadEvents.php?adminID=<?php echo $adminID; ?>',
           },
           eventBackgroundColor: '#51B47B',
           eventBorderColor: '#51B47B',

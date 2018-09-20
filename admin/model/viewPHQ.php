@@ -210,21 +210,30 @@
                                   }
 
                                   if ($rowPHQ['Validated'] == 0) {
-                                    $btnValidate = "<a  href='#' class='abtn-profile'> <button onClick=toggleValidate('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-warning'> <i class='fa fa-square-o' ></i> Validate</button></a>";
+                                    $btnValidate = "<a  href='#' class='abtn-profile'> <button style='float:left;margin-right:5px;' onClick=toggleValidate('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-warning'> <i class='fa fa-square-o' ></i> Validate</button></a>";
                                   } else {
-                                    $btnValidate = "<a  href='#' class='abtn-profile'> <button onClick=toggleValidate('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-success'> <i class='fa fa-check-square-o' ></i> Validated</button></a>";
+                                    $btnValidate = "<a  href='#' class='abtn-profile'> <button style='float:left;margin-right:5px;' onClick=toggleValidate('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-success'> <i class='fa fa-check-square-o' ></i> Validated</button></a>";
                                   }
                                   $datePHQ = new DateTime($rowPHQ['Date']);
                                   $newDatePHQ = date_format($datePHQ, "F j, Y - h:i A");
                                   echo"<tr class='filesList'>
                                       <td>".$count."</td>
-                                      <td class=''>".$newDatePHQ."</td>
-                                      <td class=''>Session ".$rowPHQ['Part']."</td>
-                                      <td class='".$labelStatus."'>".$depressionStatus."</td>
-                                      <td class=''>
+                                      <td class='col-md-3'>".$newDatePHQ."</td>
+                                      <td class='col-md-2'>Session ".$rowPHQ['Part']."</td>
+                                      <td class='col-md-2 ".$labelStatus."'>".$depressionStatus."</td>
+                                      <td class='col-md-2'>
                                         <a href='#'> <button onClick=viewQuestionnaire('".$rowPHQ['UserID']."','".$rowPHQ['Part']."','".$rowPHQ['Validated']."') class='btn btn-questionnaire'> <i class='fa fa-paperclip' ></i> View Questionnaire</button></a>
                                       </td>
-                                      <td class='' id='btnValidate".$rowPHQ['Part']."'>".$btnValidate."</td>
+                                      <td class='col-md-3' id='btnValidate".$rowPHQ['Part']."'>".$btnValidate."
+
+                                        <form method='POST' target='_blank' action='generatePDF.php' style='float:left;'>
+                                            <input type='hidden' id='userID' name='userID' value='".$userID."'>
+                                            <input type='hidden' id='part' name='part' value='".$rowPHQ['Part']."'>
+                                            <input type='hidden' id='status' name='status' value='".$depressionStatus."'>
+                                            <input type='hidden' id='date' name='date' value='".$newDatePHQ."'>
+                                            <input type='submit' name='generate_PDF' class='btn btn-info' value='Generate PDF'>
+                                        </form>
+                                      </td>
                                   </tr>";
                                   $count++;
                               }
