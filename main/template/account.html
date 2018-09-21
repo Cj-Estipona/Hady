@@ -322,12 +322,12 @@
             <input type="submit" class="btn btn-info btn-sm" name="Update" value="Update" ng-disabled="updatePasswordForm.$invalid">
           </form>
         </div>
-        <li class="list-group-item text-toggle"><i class="fa fa-bell-o"></i>
+        <!--<li class="list-group-item text-toggle"><i class="fa fa-bell-o"></i>
           Text Reminder
           <div class="btn-switch" ng-class="{'btn-switch--on':toggle.switch}" ng-model="toggle.switch" ng-click="updateTextNotif(!toggle.switch)">
             <div class="btn-switch-circle" ng-class="{'btn-switch-circle--on':toggle.switch}" ng-model="toggle.switch"></div>
           </div>
-        </li>
+        </li>-->
         <li class="list-group-item text-toggle"><i class="fa fa-info"></i>
           Share my Journal
           <div class="btn-switch" ng-class="{'btn-switch--on':toggle.switch2}" ng-model="toggle.switch2" ng-click="updatePrivilage(!toggle.switch2)">
@@ -336,8 +336,8 @@
 
         </li>
 
-        <a><li class="list-group-item"><i class="fa fa-question-circle-o"></i>Help</li></a>
-        <a><li class="list-group-item"><i class="fa fa-file-text-o"></i>Terms and Conditions</li></a>
+        <a href="https://www.hadycares.com/#faq" target="_blank"><li class="list-group-item"><i class="fa fa-question-circle-o"></i>Help</li></a>
+        <a ng-click="popUpDisclaimer()"><li class="list-group-item"><i class="fa fa-file-text-o"></i>Terms and Conditions</li></a>
         <a ng-click="logout()"><li class="list-group-item"><i class="fa fa-sign-out"></i>Sign Out</li></a>
     </ul>
   </div>

@@ -174,8 +174,8 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
           } else {
             $scope.showAlertBox(true,"alert alert-danger",response.data);
           }
+          $scope.getUserInfo();
         });
-        $scope.getUserInfo();
       }
     } else if (item=="Theme") {
       $http.post("model/userProfile.php?action=updateUserTheme", {'varToUpdate':item,'valToUpdate':$scope[item]})
@@ -185,8 +185,8 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
         } else {
           $scope.showAlertBox(true,"alert alert-danger",response.data);
         }
+        $scope.getUserInfo();
       });
-      $scope.getUserInfo();
     } else {
       if($scope[item] == ""){
         $scope.showAlertBox(true,"alert alert-danger","Please enter a valid value.");
@@ -201,8 +201,9 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
           } else {
             $scope.showAlertBox(true,"alert alert-danger",response.data);
           }
+          $scope.getUserInfo();
         });
-        $scope.getUserInfo();
+
       }
     }
     $scope.readonlyAttr[item] = false;
@@ -239,6 +240,15 @@ angular.module("hadyWebApp").controller("AccountCtrl", ["$scope","$http","$compi
               console.log("cancel Delete");
             }
         }
+    });
+  };
+
+  $scope.popUpDisclaimer = function(){
+    bootbox.alert({
+      size: "large",
+      title: "<b>Terms and Conditions</b>",
+      message: "<p><br><br>In lieu of the Republic Act 10173 – Data Privacy Act of 2012 any data that are gathered and processed during usage of Hady will be kept in private and will be use for academic purposes.<br><br>The information contained on www.hadycares.com website and the chatbot is for general information purposes only. Hady assumes no responsibility for errors or omissions in the contents on the Service.<br><br>In no event shall Hady be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. Hady reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.<br><br>It is also worthy to note that this website or any content on it is not a replacement for professional counselor.<br> </p>",
+      callback: function(){ /* your callback code */ }
     });
   };
 

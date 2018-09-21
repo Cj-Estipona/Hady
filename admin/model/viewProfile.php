@@ -100,6 +100,7 @@
     .bootstrap-datetimepicker-widget.dropdown-menu {
       min-width: 100%;
     }
+    .datepicker > div { display: inherit; }
     #schedule-meet{
       padding-top: 20px;
       padding-right: 15px;
@@ -222,14 +223,14 @@
                           <td><b>Date Created</b></td>
                           <td><?php $cdate = new DateTime($rowStudent['DateCreated']); echo date_format($cdate, "F j, Y"); ?></td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                           <td><b>Text Notification</b></td>
-                          <td><?php if ($rowStudent['TextNotif']==1) {
+                          <td><?php /*if ($rowStudent['TextNotif']==1) {
                             echo "On";
                           }else {
                             echo "Off";
-                          } ?></td>
-                        </tr>
+                          } */?></td>
+                        </tr>-->
                       </tbody>
                   </table>
                 </div>
