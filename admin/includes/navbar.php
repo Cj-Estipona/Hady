@@ -17,7 +17,7 @@
               <li><a href="users.php" class="<?php if($currentPage =='Students'){echo 'active';}?>"><i class="fa fa-users"></i><span class="textLink">Students</span></a></li>
               <li><a href="uploads.php" class="<?php if($currentPage =='Uploads'){echo 'active';}?>"><i class="fa fa-upload"></i><span class="textLink">Uploads</span></a></li>
               <li><a href="schedule.php" class="<?php if($currentPage =='Schedule'){echo 'active';}?>"><i class="fa fa-calendar"></i><span class="textLink">Schedule</span></a></li>
-              <li><a href="#" class="<?php if($currentPage =='Account'){echo 'active';}?>"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
+              <li><a href="account.php" class="<?php if($currentPage =='Account'){echo 'active';}?>"><i class="fa fa-cog"></i><span class="textLink">Account</span></a></li>
               <li><a href="#" class="<?php if($currentPage =='Logout'){echo 'active';}?>" id="btnLogout"><i class="fa fa-power-off"></i><span class="textLink">Logout</span></a></li>
           </ul>
       </div>

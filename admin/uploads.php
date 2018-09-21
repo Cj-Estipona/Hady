@@ -247,7 +247,7 @@
               <!--End Advanced Tables -->
             </div><!--panelInfor-->
 
-            <div class="panel panel-info">
+            <!--<div class="panel panel-info">
               <div class="panel-heading">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" href="#collapse2">Post Announcements / Messages</a>
@@ -256,7 +256,7 @@
               <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">Panel Body</div>
               </div>
-            </div>
+            </div>-->
           </div><!--Panel Group-->
 
 

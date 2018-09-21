@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../../css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="../../css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="../../css/bootstrap-editable.css">
 <link rel="stylesheet" href="../css/fullcalendar.min.css" />
 <link rel="stylesheet" href="../css/navbar-fixed-side.css" />
 <link rel="stylesheet" href="../../font-awesome-4.7.0\font-awesome-4.7.0\css\font-awesome.min.css">
@@ -18,6 +19,7 @@
 <script src="../../js/bootbox.min.js"></script>
 <script src="../../js/typed.js"></script>
 <script src="../../js/scrollreveal.min.js"></script>
+<script src="../../js/bootstrap-editable.js"></script>
 <script src="../lib/Chart.min.js"></script>
 <script src="../lib/chartjs-plugin-labels.min.js"></script>
 <script src="../lib/fullcalendar.min.js"></script>
